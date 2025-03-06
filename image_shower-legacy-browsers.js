@@ -88,11 +88,24 @@ async function updateInfo() {
 
 
 var trialClock;
+var text;
 var globalClock;
 var routineTimer;
 async function experimentInit() {
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
+  text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text',
+    text: 'Any text\n\nincluding line breaks',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: 0.0 
+  });
+  
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
@@ -115,14 +128,15 @@ function trialRoutineBegin(snapshot) {
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
-    trialClock.reset();
-    routineTimer.reset();
+    trialClock.reset(routineTimer.getTime());
+    routineTimer.add(1.000000);
     trialMaxDurationReached = false;
     // update component parameters for each repeat
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
     // keep track of which components have finished
     trialComponents = [];
+    trialComponents.push(text);
     
     trialComponents.forEach( function(thisComponent) {
       if ('status' in thisComponent)
@@ -133,6 +147,7 @@ function trialRoutineBegin(snapshot) {
 }
 
 
+var frameRemains;
 function trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
@@ -140,6 +155,21 @@ function trialRoutineEachFrame() {
     t = trialClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
+    
+    // *text* updates
+    if (t >= 0.0 && text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text.tStart = t;  // (not accounting for frame time here)
+      text.frameNStart = frameN;  // exact frame index
+      
+      text.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (text.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      text.setAutoDraw(false);
+    }
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -158,7 +188,7 @@ function trialRoutineEachFrame() {
     });
     
     // refresh the screen if continuing
-    if (continueRoutine) {
+    if (continueRoutine && routineTimer.getTime() > 0) {
       return Scheduler.Event.FLIP_REPEAT;
     } else {
       return Scheduler.Event.NEXT;
@@ -176,9 +206,11 @@ function trialRoutineEnd(snapshot) {
       }
     });
     psychoJS.experiment.addData('trial.stopped', globalClock.getTime());
-    // the Routine "trial" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
+    if (trialMaxDurationReached) {
+        trialClock.add(trialMaxDuration);
+    } else {
+        trialClock.add(1.000000);
+    }
     // Routines running outside a loop should always advance the datafile row
     if (currentLoop === psychoJS.experiment) {
       psychoJS.experiment.nextEntry(snapshot);
