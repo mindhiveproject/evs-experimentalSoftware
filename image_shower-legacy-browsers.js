@@ -170,6 +170,7 @@ var waitClock;
 var text_3;
 var break_2Clock;
 var text_countdown;
+var text_4;
 var globalClock;
 var routineTimer;
 async function experimentInit() {
@@ -287,6 +288,18 @@ async function experimentInit() {
     depth: 0.0 
   });
   
+  text_4 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_4',
+    text: 'Take a small break',
+    font: 'Arial',
+    units: 'norm', 
+    pos: [0, 0.5], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: -2.0 
+  });
+  
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
@@ -342,7 +355,7 @@ function loopsLoopBegin(loopsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     loops = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 2, method: TrialHandler.Method.SEQUENTIAL,
+      nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
       seed: undefined, name: 'loops'
@@ -874,6 +887,9 @@ function waitRoutineEnd(snapshot) {
 
 
 var break_2MaxDurationReached;
+var clock;
+var oldTime;
+var countdown_time;
 var break_2MaxDuration;
 var break_2Components;
 function break_2RoutineBegin(snapshot) {
@@ -888,11 +904,16 @@ function break_2RoutineBegin(snapshot) {
     routineTimer.add(1.000000);
     break_2MaxDurationReached = false;
     // update component parameters for each repeat
+    // Run 'Begin Routine' code from code_3
+    clock = new util.Clock();
+    oldTime = 0
+    countdown_time = 10
     psychoJS.experiment.addData('break_2.started', globalClock.getTime());
     break_2MaxDuration = null
     // keep track of which components have finished
     break_2Components = [];
     break_2Components.push(text_countdown);
+    break_2Components.push(text_4);
     
     break_2Components.forEach( function(thisComponent) {
       if ('status' in thisComponent)
@@ -903,6 +924,9 @@ function break_2RoutineBegin(snapshot) {
 }
 
 
+var newTime;
+var mins;
+var secs;
 function break_2RoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'break_2' ---
@@ -923,6 +947,36 @@ function break_2RoutineEachFrame() {
     frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
     if (text_countdown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       text_countdown.setAutoDraw(false);
+    }
+    
+    // Run 'Each Frame' code from code_3
+    if (countdown_time == 0) {
+        continueRoutine = false;
+    }
+    
+    newTime=myClock.getTime()
+    mins = floor(newTime / 60)
+    secs = newTime % 60
+    
+    if ((newTime !== oldTime)) {
+      text_countdown.text = ((Number.parseInt(mins).toString().padStart(2,"0") + ":") + Number.parseInt(secs).toString().padStart(2,"0"));
+      oldTime = newTime;
+      countdown_time--;
+    }
+    
+    
+    // *text_4* updates
+    if (t >= 0.0 && text_4.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text_4.tStart = t;  // (not accounting for frame time here)
+      text_4.frameNStart = frameN;  // exact frame index
+      
+      text_4.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (text_4.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      text_4.setAutoDraw(false);
     }
     
     // check for quit (typically the Esc key)
