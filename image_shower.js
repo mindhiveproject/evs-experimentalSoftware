@@ -173,8 +173,6 @@ async function experimentInit() {
   
   shuffleArray(IMAGE_ORDER)
   
-  
-  
   // Function to shuffle an array (Fisher-Yates Shuffle Algorithm)
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -475,6 +473,7 @@ function trialRoutineBegin(snapshot) {
     routineTimer.reset();
     trialMaxDurationReached = false;
     // update component parameters for each repeat
+    image.setImage('');
     key_resp.keys = undefined;
     key_resp.rt = undefined;
     _key_resp_allKeys = [];
@@ -531,7 +530,7 @@ function trialRoutineEachFrame() {
       image.setAutoDraw(true);
     }
     
-    frameRemains = 1 + randomDuration - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    frameRemains = 1 + random_duration - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
     if (image.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       image.setAutoDraw(false);
     }
