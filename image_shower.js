@@ -236,8 +236,9 @@ async function experimentInit() {
       "image/Baby 2.jpg",
       "image/Baby 3.jpg",
   ];
+  console.log(IMAGE_ORDER);
   
-  shuffleArray(IMAGE_ORDER)
+  shuffleArray(IMAGE_ORDER);
   
   // Function to shuffle an array (Fisher-Yates Shuffle Algorithm)
   function shuffleArray(array) {
@@ -602,12 +603,12 @@ function trialRoutineBegin(snapshot) {
     key_resp.rt = undefined;
     _key_resp_allKeys = [];
     // Run 'Begin Routine' code from code
-    random_duration = 2 + Math.floor(Math.random() * 8)
-    text_2.text = random_duration
+    random_duration = 2 + Math.floor(Math.random() * 8);
+    text_2.text = random_duration;
     
-    image_path = IMAGE_ORDER[loops.thisN]
-    print(image_path)
-    image.Image = image_path
+    image_path = IMAGE_ORDER[loops.thisN];
+    image.Image = image_path;
+    console.log(image_path);
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
     // keep track of which components have finished
