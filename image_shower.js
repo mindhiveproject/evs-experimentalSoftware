@@ -958,7 +958,7 @@ function break_2RoutineEachFrame() {
     }
     
     let newTime=clock.getTime()
-    let mins = floor(newTime / 60)
+    let mins = Math.floor(newTime / 60)
     let secs = newTime % 60
     
     if ((newTime !== oldTime)) {
