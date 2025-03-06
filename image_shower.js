@@ -250,7 +250,7 @@ async function experimentInit() {
           console.log(IMAGE_ORDER);
           IMAGE_ORDER = IMAGE_ORDER.slice(0, 10);
           console.log(IMAGE_ORDER);
-          test = shuffleArray(IMAGE_ORDER);
+          let test = shuffleArray(IMAGE_ORDER);
           console.log(IMAGE_ORDER);
           console.log(test)
         });
