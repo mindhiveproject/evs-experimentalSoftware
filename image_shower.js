@@ -242,14 +242,20 @@ async function experimentInit() {
         .then(response => response.text())
         .then(text => {
           const lines = text.split('\n');
+          let firstLine = false;
           lines.forEach(line => {
-            const values = line.split(',');
-            IMAGE_ORDER.push(values[2]);
+            if (firstLine) {
+              firstLine = false;
+            } else {
+                const values = line.split(',');
+                IMAGE_ORDER.push(values[2]);
+            }
           });
         });
   
   console.log(IMAGE_ORDER);
-  shuffleArray(IMAGE_ORDER);
+  IMAGE_ORDER = IMAGE_ORDER.slice(0, 10);
+  IMAGE_ORDER = shuffleArray(IMAGE_ORDER);
   console.log(IMAGE_ORDER);
   
   // Function to shuffle an array (Fisher-Yates Shuffle Algorithm)
