@@ -924,9 +924,6 @@ function break_2RoutineBegin(snapshot) {
 }
 
 
-var newTime;
-var mins;
-var secs;
 function break_2RoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'break_2' ---
@@ -954,9 +951,9 @@ function break_2RoutineEachFrame() {
         continueRoutine = false;
     }
     
-    newTime=myClock.getTime()
-    mins = floor(newTime / 60)
-    secs = newTime % 60
+    let newTime=clock.getTime()
+    let mins = floor(newTime / 60)
+    let secs = newTime % 60
     
     if ((newTime !== oldTime)) {
       text_countdown.text = ((Number.parseInt(mins).toString().padStart(2,"0") + ":") + Number.parseInt(secs).toString().padStart(2,"0"));
