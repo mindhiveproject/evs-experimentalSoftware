@@ -607,8 +607,10 @@ function trialRoutineBegin(snapshot) {
     text_2.text = random_duration;
     
     image_path = IMAGE_ORDER[loops.thisN];
-    image.Image = image_path;
+    console.log(image.image);
+    image.image = image_path;
     console.log(image_path);
+    console.log(image.image);
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
     // keep track of which components have finished
