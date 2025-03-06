@@ -230,15 +230,26 @@ async function experimentInit() {
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Run 'Begin Experiment' code from code
-  // Array to store image paths
-  IMAGE_ORDER = [
-      "image/Baby 1.jpg",
-      "image/Baby 2.jpg",
-      "image/Baby 3.jpg",
-  ];
-  console.log(IMAGE_ORDER);
+  //IMAGE_ORDER = [
+  //    "image/Baby 1.jpg",
+  //    "image/Baby 2.jpg",
+  //    "image/Baby 3.jpg",
+  //];
+  IMAGE_ORDER = [];
   
+  fetch('images.csv')
+        .then(response => response.text())
+        .then(text => {
+          const lines = text.split('\n');
+          lines.forEach(line => {
+            const values = line.split(',');
+            IMAGE_ORDER.push(values[2]);
+          });
+        });
+  
+  console.log(IMAGE_ORDER);
   shuffleArray(IMAGE_ORDER);
+  console.log(IMAGE_ORDER);
   
   // Function to shuffle an array (Fisher-Yates Shuffle Algorithm)
   function shuffleArray(array) {
@@ -453,7 +464,7 @@ function welcomeRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
     if ((trials.thisN === 0)) {
-        text.text = "Welcome! (1)";
+        text.text = "Welcome! (1) 1.1";
     } else {
         if ((trials.thisN === 1)) {
             text.text = "Welcome! (2)";
