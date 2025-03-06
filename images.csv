@@ -1,0 +1,901 @@
+thing,category,imageName
+Acorns 1,Object,image/Acorns 1.jpg
+Acorns 2,Object,image/Acorns 2.jpg
+Acorns 3,Object,image/Acorns 3.jpg
+Alcohol 1,Object,image/Alcohol 1.jpg
+Alcohol 2,Object,image/Alcohol 2.jpg
+Alcohol 3,Object,image/Alcohol 3.jpg
+Alcohol 4,Object,image/Alcohol 4.jpg
+Alcohol 5,Object,image/Alcohol 5.jpg
+Alcohol 6,Object,image/Alcohol 6.jpg
+Alcohol 7,Object,image/Alcohol 7.jpg
+Alcohol 8,Object,image/Alcohol 8.jpg
+Ambulance 1,Object,image/Ambulance 1.jpg
+Ambulance 2,Object,image/Ambulance 2.jpg
+Ambulance 3,Object,image/Ambulance 3.jpg
+Angry face 1,Person,image/Angry face 1.jpg
+Angry face 2,Person,image/Angry face 2.jpg
+Angry face 3,Person,image/Angry face 3.jpg
+Angry face 4,Person,image/Angry face 4.jpg
+Angry face 5,Person,image/Angry face 5.jpg
+Angry pose 1,Person,image/Angry pose 1.jpg
+Angry pose 2,Person,image/Angry pose 2.jpg
+Animal carcass 1,Animal,image/Animal carcass 1.jpg
+Animal carcass 2,Animal,image/Animal carcass 2.jpg
+Animal carcass 3,Animal,image/Animal carcass 3.jpg
+Animal carcass 4,Animal,image/Animal carcass 4.jpg
+Animal carcass 5,Animal,image/Animal carcass 5.jpg
+Animal carcass 6,Animal,image/Animal carcass 6.jpg
+Archery 1,Person,image/Archery 1.jpg
+Archery 2,Person,image/Archery 2.jpg
+Astronaut 1,Person,image/Astronaut 1.jpg
+Astronaut 2,Person,image/Astronaut 2.jpg
+Baby 1,Person,image/Baby 1.jpg
+Baby 2,Person,image/Baby 2.jpg
+Baby 3,Person,image/Baby 3.jpg
+Baby 4,Person,image/Baby 4.jpg
+Baby 5,Person,image/Baby 5.jpg
+Baby 6,Person,image/Baby 6.jpg
+Baby 7,Person,image/Baby 7.jpg
+Baby 8,Person,image/Baby 8.jpg
+Baby 9,Person,image/Baby 9.jpg
+Baby 10,Person,image/Baby 10.jpg
+Band 1,Person,image/Band 1.jpg
+Band 2,Person,image/Band 2.jpg
+Bar 1,Scene,image/Bar 1.jpg
+Bar 2,Scene,image/Bar 2.jpg
+Bar 3,Scene,image/Bar 3.jpg
+Barbeque 1,Person,image/Barbeque 1.jpg
+Barbeque 2,Person,image/Barbeque 2.jpg
+Bark 1,Object,image/Bark 1.jpg
+Bark 2,Object,image/Bark 2.jpg
+Bark 3,Object,image/Bark 3.jpg
+Bark 4,Object,image/Bark 4.jpg
+Bark 5,Object,image/Bark 5.jpg
+Bark 6,Object,image/Bark 6.jpg
+Barrels 1,Object,image/Barrels 1.jpg
+BDSM 1,Person,image/BDSM 1.jpg
+BDSM 2,Person,image/BDSM 2.jpg
+BDSM 3,Person,image/BDSM 3.jpg
+Beach 1,Scene,image/Beach 1.jpg
+Beach 2,Scene,image/Beach 2.jpg
+Beach 3,Scene,image/Beach 3.jpg
+Beach 4,Scene,image/Beach 4.jpg
+Beach 5,Scene,image/Beach 5.jpg
+Beach 6,Scene,image/Beach 6.jpg
+Beach 7,Scene,image/Beach 7.jpg
+Beach 8,Scene,image/Beach 8.jpg
+Bear 1,Animal,image/Bear 1.jpg
+Bear 2,Animal,image/Bear 2.jpg
+Bear 3,Animal,image/Bear 3.jpg
+Bed 1,Object,image/Bed 1.jpg
+Bee 1,Animal,image/Bee 1.jpg
+Biking 1,Person,image/Biking 1.jpg
+Billiards 1,Object,image/Billiards 1.jpg
+Bird 1,Animal,image/Bird 1.jpg
+Bird 2,Animal,image/Bird 2.jpg
+Bird 3,Animal,image/Bird 3.jpg
+Bird 4,Animal,image/Bird 4.jpg
+Bird 5,Animal,image/Bird 5.jpg
+Birthday 1,Scene,image/Birthday 1.jpg
+Birthday 2,Person,image/Birthday 2.jpg
+Birthday 3,Scene,image/Birthday 3.jpg
+Bloody knife 1,Object,image/Bloody knife 1.jpg
+Bloody knife 2,Object,image/Bloody knife 2.jpg
+Boat 1,Object,image/Boat 1.jpg
+Bored face 1,Person,image/Bored face 1.jpg
+Bored pose 1,Person,image/Bored pose 1.jpg
+Bored pose 2,Person,image/Bored pose 2.jpg
+Bored pose 3,Person,image/Bored pose 3.jpg
+Bored pose 4,Person,image/Bored pose 4.jpg
+Bored pose 5,Person,image/Bored pose 5.jpg
+Bored pose 6,Person,image/Bored pose 6.jpg
+Bottle 1,Object,image/Bottle 1.jpg
+Boxing 1,Person,image/Boxing 1.jpg
+Boxing 2,Person,image/Boxing 2.jpg
+Bricks 1,Object,image/Bricks 1.jpg
+Bridge 1,Scene,image/Bridge 1.jpg
+Bubble 1,Object,image/Bubble 1.jpg
+Bubble 2,Object,image/Bubble 2.jpg
+Building 1,Scene,image/Building 1.jpg
+Building 2,Scene,image/Building 2.jpg
+Bungee jumping 1,Person,image/Bungee jumping 1.jpg
+Bungee jumping 2,Person,image/Bungee jumping 2.jpg
+Bungee jumping 3,Person,image/Bungee jumping 3.jpg
+Camping 1,Person,image/Camping 1.jpg
+Camping 2,Person,image/Camping 2.jpg
+Camping 3,Person,image/Camping 3.jpg
+Camping 4,Person,image/Camping 4.jpg
+Camping 6,Person,image/Camping 6.jpg
+Camping 7,Person,image/Camping 7.jpg
+Camping 8,Person,image/Camping 8.jpg
+Camping 9,Person,image/Camping 9.jpg
+Camping 10,Scene,image/Camping 10.jpg
+Candle 1,Object,image/Candle 1.jpg
+Car 1,Object,image/Car 1.jpg
+Car 2,Object,image/Car 2.jpg
+Car accident 1,Object,image/Car accident 1.jpg
+Car accident 2,Object,image/Car accident 2.jpg
+Car accident 3,Object,image/Car accident 3.jpg
+Car accident 4,Object,image/Car accident 4.jpg
+Car crash 1,Scene,image/Car crash 1.jpg
+Car crash 2,Scene,image/Car crash 2.jpg
+Car crash 3,Scene,image/Car crash 3.jpg
+Car race 1,Scene,image/Car race 1.jpg
+Car race 2,Scene,image/Car race 2.jpg
+Car race 3,Scene,image/Car race 3.jpg
+Car race 4,Scene,image/Car race 4.jpg
+Cardboard 1,Object,image/Cardboard 1.jpg
+Cardboard 2,Object,image/Cardboard 2.jpg
+Cardboard 3,Object,image/Cardboard 3.jpg
+Cat 1,Animal,image/Cat 1.jpg
+Cat 2,Animal,image/Cat 2.jpg
+Cat 3,Animal,image/Cat 3.jpg
+Cat 4,Animal,image/Cat 4.jpg
+Cat 5,Animal,image/Cat 5.jpg
+Cat 6,Animal,image/Cat 6.jpg
+Cat 7,Animal,image/Cat 7.jpg
+Cat 8,Animal,image/Cat 8.jpg
+Cat 9,Animal,image/Cat 9.jpg
+Cat 10,Animal,image/Cat 10.jpg
+Cat 11,Animal,image/Cat 11.jpg
+Cat 12,Animal,image/Cat 12.jpg
+Cat 13,Animal,image/Cat 13.jpg
+Cat 14,Animal,image/Cat 14.jpg
+Celebration 1,Person,image/Celebration 1.jpg
+Celebration 2,Scene,image/Celebration 2.jpg
+Cemetery 1,Scene,image/Cemetery 1.jpg
+Cemetery 2,Scene,image/Cemetery 2.jpg
+Cemetery 3,Scene,image/Cemetery 3.jpg
+Cemetery 4,Scene,image/Cemetery 4.jpg
+Cemetery 5,Scene,image/Cemetery 5.jpg
+Cheerleader 1,Person,image/Cheerleader 1.jpg
+Cheerleader 2,Person,image/Cheerleader 2.jpg
+Child labor 1,Person,image/Child labor 1.jpg
+Child labor 2,Person,image/Child labor 2.jpg
+Child labor 3,Person,image/Child labor 3.jpg
+Child labor 4,Person,image/Child labor 4.jpg
+Children 1,Person,image/Children 1.jpg
+Chipmunk 1,Animal,image/Chipmunk 1.jpg
+Chipmunk 2,Animal,image/Chipmunk 2.jpg
+Chipmunk 3,Animal,image/Chipmunk 3.jpg
+City 1,Scene,image/City 1.jpg
+Clean 1,Object,image/Clean 1.jpg
+Cliff diver 1,Person,image/Cliff diver 1.jpg
+Cliff diver 2,Person,image/Cliff diver 2.jpg
+Cliff diver 3,Person,image/Cliff diver 3.jpg
+Cockroach 1,Animal,image/Cockroach 1.jpg
+Cockroach 2,Animal,image/Cockroach 2.jpg
+Cockroach 3,Animal,image/Cockroach 3.jpg
+Cockroach 4,Animal,image/Cockroach 4.jpg
+Coffee 1,Object,image/Coffee 1.jpg
+Cold 1,Object,image/Cold 1.jpg
+Cold 2,Object,image/Cold 2.jpg
+Cold 3,Object,image/Cold 3.jpg
+Cold 4,Object,image/Cold 4.jpg
+Cold 5,Scene,image/Cold 5.jpg
+Cold 6,Person,image/Cold 6.jpg
+Cold 7,Person,image/Cold 7.jpg
+Cold 8,Object,image/Cold 8.jpg
+Collaboration 1,Person,image/Collaboration 1.jpg
+Cotton swabs 1,Object,image/Cotton swabs 1.jpg
+Cotton swabs 2,Object,image/Cotton swabs 2.jpg
+Cotton swabs 3,Object,image/Cotton swabs 3.jpg
+Couple 1,Person,image/Couple 1.jpg
+Couple 2,Person,image/Couple 2.jpg
+Couple 3,Person,image/Couple 3.jpg
+Couple 4,Person,image/Couple 4.jpg
+Couple 5,Animal,image/Couple 5.jpg
+Couple 6,Person,image/Couple 6.jpg
+Couple 7,Person,image/Couple 7.jpg
+Couple 8,Person,image/Couple 8.jpg
+Couple 9,Person,image/Couple 9.jpg
+Crosswalk 1 ,Scene,image/Crosswalk 1 .jpg
+Crow 1,Animal,image/Crow 1.jpg
+Crow 2,Animal,image/Crow 2.jpg
+Cups 1,Object,image/Cups 1.jpg
+Cups 2,Object,image/Cups 2.jpg
+Cups 3,Object,image/Cups 3.jpg
+Cups 4,Object,image/Cups 4.jpg
+Dancing 1,Person,image/Dancing 1.jpg
+Dancing 2,Person,image/Dancing 2.jpg
+Dancing 3,Person,image/Dancing 3.jpg
+Dancing 4,Person,image/Dancing 4.jpg
+Dancing 5,Person,image/Dancing 5.jpg
+Dancing 6,Person,image/Dancing 6.jpg
+Dancing 7,Person,image/Dancing 7.jpg
+Dancing 8,Person,image/Dancing 8.jpg
+Dancing 9,Person,image/Dancing 9.jpg
+Dead bodies 1,Person,image/Dead bodies 1.jpg
+Dead bodies 2,Person,image/Dead bodies 2.jpg
+Dead bodies 3,Person,image/Dead bodies 3.jpg
+Depressed face 1,Person,image/Depressed face 1.jpg
+Depressed face 2,Person,image/Depressed face 2.jpg
+Depressed pose 1,Person,image/Depressed pose 1.jpg
+Depressed pose 2,Person,image/Depressed pose 2.jpg
+Depressed pose 3,Person,image/Depressed pose 3.jpg
+Depressed pose 4,Person,image/Depressed pose 4.jpg
+Desert 1,Scene,image/Desert 1.jpg
+Dessert 1,Object,image/Dessert 1.jpg
+Dessert 2,Object,image/Dessert 2.jpg
+Dessert 3,Object,image/Dessert 3.jpg
+Dessert 4,Object,image/Dessert 4.jpg
+Dessert 5,Object,image/Dessert 5.jpg
+Dessert 6,Object,image/Dessert 6.jpg
+Dessert 7,Object,image/Dessert 7.jpg
+Dessert 8,Person,image/Dessert 8.jpg
+Destruction 1,Scene,image/Destruction 1.jpg
+Destruction 4,Scene,image/Destruction 4.jpg
+Destruction 5,Scene,image/Destruction 5.jpg
+Destruction 6,Scene,image/Destruction 6.jpg
+Destruction 7,Scene,image/Destruction 7.jpg
+Destruction 8,Scene,image/Destruction 8.jpg
+Destruction 9,Scene,image/Destruction 9.jpg
+Destruction 10,Scene,image/Destruction 10.jpg
+Dirt 1,Scene,image/Dirt 1.jpg
+Destruction 2,Scene,image/Destruction 2.jpg
+Destruction 3,Scene,image/Destruction 3.jpg
+Dirt 2,Scene,image/Dirt 2.jpg
+Dirt 3,Scene,image/Dirt 3.jpg
+Dirt 4,Scene,image/Dirt 4.jpg
+Dirt 5,Scene,image/Dirt 5.jpg
+Dock 1,Scene,image/Dock 1.jpg
+Doctor 1,Person,image/Doctor 1.jpg
+Doctor 2,Person,image/Doctor 2.jpg
+Doctor 3,Person,image/Doctor 3.jpg
+Doctor 4,Person,image/Doctor 4.jpg
+Doctor 5,Person,image/Doctor 5.jpg
+Doctor 6,Person,image/Doctor 6.jpg
+Doctor 7,Person,image/Doctor 7.jpg
+Doctor 8,Person,image/Doctor 8.jpg
+Doctor 9,Person,image/Doctor 9.jpg
+Dog 1,Animal,image/Dog 1.jpg
+Dog 2,Animal,image/Dog 2.jpg
+Dog 3,Animal,image/Dog 3.jpg
+Dog 4,Animal,image/Dog 4.jpg
+Dog 5,Animal,image/Dog 5.jpg
+Dog 6,Animal,image/Dog 6.jpg
+Dog 7,Animal,image/Dog 7.jpg
+Dog 8,Animal,image/Dog 8.jpg
+Dog 9,Animal,image/Dog 9.jpg
+Dog 10,Animal,image/Dog 10.jpg
+Dog 11,Animal,image/Dog 11.jpg
+Dog 12,Animal,image/Dog 12.jpg
+Dog 13,Animal,image/Dog 13.jpg
+Dog 14,Animal,image/Dog 14.jpg
+Dog 15,Animal,image/Dog 15.jpg
+Dog 16,Animal,image/Dog 16.jpg
+Dog 17,Animal,image/Dog 17.jpg
+Dog 18,Animal,image/Dog 18.jpg
+Dog 19,Animal,image/Dog 19.jpg
+Dog 20,Animal,image/Dog 20.jpg
+Dog 21,Animal,image/Dog 21.jpg
+Dog 22,Animal,image/Dog 22.jpg
+Dog 23,Animal,image/Dog 23.jpg
+Dog 24,Animal,image/Dog 24.jpg
+Dog 25,Animal,image/Dog 25.jpg
+Dog 26,Animal,image/Dog 26.jpg
+Dog 27,Animal,image/Dog 27.jpg
+Dog 28,Animal,image/Dog 28.jpg
+Dog 29,Animal,image/Dog 29.jpg
+Dog 30,Animal,image/Dog 30.jpg
+Dog 31,Animal,image/Dog 31.jpg
+Dog attack 1,Animal,image/Dog attack 1.jpg
+Dog attack 2,Animal,image/Dog attack 2.jpg
+Dog attack 3,Animal,image/Dog attack 3.jpg
+Drink 1,Object,image/Drink 1.jpg
+Drink 2,Object,image/Drink 2.jpg
+Dummy 1,Object,image/Dummy 1.jpg
+Eating 1,Person,image/Eating 1.jpg
+Eating 2,Person,image/Eating 2.jpg
+Eating 3,Person,image/Eating 3.jpg
+Elephant 1,Animal,image/Elephant 1.jpg
+Excited face 1,Person,image/Excited face 1.jpg
+Excited face 2,Person,image/Excited face 2.jpg
+Excited face 3,Person,image/Excited face 3.jpg
+Excited face 4,Person,image/Excited face 4.jpg
+Excited face 5,Person,image/Excited face 5.jpg
+Excited face 6,Person,image/Excited face 6.jpg
+Excited face 7,Person,image/Excited face 7.jpg
+Exercise 1,Person,image/Exercise 1.jpg
+Exercise 2,Person,image/Exercise 2.jpg
+Exercise 3,Person,image/Exercise 3.jpg
+Explosion 1,Scene,image/Explosion 1.jpg
+Explosion 2,Scene,image/Explosion 2.jpg
+Explosion 3,Scene,image/Explosion 3.jpg
+Explosion 4,Scene,image/Explosion 4.jpg
+Explosion 5,Scene,image/Explosion 5.jpg
+Explosion 6,Scene,image/Explosion 6.jpg
+Father 1,Person,image/Father 1.jpg
+Feces 1,Object,image/Feces 1.jpg
+Feces 2,Object,image/Feces 2.jpg
+Fence 1,Object,image/Fence 1.jpg
+Fence 2,Object,image/Fence 2.jpg
+Fence 3,Object,image/Fence 3.jpg
+Fence 4,Object,image/Fence 4.jpg
+Fence 5,Object,image/Fence 5.jpg
+Fence 6,Object,image/Fence 6.jpg
+Ferret 1,Animal,image/Ferret 1.jpg
+Fire 1,Person,image/Fire 1.jpg
+Fire 2,Scene,image/Fire 2.jpg
+Fire 3,Scene,image/Fire 3.jpg
+Fire 4,Scene,image/Fire 4.jpg
+Fire 5,Scene,image/Fire 5.jpg
+Fire 6,Scene,image/Fire 6.jpg
+Fire 7,Scene,image/Fire 7.jpg
+Fire 8,Scene,image/Fire 8.jpg
+Fire 9,Scene,image/Fire 9.jpg
+Fire 10,Scene,image/Fire 10.jpg
+Fire 11,Scene,image/Fire 11.jpg
+Fire hydrant 1,Object,image/Fire hydrant 1.jpg
+Fire hydrant 2,Object,image/Fire hydrant 2.jpg
+Fire hydrant 3,Object,image/Fire hydrant 3.jpg
+Fire hydrant 4,Object,image/Fire hydrant 4.jpg
+Fireman 1,Person,image/Fireman 1.jpg
+Fireworks 1,Scene,image/Fireworks 1.jpg
+Fireworks 2,Scene,image/Fireworks 2.jpg
+Fireworks 3,Scene,image/Fireworks 3.jpg
+Fireworks 4,Scene,image/Fireworks 4.jpg
+Fireworks 5,Scene,image/Fireworks 5.jpg
+Fireworks 6,Scene,image/Fireworks 6.jpg
+Fireworks 7,Scene,image/Fireworks 7.jpg
+Flood 1,Scene,image/Flood 1.jpg
+Flood 2,Scene,image/Flood 2.jpg
+Flood 3,Scene,image/Flood 3.jpg
+Flowers 1,Object,image/Flowers 1.jpg
+Flowers 2,Object,image/Flowers 2.jpg
+Flowers 3,Object,image/Flowers 3.jpg
+Flowers 4,Object,image/Flowers 4.jpg
+Flowers 5,Object,image/Flowers 5.jpg
+Flowers 6,Object,image/Flowers 6.jpg
+Flowers 7,Object,image/Flowers 7.jpg
+Flowers 8,Object,image/Flowers 8.jpg
+Flowers 9,Object,image/Flowers 9.jpg
+Flowers 10,Object,image/Flowers 10.jpg
+Food 1,Object,image/Food 1.jpg
+Food 2,Object,image/Food 2.jpg
+Food 3,Object,image/Food 3.jpg
+Food 4,Object,image/Food 4.jpg
+Food 5,Object,image/Food 5.jpg
+Food 6,Object,image/Food 6.jpg
+Football player 1,Person,image/Football player 1.jpg
+Frisbee 1,Person,image/Frisbee 1.jpg
+Frustrated pose 1,Person,image/Frustrated pose 1.jpg
+Frustrated pose 2,Person,image/Frustrated pose 2.jpg
+Frustrated pose 3,Person,image/Frustrated pose 3.jpg
+Frustrated pose 4,Person,image/Frustrated pose 4.jpg
+Frustrated pose 5,Person,image/Frustrated pose 5.jpg
+Frustrated pose 6,Person,image/Frustrated pose 6.jpg
+Frustrated pose 7,Person,image/Frustrated pose 7.jpg
+Frustrated pose 8,Person,image/Frustrated pose 8.jpg
+Funeral 1,Scene,image/Funeral 1.jpg
+Galaxy 1,Scene,image/Galaxy 1.jpg
+Galaxy 2,Scene,image/Galaxy 2.jpg
+Galaxy 3,Scene,image/Galaxy 3.jpg
+Galaxy 4,Scene,image/Galaxy 4.jpg
+Galaxy 5,Scene,image/Galaxy 5.jpg
+Galaxy 6,Scene,image/Galaxy 6.jpg
+Galaxy 7,Scene,image/Galaxy 7.jpg
+Galaxy 8,Scene,image/Galaxy 8.jpg
+Garbage dump 1,Scene,image/Garbage dump 1.jpg
+Garbage dump 2,Scene,image/Garbage dump 2.jpg
+Garbage dump 3,Scene,image/Garbage dump 3.jpg
+Garbage dump 4,Scene,image/Garbage dump 4.jpg
+Garbage dump 5,Scene,image/Garbage dump 5.jpg
+Garbage dump 6,Scene,image/Garbage dump 6.jpg
+Garbage dump 7,Scene,image/Garbage dump 7.jpg
+Garbage dump 8,Scene,image/Garbage dump 8.jpg
+Gargoyle 1,Object,image/Gargoyle 1.jpg
+Gargoyle 2,Object,image/Gargoyle 2.jpg
+Gazing 1,Person,image/Gazing 1.jpg
+Gazing 2,Person,image/Gazing 2.jpg
+Gazing 3,Person,image/Gazing 3.jpg
+Gazing 4,Person,image/Gazing 4.jpg
+Gazing 5,Person,image/Gazing 5.jpg
+Gazing 6,Person,image/Gazing 6.jpg
+Gazing 7,Person,image/Gazing 7.jpg
+Goat 1,Animal,image/Goat 1.jpg
+Goat 2,Animal,image/Goat 2.jpg
+Gorrila 1,Animal,image/Gorrila 1.jpg
+Grass 1,Scene,image/Grass 1.jpg
+Grass 2,Scene,image/Grass 2.jpg
+Grass 3,Scene,image/Grass 3.jpg
+Grass 4,Scene,image/Grass 4.jpg
+Grass 5,Scene,image/Grass 5.jpg
+Grass 6,Scene,image/Grass 6.jpg
+Grass 7,Scene,image/Grass 7.jpg
+Graveyard 1,Scene,image/Graveyard 1.jpg
+Graveyard 2,Scene,image/Graveyard 2.jpg
+Graveyard 3,Scene,image/Graveyard 3.jpg
+Graveyard 4,Scene,image/Graveyard 4.jpg
+Guitar 1,Person,image/Guitar 1.jpg
+Gun 1,Object,image/Gun 1.jpg
+Gun 2,Person,image/Gun 2.jpg
+Gun 3,Object,image/Gun 3.jpg
+Gun 4,Object,image/Gun 4.jpg
+Gun 5,Object,image/Gun 5.jpg
+Gun 6,Object,image/Gun 6.jpg
+Gun 7,Object,image/Gun 7.jpg
+Gun 8,Object,image/Gun 8.jpg
+Gun 9,Object,image/Gun 9.jpg
+Gun 10,Object,image/Gun 10.jpg
+Hallway 1,Scene,image/Hallway 1.jpg
+Hang gliding 1,Person,image/Hang gliding 1.jpg
+Hang gliding 2,Person,image/Hang gliding 2.jpg
+Hang gliding 3,Person,image/Hang gliding 3.jpg
+Hangover 1,Person,image/Hangover 1.jpg
+Happy face 1,Person,image/Happy face 1.jpg
+Happy face 2,Person,image/Happy face 2.jpg
+Happy pose 1,Person,image/Happy pose 1.jpg
+Happy pose 2,Person,image/Happy pose 2.jpg
+Happy pose 3,Scene,image/Happy pose 3.jpg
+Heart 1,Object,image/Heart 1.jpg
+Heart 2,Object,image/Heart 2.jpg
+Heart 3,Object,image/Heart 3.jpg
+Horse 1,Animal,image/Horse 1.jpg
+Horse racing 1,Animal,image/Horse racing 1.jpg
+House 1,Scene,image/House 1.jpg
+Injury 1,Person,image/Injury 1.jpg
+Injury 2,Person,image/Injury 2.jpg
+Injury 3,Person,image/Injury 3.jpg
+Injury 4,Person,image/Injury 4.jpg
+Intensity 1,Person,image/Intensity 1.jpg
+Jail 1,Scene,image/Jail 1.jpg
+Jail 2,Scene,image/Jail 2.jpg
+Jail 3,Scene,image/Jail 3.jpg
+Jail 4,Scene,image/Jail 4.jpg
+Jail 5,Scene,image/Jail 5.jpg
+Keyboard 1,Object,image/Keyboard 1.jpg
+Keyboard 2,Object,image/Keyboard 2.jpg
+Keyboard 3,Object,image/Keyboard 3.jpg
+Keys 1,Object,image/Keys 1.jpg
+KKK rally 1,Person,image/KKK rally 1.jpg
+KKK rally 2,Person,image/KKK rally 2.jpg
+Knife 1,Object,image/Knife 1.jpg
+Knife 2,Object,image/Knife 2.jpg
+Lake 1,Scene,image/Lake 1.jpg
+Lake 2,Scene,image/Lake 2.jpg
+Lake 3,Scene,image/Lake 3.jpg
+Lake 4,Scene,image/Lake 4.jpg
+Lake 5,Scene,image/Lake 5.jpg
+Lake 6,Scene,image/Lake 6.jpg
+Lake 7,Scene,image/Lake 7.jpg
+Lake 8,Scene,image/Lake 8.jpg
+Lake 9,Scene,image/Lake 9.jpg
+Lake 10,Scene,image/Lake 10.jpg
+Lake 11,Scene,image/Lake 11.jpg
+Lake 12,Scene,image/Lake 12.jpg
+Lake 13,Scene,image/Lake 13.jpg
+Lake 14,Scene,image/Lake 14.jpg
+Lake 15,Scene,image/Lake 15.jpg
+Lake 16,Scene,image/Lake 16.jpg
+Lake 17,Scene,image/Lake 17.jpg
+Lamb 1,Animal,image/Lamb 1.jpg
+Lava 1,Scene,image/Lava 1.jpg
+Lightning 1,Scene,image/Lightning 1.jpg
+Lightning 2,Scene,image/Lightning 2.jpg
+Lightning 3,Scene,image/Lightning 3.jpg
+Lightning 4,Scene,image/Lightning 4.jpg
+Lightning 5,Scene,image/Lightning 5.jpg
+Lightning 6,Scene,image/Lightning 6.jpg
+Lightning 7,Scene,image/Lightning 7.jpg
+Lion 1,Animal,image/Lion 1.jpg
+Lion 2,Animal,image/Lion 2.jpg
+Lion 3,Animal,image/Lion 3.jpg
+Lion 4,Animal,image/Lion 4.jpg
+Lion 5,Animal,image/Lion 5.jpg
+Massage 1,Person,image/Massage 1.jpg
+Massage 2,Person,image/Massage 2.jpg
+Meerkat 1,Animal,image/Meerkat 1.jpg
+Memorial 1,Scene,image/Memorial 1.jpg
+Memorial 2,Scene,image/Memorial 2.jpg
+Memorial 3,Scene,image/Memorial 3.jpg
+Miserable face 1,Person,image/Miserable face 1.jpg
+Miserable face 2,Person,image/Miserable face 2.jpg
+Miserable pose 1,Person,image/Miserable pose 1.jpg
+Miserable pose 2,Person,image/Miserable pose 2.jpg
+Miserable pose 3,Person,image/Miserable pose 3.jpg
+Miserable pose 4,Person,image/Miserable pose 4.jpg
+Miserable pose 5,Person,image/Miserable pose 5.jpg
+Money 1,Object,image/Money 1.jpg
+Monkey 1,Animal,image/Monkey 1.jpg
+Monkey 2,Animal,image/Monkey 2.jpg
+Monkey 3,Animal,image/Monkey 3.jpg
+Monkey 4,Animal,image/Monkey 4.jpg
+Moon 1,Scene,image/Moon 1.jpg
+Mother 1,Person,image/Mother 1.jpg
+Mother 2,Person,image/Mother 2.jpg
+Mother 3,Person,image/Mother 3.jpg
+Mother 4,Person,image/Mother 4.jpg
+Mother 5,Person,image/Mother 5.jpg
+Mother 6,Person,image/Mother 6.jpg
+Mother 7,Person,image/Mother 7.jpg
+Mother 8,Person,image/Mother 8.jpg
+Mother 9,Person,image/Mother 9.jpg
+Motocross 1,Person,image/Motocross 1.jpg
+Musician 1,Person,image/Musician 1.jpg
+Nature 1,Scene,image/Nature 1.jpg
+Nature 2,Scene,image/Nature 2.jpg
+Neonazi 1,Person,image/Neonazi 1.jpg
+Neutral face 1,Person,image/Neutral face 1.jpg
+Neutral face 2,Person,image/Neutral face 2.jpg
+Neutral face 3,Person,image/Neutral face 3.jpg
+Neutral face 4,Person,image/Neutral face 4.jpg
+Neutral face 5,Person,image/Neutral face 5.jpg
+Neutral pose 1,Person,image/Neutral pose 1.jpg
+Neutral pose 2,Scene,image/Neutral pose 2.jpg
+Neutral pose 3,Person,image/Neutral pose 3.jpg
+Nude couple 1,Person,image/Nude couple 1.jpg
+Nude couple 2,Person,image/Nude couple 2.jpg
+Nude couple 3,Person,image/Nude couple 3.jpg
+Nude couple 4,Person,image/Nude couple 4.jpg
+Nude couple 5,Person,image/Nude couple 5.jpg
+Nude couple 6,Person,image/Nude couple 6.jpg
+Nude couple 7,Person,image/Nude couple 7.jpg
+Nude couple 8,Person,image/Nude couple 8.jpg
+Nude couple 9,Person,image/Nude couple 9.jpg
+Nude couple 10,Person,image/Nude couple 10.jpg
+Nude couple 11,Person,image/Nude couple 11.jpg
+Nude couple 12,Person,image/Nude couple 12.jpg
+Nude couple 13,Person,image/Nude couple 13.jpg
+Nude couple 14,Person,image/Nude couple 14.jpg
+Nude man 1,Person,image/Nude man 1.jpg
+Nude man 2,Person,image/Nude man 2.jpg
+Nude man 4,Person,image/Nude man 4.jpg
+Nude man 5,Person,image/Nude man 5.jpg
+Nude man 6,Person,image/Nude man 6.jpg
+Nude man 7,Person,image/Nude man 7.jpg
+Nude man 8,Person,image/Nude man 8.jpg
+Nude man 9,Person,image/Nude man 9.jpg
+Nude man 10,Person,image/Nude man 10.jpg
+Nude man 11,Person,image/Nude man 11.jpg
+Nude man 12,Person,image/Nude man 12.jpg
+Nude man 13,Person,image/Nude man 13.jpg
+Nude man 14,Person,image/Nude man 14.jpg
+Nude man 15,Person,image/Nude man 15.jpg
+Nude man 16,Person,image/Nude man 16.jpg
+Nude man 17,Person,image/Nude man 17.jpg
+Nude man 18,Person,image/Nude man 18.jpg
+Nude man 19,Person,image/Nude man 19.jpg
+Nude man 20,Person,image/Nude man 20.jpg
+Nude man 3,Person,image/Nude man 3.jpg
+Nude man 21,Person,image/Nude man 21.jpg
+Nude man 22,Person,image/Nude man 22.jpg
+Nude man 23,Person,image/Nude man 23.jpg
+Nude woman 1,Person,image/Nude woman 1.jpg
+Nude woman 2,Person,image/Nude woman 2.jpg
+Nude woman 3,Person,image/Nude woman 3.jpg
+Nude woman 4,Person,image/Nude woman 4.jpg
+Nude woman 5,Person,image/Nude woman 5.jpg
+Nude woman 6,Person,image/Nude woman 6.jpg
+Nude woman 7,Person,image/Nude woman 7.jpg
+Nude woman 8,Person,image/Nude woman 8.jpg
+Nude woman 9,Person,image/Nude woman 9.jpg
+Nude woman 10,Person,image/Nude woman 10.jpg
+Nude woman 11,Person,image/Nude woman 11.jpg
+Nude woman 12,Person,image/Nude woman 12.jpg
+Nude woman 13,Person,image/Nude woman 13.jpg
+Nude woman 14,Person,image/Nude woman 14.jpg
+Nude woman 15,Person,image/Nude woman 15.jpg
+Nude woman 16,Person,image/Nude woman 16.jpg
+Nude woman 17,Person,image/Nude woman 17.jpg
+Nude woman 18,Person,image/Nude woman 18.jpg
+Nude woman 19,Person,image/Nude woman 19.jpg
+Nude woman 20,Person,image/Nude woman 20.jpg
+Nude woman 21,Person,image/Nude woman 21.jpg
+Nude woman 22,Person,image/Nude woman 22.jpg
+Office supplies 1,Object,image/Office supplies 1.jpg
+Office supplies 2,Object,image/Office supplies 2.jpg
+Office supplies 3,Object,image/Office supplies 3.jpg
+Office supplies 4,Object,image/Office supplies 4.jpg
+Office supplies 5,Object,image/Office supplies 5.jpg
+Opossum 1,Animal,image/Opossum 1.jpg
+Orangutan 1,Animal,image/Orangutan 1.jpg
+Ornament 1,Object,image/Ornament 1.jpg
+Paintbrush 1,Object,image/Paintbrush 1.jpg
+Paper 1,Object,image/Paper 1.jpg
+Paper 2,Object,image/Paper 2.jpg
+Paper 3,Object,image/Paper 3.jpg
+Paper 4,Object,image/Paper 4.jpg
+Paper 5,Object,image/Paper 5.jpg
+Paperclips 1,Object,image/Paperclips 1.jpg
+Paperclips 2,Object,image/Paperclips 2.jpg
+Paperclips 3,Object,image/Paperclips 3.jpg
+Paperclips 4,Object,image/Paperclips 4.jpg
+Parachuting 1,Scene,image/Parachuting 1.jpg
+Parachuting 2,Person,image/Parachuting 2.jpg
+Parachuting 3,Person,image/Parachuting 3.jpg
+Parachuting 4,Person,image/Parachuting 4.jpg
+Parade 1,Person,image/Parade 1.jpg
+Parasailing 1,Scene,image/Parasailing 1.jpg
+Parasailing 2,Person,image/Parasailing 2.jpg
+Parasailing 3,Scene,image/Parasailing 3.jpg
+Parasailing 4,Scene,image/Parasailing 4.jpg
+Party 1,Person,image/Party 1.jpg
+Path 1,Scene,image/Path 1.jpg
+Penguins 1,Animal,image/Penguins 1.jpg
+Penguins 2,Animal,image/Penguins 2.jpg
+Performance 1,Scene,image/Performance 1.jpg
+Performance 2,Scene,image/Performance 2.jpg
+Phone 1,Object,image/Phone 1.jpg
+Picnic 1,Person,image/Picnic 1.jpg
+Picnic 2,Person,image/Picnic 2.jpg
+Picnic 3,Person,image/Picnic 3.jpg
+Picnic 4,Person,image/Picnic 4.jpg
+Pig 1,Animal,image/Pig 1.jpg
+Pig 2,Animal,image/Pig 2.jpg
+Pigeon 1,Animal,image/Pigeon 1.jpg
+Pigeon 2,Animal,image/Pigeon 2.jpg
+Pigeon 3,Animal,image/Pigeon 3.jpg
+Pigeon 4,Animal,image/Pigeon 4.jpg
+Pigeon 5,Animal,image/Pigeon 5.jpg
+Pigeon 6,Animal,image/Pigeon 6.jpg
+Pinecone 1,Object,image/Pinecone 1.jpg
+Pinecone 2,Object,image/Pinecone 2.jpg
+Pinecone 3,Object,image/Pinecone 3.jpg
+Pinecone 4,Object,image/Pinecone 4.jpg
+Plane crash 1,Object,image/Plane crash 1.jpg
+Plane crash 2,Scene,image/Plane crash 2.jpg
+Plane crash 3,Scene,image/Plane crash 3.jpg
+Plane crash 4,Object,image/Plane crash 4.jpg
+Police 1,Person,image/Police 1.jpg
+Police 2,Person,image/Police 2.jpg
+Police 3,Person,image/Police 3.jpg
+Police 4,Person,image/Police 4.jpg
+Police 5,Person,image/Police 5.jpg
+Pollution 1,Scene,image/Pollution 1.jpg
+Power lines 1,Scene,image/Power lines 1.jpg
+Present 1,Object,image/Present 1.jpg
+Present 2,Object,image/Present 2.jpg
+Prison 1,Scene,image/Prison 1.jpg
+Prison 2,Object,image/Prison 2.jpg
+Pumpkin 1,Object,image/Pumpkin 1.jpg
+Raccoon 1,Animal,image/Raccoon 1.jpg
+Rafting 1,Person,image/Rafting 1.jpg
+Rafting 2,Person,image/Rafting 2.jpg
+Rafting 3,Person,image/Rafting 3.jpg
+Rafting 4,Person,image/Rafting 4.jpg
+Rafting 5,Person,image/Rafting 5.jpg
+Rafting 6,Person,image/Rafting 6.jpg
+Railroad 1,Scene,image/Railroad 1.jpg
+Rainbow 1,Scene,image/Rainbow 1.jpg
+Rainbow 2,Scene,image/Rainbow 2.jpg
+Research 1,Scene,image/Research 1.jpg
+Road 1,Scene,image/Road 1.jpg
+Rock climbing 1,Person,image/Rock climbing 1.jpg
+Rock climbing 2,Person,image/Rock climbing 2.jpg
+Rock climbing 3,Person,image/Rock climbing 3.jpg
+Rock climbing 4,Person,image/Rock climbing 4.jpg
+Rocks 1,Object,image/Rocks 1.jpg
+Rocks 2,Object,image/Rocks 2.jpg
+Rocks 3,Object,image/Rocks 3.jpg
+Rocks 4,Object,image/Rocks 4.jpg
+Rocks 5,Object,image/Rocks 5.jpg
+Rocks 6,Object,image/Rocks 6.jpg
+Rocks 7,Object,image/Rocks 7.jpg
+Rollercoaster 1,Scene,image/Rollercoaster 1.jpg
+Rollercoaster 2,Scene,image/Rollercoaster 2.jpg
+Rollercoaster 3,Scene,image/Rollercoaster 3.jpg
+Roofing 1,Object,image/Roofing 1.jpg
+Roofing 2,Object,image/Roofing 2.jpg
+Roofing 3,Object,image/Roofing 3.jpg
+Roofing 4,Object,image/Roofing 4.jpg
+Roofing 5,Object,image/Roofing 5.jpg
+Rooster 1,Animal,image/Rooster 1.jpg
+Rubber duck 1,Object,image/Rubber duck 1.jpg
+Rugby 1,Person,image/Rugby 1.jpg
+Rugby 2,Person,image/Rugby 2.jpg
+Running away 1,Person,image/Running away 1.jpg
+Sad face 1,Person,image/Sad face 1.jpg
+Sad face 2,Person,image/Sad face 2.jpg
+Sad face 3,Person,image/Sad face 3.jpg
+Sad face 4,Person,image/Sad face 4.jpg
+Sad face 5,Person,image/Sad face 5.jpg
+Sad face 6,Person,image/Sad face 6.jpg
+Sad face 7,Person,image/Sad face 7.jpg
+Sad face 8,Person,image/Sad face 8.jpg
+Sad face 9,Person,image/Sad face 9.jpg
+Sad pose 1,Person,image/Sad pose 1.jpg
+Sad pose 2,Person,image/Sad pose 2.jpg
+Sad pose 3,Person,image/Sad pose 3.jpg
+Sad pose 4,Person,image/Sad pose 4.jpg
+Sad pose 5,Person,image/Sad pose 5.jpg
+Sad pose 6,Person,image/Sad pose 6.jpg
+Sad pose 7,Person,image/Sad pose 7.jpg
+Sailing 1,Scene,image/Sailing 1.jpg
+Sailing 2,Scene,image/Sailing 2.jpg
+Sailing 3,Scene,image/Sailing 3.jpg
+Satellite 1,Object,image/Satellite 1.jpg
+Scared cat 1,Animal,image/Scared cat 1.jpg
+Scared face 1,Person,image/Scared face 1.jpg
+Scared face 2,Person,image/Scared face 2.jpg
+Scared face 3,Person,image/Scared face 3.jpg
+Scared face 4,Person,image/Scared face 4.jpg
+Scared face 5,Person,image/Scared face 5.jpg
+Scary face 1,Person,image/Scary face 1.jpg
+Scary face 2,Person,image/Scary face 2.jpg
+School 1,Person,image/School 1.jpg
+School 2,Person,image/School 2.jpg
+School 3,Person,image/School 3.jpg
+School 4,Person,image/School 4.jpg
+School 5,Person,image/School 5.jpg
+School 6,Person,image/School 6.jpg
+School 7,Person,image/School 7.jpg
+School 8,Person,image/School 8.jpg
+Seal 1,Animal,image/Seal 1.jpg
+Severed finger 1,Person,image/Severed finger 1.jpg
+Shark 1,Animal,image/Shark 1.jpg
+Shark 2,Animal,image/Shark 2.jpg
+Shark 3,Animal,image/Shark 3.jpg
+Shark 4,Animal,image/Shark 4.jpg
+Shark 5,Animal,image/Shark 5.jpg
+Shark 6,Animal,image/Shark 6.jpg
+Shark 7,Animal,image/Shark 7.jpg
+Shark 8,Animal,image/Shark 8.jpg
+Shark 9,Animal,image/Shark 9.jpg
+Shark 10,Animal,image/Shark 10.jpg
+Shark 11,Animal,image/Shark 11.jpg
+Shooting 1,Person,image/Shooting 1.jpg
+Shot 1,Object,image/Shot 1.jpg
+Shot 2,Person,image/Shot 2.jpg
+Shot 3,Object,image/Shot 3.jpg
+Shot 4,Object,image/Shot 4.jpg
+Shot 5,Object,image/Shot 5.jpg
+Siblings 1,Person,image/Siblings 1.jpg
+Sidewalk 1,Object,image/Sidewalk 1.jpg
+Sidewalk 2,Object,image/Sidewalk 2.jpg
+Sidewalk 3,Object,image/Sidewalk 3.jpg
+Sidewalk 4,Object,image/Sidewalk 4.jpg
+Sidewalk 5,Object,image/Sidewalk 5.jpg
+Sidewalk 6,Object,image/Sidewalk 6.jpg
+Skier 1,Person,image/Skier 1.jpg
+Skijump 1,Scene,image/Skijump 1.jpg
+Skijump 2,Scene,image/Skijump 2.jpg
+Skinhead 1,Person,image/Skinhead 1.jpg
+Sky 1,Scene,image/Sky 1.jpg
+Skydiving 1,Scene,image/Skydiving 1.jpg
+Skydiving 2,Person,image/Skydiving 2.jpg
+Skydiving 3,Person,image/Skydiving 3.jpg
+Skydiving 4,Person,image/Skydiving 4.jpg
+Skydiving 5,Person,image/Skydiving 5.jpg
+Skyscraper 1,Scene,image/Skyscraper 1.jpg
+Skyscraper 2,Scene,image/Skyscraper 2.jpg
+Sleepy pose 1,Person,image/Sleepy pose 1.jpg
+Sleepy pose 2,Person,image/Sleepy pose 2.jpg
+Sleepy pose 3,Person,image/Sleepy pose 3.jpg
+Sleepy pose 4,Person,image/Sleepy pose 4.jpg
+Smiling face 1,Person,image/Smiling face 1.jpg
+Snake 1,Animal,image/Snake 1.jpg
+Snake 2,Animal,image/Snake 2.jpg
+Snake 3,Animal,image/Snake 3.jpg
+Snake 4,Animal,image/Snake 4.jpg
+Snake 5,Animal,image/Snake 5.jpg
+Snake 6,Animal,image/Snake 6.jpg
+Snow 1,Scene,image/Snow 1.jpg
+Snow 2,Scene,image/Snow 2.jpg
+Snow 3,Scene,image/Snow 3.jpg
+Snow 4,Scene,image/Snow 4.jpg
+Snow 5,Scene,image/Snow 5.jpg
+Soccer 1,Object,image/Soccer 1.jpg
+Soccer 2,Object,image/Soccer 2.jpg
+Socks 1,Object,image/Socks 1.jpg
+Solar panel 1,Scene,image/Solar panel 1.jpg
+Soldiers 1,Scene,image/Soldiers 1.jpg
+Soldiers 2,Person,image/Soldiers 2.jpg
+Soldiers 3,Person,image/Soldiers 3.jpg
+Soldiers 4,Scene,image/Soldiers 4.jpg
+Soldiers 5,Person,image/Soldiers 5.jpg
+Soldiers 6,Person,image/Soldiers 6.jpg
+Soldiers 7,Person,image/Soldiers 7.jpg
+Soldiers 8,Person,image/Soldiers 8.jpg
+Soldiers 9,Person,image/Soldiers 9.jpg
+Soldiers 10,Scene,image/Soldiers 10.jpg
+Soup 1,Object,image/Soup 1.jpg
+Spider 1,Animal,image/Spider 1.jpg
+Spider 2,Animal,image/Spider 2.jpg
+Statue 1,Object,image/Statue 1.jpg
+Statue 2,Object,image/Statue 2.jpg
+Stingray 1,Animal,image/Stingray 1.jpg
+Stingray 2,Animal,image/Stingray 2.jpg
+Stingray 3,Animal,image/Stingray 3.jpg
+Storage 1,Object,image/Storage 1.jpg
+Storage 2,Object,image/Storage 2.jpg
+Storage 3,Object,image/Storage 3.jpg
+Street 1,Scene,image/Street 1.jpg
+Street 2,Scene,image/Street 2.jpg
+Street 3,Scene,image/Street 3.jpg
+Street 4,Scene,image/Street 4.jpg
+Street 5,Scene,image/Street 5.jpg
+Sun 1,Object,image/Sun 1.jpg
+Sunflower 1,Scene,image/Sunflower 1.jpg
+Sunset 1,Scene,image/Sunset 1.jpg
+Sunset 2,Scene,image/Sunset 2.jpg
+Sunset 3,Scene,image/Sunset 3.jpg
+Sunset 4,Scene,image/Sunset 4.jpg
+Sunset 5,Scene,image/Sunset 5.jpg
+Sunset 6,Scene,image/Sunset 6.jpg
+Surgery 1,Person,image/Surgery 1.jpg
+Surgery 2,Person,image/Surgery 2.jpg
+Surgery 3,Person,image/Surgery 3.jpg
+Surgery 4,Person,image/Surgery 4.jpg
+Surgery 5,Person,image/Surgery 5.jpg
+Surprise 1,Person,image/Surprise 1.jpg
+Surprise 2,Person,image/Surprise 2.jpg
+Swimming 1,Person,image/Swimming 1.jpg
+Swingset 1,Object,image/Swingset 1.jpg
+Thunderstorm 1,Scene,image/Thunderstorm 1.jpg
+Thunderstorm 2,Scene,image/Thunderstorm 2.jpg
+Thunderstorm 3,Scene,image/Thunderstorm 3.jpg
+Thunderstorm 4,Scene,image/Thunderstorm 4.jpg
+Thunderstorm 5,Scene,image/Thunderstorm 5.jpg
+Thunderstorm 6,Scene,image/Thunderstorm 6.jpg
+Thunderstorm 7,Scene,image/Thunderstorm 7.jpg
+Thunderstorm 8,Scene,image/Thunderstorm 8.jpg
+Thunderstorm 9,Scene,image/Thunderstorm 9.jpg
+Thunderstorm 10,Scene,image/Thunderstorm 10.jpg
+Thunderstorm 11,Scene,image/Thunderstorm 11.jpg
+Tickling 1,Person,image/Tickling 1.jpg
+Tiger 1,Animal,image/Tiger 1.jpg
+Tiger 2,Animal,image/Tiger 2.jpg
+Timber 1,Object,image/Timber 1.jpg
+Timber 2,Object,image/Timber 2.jpg
+Timber 3,Object,image/Timber 3.jpg
+Timber 4,Object,image/Timber 4.jpg
+Toast 1,Person,image/Toast 1.jpg
+Toilet 1,Object,image/Toilet 1.jpg
+Toilet 2,Object,image/Toilet 2.jpg
+Toilet 3,Object,image/Toilet 3.jpg
+Toilet 4,Object,image/Toilet 4.jpg
+Tornado 1,Scene,image/Tornado 1.jpg
+Tornado 2,Scene,image/Tornado 2.jpg
+Tornado 3,Scene,image/Tornado 3.jpg
+Tornado 4,Scene,image/Tornado 4.jpg
+Tornado 5,Scene,image/Tornado 5.jpg
+Torture chamber 1,Object,image/Torture chamber 1.jpg
+Traffic 1,Scene,image/Traffic 1.jpg
+Tumor 1,Person,image/Tumor 1.jpg
+Volcano 1,Scene,image/Volcano 1.jpg
+Volcano 2,Scene,image/Volcano 2.jpg
+Volcano 3,Scene,image/Volcano 3.jpg
+Wall 1,Object,image/Wall 1.jpg
+Wall 2,Object,image/Wall 2.jpg
+Wall 3,Object,image/Wall 3.jpg
+Wall 4,Object,image/Wall 4.jpg
+Wall 5,Object,image/Wall 5.jpg
+War 1,Person,image/War 1.jpg
+War 2 ,Scene,image/War 2 .jpg
+War 3,Person,image/War 3.jpg
+War 4,Person,image/War 4.jpg
+War 5,Scene,image/War 5.jpg
+War 6,Person,image/War 6.jpg
+War 7,Person,image/War 7.jpg
+War 8,Scene,image/War 8.jpg
+Waterfall 1,Scene,image/Waterfall 1.jpg
+Weapon 1,Object,image/Weapon 1.jpg
+Wedding 1,Person,image/Wedding 1.jpg
+Wedding 2,Person,image/Wedding 2.jpg
+Wedding 3,Person,image/Wedding 3.jpg
+Wedding 4,Object,image/Wedding 4.jpg
+Wedding 5,Person,image/Wedding 5.jpg
+Wedding 6,Person,image/Wedding 6.jpg
+Wedding 7,Object,image/Wedding 7.jpg
+Wedding 8,Object,image/Wedding 8.jpg
+Wedding 9,Person,image/Wedding 9.jpg
+Wedding 10,Person,image/Wedding 10.jpg
+Wedding 11,Object,image/Wedding 11.jpg
+Wedding 12,Scene,image/Wedding 12.jpg
+Wedding ring 1,Object,image/Wedding ring 1.jpg
+Windmill 1,Object,image/Windmill 1.jpg
+Wolf 1,Animal,image/Wolf 1.jpg
+Wolf 2,Animal,image/Wolf 2.jpg
+Woods 1,Scene,image/Woods 1.jpg
+Yarn 1,Object,image/Yarn 1.jpg
+Yarn 2,Object,image/Yarn 2.jpg
+Yarn 3,Object,image/Yarn 3.jpg
+Yarn 4,Object,image/Yarn 4.jpg
+Yoga 1,Person,image/Yoga 1.jpg
+Yoga 2,Person,image/Yoga 2.jpg
+Yoga 3,Person,image/Yoga 3.jpg
+Yoga 4,Person,image/Yoga 4.jpg
+Yoga 5,Person,image/Yoga 5.jpg
+Zebra 1,Animal,image/Zebra 1.jpg

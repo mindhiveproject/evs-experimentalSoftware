@@ -69,6 +69,7 @@ psychoJS.start({
     // resources:
     {'name': 'image/Acorns 1.jpg', 'path': 'image/Acorns 1.jpg'},
     {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
+    {'name': 'images.csv', 'path': 'images.csv'},
     {'name': 'image/Acorns 1.jpg', 'path': 'image/Acorns 1.jpg'},
     {'name': 'image/Acorns 2.jpg', 'path': 'image/Acorns 2.jpg'},
     {'name': 'image/Acorns 3.jpg', 'path': 'image/Acorns 3.jpg'},
