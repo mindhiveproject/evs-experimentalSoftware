@@ -998,6 +998,7 @@ async function updateInfo() {
 
 var welcomeClock;
 var text;
+var key_resp_2;
 var trialClock;
 var polygon;
 var image;
@@ -1024,6 +1025,8 @@ async function experimentInit() {
     color: new util.Color('white'),  opacity: undefined,
     depth: 0.0 
   });
+  
+  key_resp_2 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
@@ -1132,7 +1135,7 @@ function trialsLoopBegin(trialsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     trials = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 1, method: TrialHandler.Method.RANDOM,
+      nReps: 2, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
       seed: undefined, name: 'trials'
@@ -1171,7 +1174,7 @@ function loopsLoopBegin(loopsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     loops = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
+      nReps: 2, method: TrialHandler.Method.SEQUENTIAL,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
       seed: undefined, name: 'loops'
@@ -1266,6 +1269,7 @@ var t;
 var frameN;
 var continueRoutine;
 var welcomeMaxDurationReached;
+var _key_resp_2_allKeys;
 var welcomeMaxDuration;
 var welcomeComponents;
 function welcomeRoutineBegin(snapshot) {
@@ -1276,8 +1280,8 @@ function welcomeRoutineBegin(snapshot) {
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
-    welcomeClock.reset(routineTimer.getTime());
-    routineTimer.add(1.000000);
+    welcomeClock.reset();
+    routineTimer.reset();
     welcomeMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
@@ -1289,11 +1293,15 @@ function welcomeRoutineBegin(snapshot) {
         }
     }
     
+    key_resp_2.keys = undefined;
+    key_resp_2.rt = undefined;
+    _key_resp_2_allKeys = [];
     psychoJS.experiment.addData('welcome.started', globalClock.getTime());
     welcomeMaxDuration = null
     // keep track of which components have finished
     welcomeComponents = [];
     welcomeComponents.push(text);
+    welcomeComponents.push(key_resp_2);
     
     welcomeComponents.forEach( function(thisComponent) {
       if ('status' in thisComponent)
@@ -1304,7 +1312,6 @@ function welcomeRoutineBegin(snapshot) {
 }
 
 
-var frameRemains;
 function welcomeRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'welcome' ---
@@ -1322,9 +1329,29 @@ function welcomeRoutineEachFrame() {
       text.setAutoDraw(true);
     }
     
-    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (text.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      text.setAutoDraw(false);
+    
+    // *key_resp_2* updates
+    if (t >= 1 && key_resp_2.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      key_resp_2.tStart = t;  // (not accounting for frame time here)
+      key_resp_2.frameNStart = frameN;  // exact frame index
+      
+      // keyboard checking is just starting
+      psychoJS.window.callOnFlip(function() { key_resp_2.clock.reset(); });  // t=0 on next screen flip
+      psychoJS.window.callOnFlip(function() { key_resp_2.start(); }); // start on screen flip
+      psychoJS.window.callOnFlip(function() { key_resp_2.clearEvents(); });
+    }
+    
+    if (key_resp_2.status === PsychoJS.Status.STARTED) {
+      let theseKeys = key_resp_2.getKeys({keyList: ['space'], waitRelease: false});
+      _key_resp_2_allKeys = _key_resp_2_allKeys.concat(theseKeys);
+      if (_key_resp_2_allKeys.length > 0) {
+        key_resp_2.keys = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].name;  // just the last key pressed
+        key_resp_2.rt = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].rt;
+        key_resp_2.duration = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].duration;
+        // a response ends the routine
+        continueRoutine = false;
+      }
     }
     
     // check for quit (typically the Esc key)
@@ -1345,7 +1372,7 @@ function welcomeRoutineEachFrame() {
     });
     
     // refresh the screen if continuing
-    if (continueRoutine && routineTimer.getTime() > 0) {
+    if (continueRoutine) {
       return Scheduler.Event.FLIP_REPEAT;
     } else {
       return Scheduler.Event.NEXT;
@@ -1363,11 +1390,21 @@ function welcomeRoutineEnd(snapshot) {
       }
     });
     psychoJS.experiment.addData('welcome.stopped', globalClock.getTime());
-    if (welcomeMaxDurationReached) {
-        welcomeClock.add(welcomeMaxDuration);
-    } else {
-        welcomeClock.add(1.000000);
+    // update the trial handler
+    if (currentLoop instanceof MultiStairHandler) {
+      currentLoop.addResponse(key_resp_2.corr, level);
     }
+    psychoJS.experiment.addData('key_resp_2.keys', key_resp_2.keys);
+    if (typeof key_resp_2.keys !== 'undefined') {  // we had a response
+        psychoJS.experiment.addData('key_resp_2.rt', key_resp_2.rt);
+        psychoJS.experiment.addData('key_resp_2.duration', key_resp_2.duration);
+        routineTimer.reset();
+        }
+    
+    key_resp_2.stop();
+    // the Routine "welcome" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset();
+    
     // Routines running outside a loop should always advance the datafile row
     if (currentLoop === psychoJS.experiment) {
       psychoJS.experiment.nextEntry(snapshot);
@@ -1398,6 +1435,7 @@ function trialRoutineBegin(snapshot) {
     key_resp.keys = undefined;
     key_resp.rt = undefined;
     _key_resp_allKeys = [];
+    // Run 'Begin Routine' code from code
     random_duration = 2 + Math.floor(Math.random() * 8)
     text_2.text = random_duration
     
@@ -1422,6 +1460,7 @@ function trialRoutineBegin(snapshot) {
 }
 
 
+var frameRemains;
 function trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
