@@ -888,7 +888,7 @@ function waitRoutineEnd(snapshot) {
 
 var break_2MaxDurationReached;
 var clock;
-var oldTime;
+var current_time;
 var countdown_time;
 var break_2MaxDuration;
 var break_2Components;
@@ -906,7 +906,7 @@ function break_2RoutineBegin(snapshot) {
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_3
     clock = new util.Clock();
-    oldTime = 0
+    current_time = 0
     countdown_time = 10
     psychoJS.experiment.addData('break_2.started', globalClock.getTime());
     break_2MaxDuration = null
@@ -951,20 +951,13 @@ function break_2RoutineEachFrame() {
     }
     
     // Run 'Each Frame' code from code_3
-    if (countdown_time == 0) {
+    if (current_time >= countdown_time) {
         continueRoutine = false;
     }
     
-    let newTime=clock.getTime()
-    let mins = Math.floor(newTime / 60)
-    let secs = newTime % 60
-    
-    if ((newTime !== oldTime)) {
-      text_countdown.text = ((Number.parseInt(mins).toString().padStart(2,"0") + ":") + Number.parseInt(secs).toString().padStart(2,"0"));
-      oldTime = newTime;
-      countdown_time--;
-    }
-    
+    current_time = clock.getTime()
+    let timeLeft = countdown_time - seconds;
+    text_countdown.text = timeLeft;
     
     // *text_4* updates
     if (t >= 0.0 && text_4.status === PsychoJS.Status.NOT_STARTED) {
