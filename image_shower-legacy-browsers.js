@@ -234,16 +234,18 @@ async function experimentInit() {
         .then(response => response.text())
         .then(text => {
           const lines = text.split('\n');
+          let tempArray = [];
           for (let i = 1; i < lines.length; i++) {
               const line = lines[i];
               const values = line.split(',');
-              IMAGE_ORDER.push(values[2]);
+              tempArray.push(values[2]);
           }
-          console.log(IMAGE_ORDER);
-          IMAGE_ORDER = IMAGE_ORDER.slice(0, 10);
-          console.log(IMAGE_ORDER);
-          IMAGE_ORDER = IMAGE_ORDER.sort(() => 0.5 - Math.random());
-          console.log(IMAGE_ORDER);
+          console.log(tempArray);
+          tempArray = tempArray.slice(0, 10);
+          console.log(tempArray);
+          tempArray = tempArray.sort(() => 0.5 - Math.random());
+          console.log(tempArray);
+          IMAGE_ORDER = tempArray;
         });
   text_2 = new visual.TextStim({
     win: psychoJS.window,
