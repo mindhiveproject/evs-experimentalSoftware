@@ -228,7 +228,7 @@ async function experimentInit() {
   //    "image/Baby 2.jpg",
   //    "image/Baby 3.jpg",
   //];
-  IMAGE_ORDER = [];
+  IMAGE_ORDER = ["image/Baby 1.jpg"];
   
   fetch('images.csv')
         .then(response => response.text())
