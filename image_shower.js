@@ -243,7 +243,7 @@ async function experimentInit() {
         .then(text => {
           const lines = text.split('\n');
           for (let i = 1; i < lines.length; i++) {
-              line = lines[i];
+              const line = lines[i];
               const values = line.split(',');
               IMAGE_ORDER.push(values[2]);
           }
