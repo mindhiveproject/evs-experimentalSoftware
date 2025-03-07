@@ -19,6 +19,23 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
+IMAGE_ORDER = [];
+
+fetch('images.csv')
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.split('\n');
+        let tempArray = [];
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i];
+            const values = line.split(',');
+            tempArray.push(values[2]);
+        }
+        console.log(tempArray);
+        tempArray = tempArray.slice(0, 10);
+        console.log(tempArray);
+        IMAGE_ORDER = tempArray;
+      });
 // init psychoJS:
 const psychoJS = new PsychoJS({
   debug: true
@@ -232,30 +249,7 @@ async function experimentInit() {
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Run 'Begin Experiment' code from code
-  //IMAGE_ORDER = [
-  //    "image/Baby 1.jpg",
-  //    "image/Baby 2.jpg",
-  //    "image/Baby 3.jpg",
-  //];
-  IMAGE_ORDER = ["image/Baby 1.jpg"];
-  
-  fetch('images.csv')
-        .then(response => response.text())
-        .then(text => {
-          const lines = text.split('\n');
-          let tempArray = [];
-          for (let i = 1; i < lines.length; i++) {
-              const line = lines[i];
-              const values = line.split(',');
-              tempArray.push(values[2]);
-          }
-          console.log(tempArray);
-          tempArray = tempArray.slice(0, 10);
-          console.log(tempArray);
-          tempArray = tempArray.sort(() => 0.5 - Math.random());
-          console.log(tempArray);
-          IMAGE_ORDER = tempArray;
-        });
+  IMAGE_ORDER = IMAGE_ORDER.sort(() => 0.5 - Math.random());
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
@@ -287,7 +281,7 @@ async function experimentInit() {
   text_countdown = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_countdown',
-    text: countdown_time,
+    text: '10',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
