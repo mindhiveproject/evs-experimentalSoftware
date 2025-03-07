@@ -185,6 +185,9 @@ async function updateInfo() {
 var welcomeClock;
 var text;
 var key_resp_2;
+var welcome_1;
+var welcome_2;
+var welcome_3;
 var trialClock;
 var polygon;
 var image;
@@ -194,7 +197,6 @@ var waitClock;
 var text_3;
 var break_2Clock;
 var text_countdown;
-var countdown_time;
 var text_4;
 var globalClock;
 var routineTimer;
@@ -214,6 +216,42 @@ async function experimentInit() {
   });
   
   key_resp_2 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+  
+  welcome_1 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'welcome_1',
+    text: 'welcome 1',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: -3.0 
+  });
+  
+  welcome_2 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'welcome_2',
+    text: 'welcome_2',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: -4.0 
+  });
+  
+  welcome_3 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'welcome_3',
+    text: 'welcome 3',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: -5.0 
+  });
   
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
@@ -279,7 +317,7 @@ async function experimentInit() {
   text_countdown = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_countdown',
-    text: countdown_time,
+    text: '10',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -288,7 +326,6 @@ async function experimentInit() {
     depth: 0.0 
   });
   
-  countdown_time = 10
   text_4 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_4',
@@ -465,12 +502,12 @@ function welcomeRoutineBegin(snapshot) {
     welcomeMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
-    if ((trials.thisN === 0)) {
-        text.text = "Welcome! (1) 1.1";
-    } else {
-        if ((trials.thisN === 1)) {
-            text.text = "Welcome! (2)";
-        }
+    if (trials.thisN === 0) {
+        text.text = welcome_1.text;
+    } else if (trials.thisN === 1) {
+        text.text = welcome_2.text;
+    } else if (trials.thisN === 2) {
+        text.text = welcome_3.text;
     }
     
     window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
@@ -486,6 +523,9 @@ function welcomeRoutineBegin(snapshot) {
     welcomeComponents = [];
     welcomeComponents.push(text);
     welcomeComponents.push(key_resp_2);
+    welcomeComponents.push(welcome_1);
+    welcomeComponents.push(welcome_2);
+    welcomeComponents.push(welcome_3);
     
     for (const thisComponent of welcomeComponents)
       if ('status' in thisComponent)
@@ -495,6 +535,7 @@ function welcomeRoutineBegin(snapshot) {
 }
 
 
+var frameRemains;
 function welcomeRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'welcome' ---
@@ -535,6 +576,51 @@ function welcomeRoutineEachFrame() {
         // a response ends the routine
         continueRoutine = false;
       }
+    }
+    
+    
+    // *welcome_1* updates
+    if (t >= 0 && welcome_1.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      welcome_1.tStart = t;  // (not accounting for frame time here)
+      welcome_1.frameNStart = frameN;  // exact frame index
+      
+      welcome_1.setAutoDraw(true);
+    }
+    
+    frameRemains = 0 + 0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (welcome_1.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      welcome_1.setAutoDraw(false);
+    }
+    
+    
+    // *welcome_2* updates
+    if (t >= 0.0 && welcome_2.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      welcome_2.tStart = t;  // (not accounting for frame time here)
+      welcome_2.frameNStart = frameN;  // exact frame index
+      
+      welcome_2.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (welcome_2.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      welcome_2.setAutoDraw(false);
+    }
+    
+    
+    // *welcome_3* updates
+    if (t >= 0.0 && welcome_3.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      welcome_3.tStart = t;  // (not accounting for frame time here)
+      welcome_3.frameNStart = frameN;  // exact frame index
+      
+      welcome_3.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (welcome_3.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      welcome_3.setAutoDraw(false);
     }
     
     // check for quit (typically the Esc key)
@@ -644,7 +730,6 @@ function trialRoutineBegin(snapshot) {
 }
 
 
-var frameRemains;
 function trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
@@ -888,6 +973,7 @@ function waitRoutineEnd(snapshot) {
 var break_2MaxDurationReached;
 var clock;
 var current_time;
+var countdown_time;
 var break_2MaxDuration;
 var break_2Components;
 function break_2RoutineBegin(snapshot) {
@@ -905,6 +991,7 @@ function break_2RoutineBegin(snapshot) {
     // Run 'Begin Routine' code from code_3
     clock = new util.Clock();
     current_time = 0
+    countdown_time = 10
     psychoJS.experiment.addData('break_2.started', globalClock.getTime());
     break_2MaxDuration = null
     // keep track of which components have finished
