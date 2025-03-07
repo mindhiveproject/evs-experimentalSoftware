@@ -953,12 +953,17 @@ function break_2RoutineEachFrame() {
     }
     
     // Run 'Each Frame' code from code_3
+    console.log(current_time);
+    console.log(countdown_time);
     if (current_time >= countdown_time) {
         continueRoutine = false;
     }
     
-    current_time = clock.getTime()
-    text_countdown.text = countdown_time - current_time;
+    let now = Math.floor(clock.getTime());
+    if (now !== current_time) {
+      current_time = now;
+      text_countdown.text = countdown_time - now;
+    }
     
     // *text_4* updates
     if (t >= 0.0 && text_4.status === PsychoJS.Status.NOT_STARTED) {
