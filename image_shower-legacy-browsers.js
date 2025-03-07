@@ -279,7 +279,7 @@ async function experimentInit() {
   text_countdown = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_countdown',
-    text: '',
+    text: countdown_time,
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -931,10 +931,6 @@ function break_2RoutineEachFrame() {
     t = break_2Clock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
-    
-    if (text_countdown.status === PsychoJS.Status.STARTED){ // only update if being drawn
-      text_countdown.setText(countdown_time, false);
-    }
     
     // *text_countdown* updates
     if (t >= 0.0 && text_countdown.status === PsychoJS.Status.NOT_STARTED) {
