@@ -900,8 +900,8 @@ function break_2RoutineBegin(snapshot) {
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
-    break_2Clock.reset(routineTimer.getTime());
-    routineTimer.add(1.000000);
+    break_2Clock.reset();
+    routineTimer.reset();
     break_2MaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_3
@@ -945,11 +945,6 @@ function break_2RoutineEachFrame() {
       text_countdown.setAutoDraw(true);
     }
     
-    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (text_countdown.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      text_countdown.setAutoDraw(false);
-    }
-    
     // Run 'Each Frame' code from code_3
     console.log(current_time);
     console.log(countdown_time);
@@ -972,11 +967,6 @@ function break_2RoutineEachFrame() {
       text_4.setAutoDraw(true);
     }
     
-    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (text_4.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      text_4.setAutoDraw(false);
-    }
-    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -995,7 +985,7 @@ function break_2RoutineEachFrame() {
     });
     
     // refresh the screen if continuing
-    if (continueRoutine && routineTimer.getTime() > 0) {
+    if (continueRoutine) {
       return Scheduler.Event.FLIP_REPEAT;
     } else {
       return Scheduler.Event.NEXT;
@@ -1013,11 +1003,9 @@ function break_2RoutineEnd(snapshot) {
       }
     });
     psychoJS.experiment.addData('break_2.stopped', globalClock.getTime());
-    if (break_2MaxDurationReached) {
-        break_2Clock.add(break_2MaxDuration);
-    } else {
-        break_2Clock.add(1.000000);
-    }
+    // the Routine "break_2" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset();
+    
     // Routines running outside a loop should always advance the datafile row
     if (currentLoop === psychoJS.experiment) {
       psychoJS.experiment.nextEntry(snapshot);
