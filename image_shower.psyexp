@@ -400,7 +400,7 @@
         <Param val="task_timer = core.CountdownTimer(start = 5)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="# end task after 5 secs&amp;#10;time_left = task_timer.getTime()&amp;#10;minutes = int(time_left/60)&amp;#10;seconds = int(time_left - minutes * 60)&amp;#10;&amp;#10;text_countdown.text = seconds&amp;#10;if time_left &lt;= 0.0:&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="if (current_time &gt;= countdown_time) {&amp;#10;    continueRoutine = false;&amp;#10;}&amp;#10;&amp;#10;current_time = clock.getTime()&amp;#10;let timeLeft = countdown_time - seconds;&amp;#10;text_countdown.text = timeLeft;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="if (current_time &gt;= countdown_time) {&amp;#10;    continueRoutine = false;&amp;#10;}&amp;#10;&amp;#10;current_time = clock.getTime()&amp;#10;text_countdown.text = countdown_time - current_time;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>

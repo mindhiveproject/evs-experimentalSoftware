@@ -956,8 +956,7 @@ function break_2RoutineEachFrame() {
     }
     
     current_time = clock.getTime()
-    let timeLeft = countdown_time - seconds;
-    text_countdown.text = timeLeft;
+    text_countdown.text = countdown_time - current_time;
     
     // *text_4* updates
     if (t >= 0.0 && text_4.status === PsychoJS.Status.NOT_STARTED) {
