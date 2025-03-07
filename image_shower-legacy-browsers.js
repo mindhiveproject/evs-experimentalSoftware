@@ -211,7 +211,7 @@ async function experimentInit() {
   welcome_1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_1',
-    text: 'welcome 1',
+    text: ':).  welcome 1',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
