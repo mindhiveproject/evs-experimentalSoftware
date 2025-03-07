@@ -186,6 +186,7 @@ var waitClock;
 var text_3;
 var break_2Clock;
 var text_countdown;
+var countdown_time;
 var text_4;
 var globalClock;
 var routineTimer;
@@ -279,6 +280,7 @@ async function experimentInit() {
     depth: 0.0 
   });
   
+  countdown_time = 10
   text_4 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_4',
@@ -883,7 +885,6 @@ function waitRoutineEnd(snapshot) {
 var break_2MaxDurationReached;
 var clock;
 var current_time;
-var countdown_time;
 var break_2MaxDuration;
 var break_2Components;
 function break_2RoutineBegin(snapshot) {
@@ -901,7 +902,6 @@ function break_2RoutineBegin(snapshot) {
     // Run 'Begin Routine' code from code_3
     clock = new util.Clock();
     current_time = 0
-    countdown_time = 10
     psychoJS.experiment.addData('break_2.started', globalClock.getTime());
     break_2MaxDuration = null
     // keep track of which components have finished

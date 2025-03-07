@@ -395,8 +395,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="clock = new util.Clock();&amp;#10;current_time = 0&amp;#10;countdown_time = 10" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="countdown_time = 10" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="clock = new util.Clock();&amp;#10;current_time = 0" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="task_timer = core.CountdownTimer(start = 5)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="# end task after 5 secs&amp;#10;time_left = task_timer.getTime()&amp;#10;minutes = int(time_left/60)&amp;#10;seconds = int(time_left - minutes * 60)&amp;#10;&amp;#10;text_countdown.text = seconds&amp;#10;if time_left &lt;= 0.0:&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
