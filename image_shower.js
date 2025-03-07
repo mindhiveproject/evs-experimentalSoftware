@@ -353,7 +353,7 @@ function loopsLoopBegin(loopsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     loops = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
+      nReps: 3, method: TrialHandler.Method.SEQUENTIAL,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
       seed: undefined, name: 'loops'
@@ -618,14 +618,13 @@ function trialRoutineBegin(snapshot) {
     key_resp.rt = undefined;
     _key_resp_allKeys = [];
     // Run 'Begin Routine' code from code
-    random_duration = 2 + Math.floor(Math.random() * 8);
+    let image_time_range = 1;
+    
+    random_duration = 2 + Math.floor(Math.random() * image_time_range);
     text_2.text = random_duration;
     
     image_path = window.RANDOM_IMAGES[loops.thisN];
-    console.log(image.image);
     image.image = image_path;
-    console.log(image_path);
-    console.log(image.image);
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
     // keep track of which components have finished
