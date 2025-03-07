@@ -192,7 +192,6 @@ var trialClock;
 var polygon;
 var image;
 var key_resp;
-var text_2;
 var waitClock;
 var text_3;
 var break_2Clock;
@@ -285,18 +284,6 @@ async function experimentInit() {
     texRes : 128.0, interpolate : true, depth : -1.0 
   });
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  
-  text_2 = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'text_2',
-    text: '0',
-    font: 'Arial',
-    units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
-    languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
-    depth: -4.0 
-  });
   
   // Initialize components for Routine "wait"
   waitClock = new util.Clock();
@@ -709,7 +696,7 @@ function trialRoutineBegin(snapshot) {
     let image_time_range = 1;
     
     random_duration = 2 + Math.floor(Math.random() * image_time_range);
-    text_2.text = random_duration;
+    //text_2.text = random_duration;
     
     image_path = window.RANDOM_IMAGES[loops.thisN];
     image.image = image_path;
@@ -720,7 +707,6 @@ function trialRoutineBegin(snapshot) {
     trialComponents.push(polygon);
     trialComponents.push(image);
     trialComponents.push(key_resp);
-    trialComponents.push(text_2);
     
     for (const thisComponent of trialComponents)
       if ('status' in thisComponent)
@@ -793,21 +779,6 @@ function trialRoutineEachFrame() {
         key_resp.rt = _key_resp_allKeys[_key_resp_allKeys.length - 1].rt;
         key_resp.duration = _key_resp_allKeys[_key_resp_allKeys.length - 1].duration;
       }
-    }
-    
-    
-    // *text_2* updates
-    if (t >= 1 && text_2.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      text_2.tStart = t;  // (not accounting for frame time here)
-      text_2.frameNStart = frameN;  // exact frame index
-      
-      text_2.setAutoDraw(true);
-    }
-    
-    frameRemains = 1 + 1 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (text_2.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      text_2.setAutoDraw(false);
     }
     
     // check for quit (typically the Esc key)
