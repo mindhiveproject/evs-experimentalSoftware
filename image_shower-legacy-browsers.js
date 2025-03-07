@@ -11,7 +11,7 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
-IMAGE_ORDER = [];
+IMAGES = [];
 
 fetch('images.csv')
       .then(response => response.text())
@@ -26,7 +26,7 @@ fetch('images.csv')
         console.log(tempArray);
         tempArray = tempArray.slice(0, 10);
         console.log(tempArray);
-        IMAGE_ORDER = tempArray;
+        IMAGES = tempArray;
       });
 // init psychoJS:
 const psychoJS = new PsychoJS({
@@ -181,7 +181,7 @@ var trialClock;
 var polygon;
 var image;
 var key_resp;
-var IMAGE_ORDER;
+var RANDOM_IMAGES;
 var text_2;
 var waitClock;
 var text_3;
@@ -241,7 +241,7 @@ async function experimentInit() {
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Run 'Begin Experiment' code from code
-  IMAGE_ORDER = IMAGE_ORDER.sort(() => 0.5 - Math.random());
+  RANDOM_IMAGES = IMAGES.sort(() => 0.5 - Math.random());
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
@@ -615,7 +615,7 @@ function trialRoutineBegin(snapshot) {
     random_duration = 2 + Math.floor(Math.random() * 8);
     text_2.text = random_duration;
     
-    image_path = IMAGE_ORDER[loops.thisN];
+    image_path = RANDOM_IMAGES[loops.thisN];
     console.log(image.image);
     image.image = image_path;
     console.log(image_path);
