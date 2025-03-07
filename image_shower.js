@@ -247,11 +247,6 @@ async function experimentInit() {
   });
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
-  // Run 'Begin Experiment' code from code
-  window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
-  
-  console.log("Randomizing images");
-  console.log(window.RANDOM_IMAGES)
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
@@ -476,6 +471,10 @@ function welcomeRoutineBegin(snapshot) {
         }
     }
     
+    window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
+    
+    console.log("Randomizing images");
+    console.log(window.RANDOM_IMAGES)
     key_resp_2.keys = undefined;
     key_resp_2.rt = undefined;
     _key_resp_2_allKeys = [];
