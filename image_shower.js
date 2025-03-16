@@ -24,7 +24,7 @@ window.IMAGES = new Map();
 fetch('images.csv')
       .then(response => response.text())
       .then(text => {
-        const lines = text.split('\n');
+        const lines = text.split("\n");
         // 4 categories
         let persons = [];
         let scenes = [];
@@ -46,10 +46,10 @@ fetch('images.csv')
                 animals.push(values[2]);
             }
         }
-        window.IMAGES.set('person': persons);
-        window.IMAGES.set('scene': scenes);
-        window.IMAGES.set('object': objects);
-        window.IMAGES.set('animal': animals);
+        window.IMAGES.set("person": persons);
+        window.IMAGES.set("scene": scenes);
+        window.IMAGES.set("object": objects);
+        window.IMAGES.set("animal": animals);
       });
 // init psychoJS:
 const psychoJS = new PsychoJS({
@@ -489,6 +489,7 @@ function welcomeRoutineBegin(snapshot) {
     //
     //console.log("Randomizing images");
     //console.log(window.RANDOM_IMAGES)
+    
     key_resp_2.keys = undefined;
     key_resp_2.rt = undefined;
     _key_resp_2_allKeys = [];
