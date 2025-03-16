@@ -19,22 +19,37 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
-window.IMAGES = [];
+window.IMAGES = new Map();
 
 fetch('images.csv')
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n');
-        let tempArray = [];
+        // 4 categories
+        let persons = [];
+        let scenes = [];
+        let objects = [];
+        let animals = [];
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i];
             const values = line.split(',');
-            tempArray.push(values[2]);
+            if (values[1] === "Person") {
+                persons.push(values[2]);
+            }
+            if (values[1] === "Scene") {
+                scenes.push(values[2]);
+            }
+            if (values[1] === "Object") {
+                objects.push(values[2]);
+            }
+            if (values[1] === "Animal") {
+                animals.push(values[2]);
+            }
         }
-        console.log(tempArray);
-        tempArray = tempArray.slice(0, 10);
-        console.log(tempArray);
-        window.IMAGES = tempArray;
+        window.IMAGES.set('person': persons);
+        window.IMAGES.set('scene': scenes);
+        window.IMAGES.set('object': objects);
+        window.IMAGES.set('animal': animals);
       });
 // init psychoJS:
 const psychoJS = new PsychoJS({
@@ -151,9 +166,6 @@ psychoJS.start({
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.INFO);
 
-
-var currentLoop;
-var frameDur;
 async function updateInfo() {
   currentLoop = psychoJS.experiment;  // right now there are no loops
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
@@ -181,24 +193,6 @@ async function updateInfo() {
   return Scheduler.Event.NEXT;
 }
 
-
-var welcomeClock;
-var text;
-var key_resp_2;
-var welcome_1;
-var welcome_2;
-var welcome_3;
-var trialClock;
-var polygon;
-var image;
-var key_resp;
-var waitClock;
-var text_3;
-var break_2Clock;
-var text_countdown;
-var text_4;
-var globalClock;
-var routineTimer;
 async function experimentInit() {
   // Initialize components for Routine "welcome"
   welcomeClock = new util.Clock();
@@ -332,8 +326,6 @@ async function experimentInit() {
   return Scheduler.Event.NEXT;
 }
 
-
-var trials;
 function trialsLoopBegin(trialsLoopScheduler, snapshot) {
   return async function() {
     TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
@@ -341,7 +333,7 @@ function trialsLoopBegin(trialsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     trials = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 2, method: TrialHandler.Method.RANDOM,
+      nReps: 3, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
       seed: undefined, name: 'trials'
@@ -370,8 +362,6 @@ function trialsLoopBegin(trialsLoopScheduler, snapshot) {
   }
 }
 
-
-var loops;
 function loopsLoopBegin(loopsLoopScheduler, snapshot) {
   return async function() {
     TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
@@ -404,7 +394,6 @@ function loopsLoopBegin(loopsLoopScheduler, snapshot) {
   }
 }
 
-
 async function loopsLoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(loops);
@@ -415,7 +404,6 @@ async function loopsLoopEnd() {
     currentLoop = psychoJS.experiment;  // so we use addData from the experiment
   return Scheduler.Event.NEXT;
 }
-
 
 function loopsLoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -436,7 +424,6 @@ function loopsLoopEndIteration(scheduler, snapshot) {
   };
 }
 
-
 async function trialsLoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials);
@@ -447,7 +434,6 @@ async function trialsLoopEnd() {
     currentLoop = psychoJS.experiment;  // so we use addData from the experiment
   return Scheduler.Event.NEXT;
 }
-
 
 function trialsLoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -468,14 +454,6 @@ function trialsLoopEndIteration(scheduler, snapshot) {
   };
 }
 
-
-var t;
-var frameN;
-var continueRoutine;
-var welcomeMaxDurationReached;
-var _key_resp_2_allKeys;
-var welcomeMaxDuration;
-var welcomeComponents;
 function welcomeRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -495,6 +473,16 @@ function welcomeRoutineBegin(snapshot) {
         text.text = welcome_2.text;
     } else if (trials.thisN === 2) {
         text.text = welcome_3.text;
+    }
+    
+    // Initialize list of 40 images
+    routine_image_list = []
+    
+    for (let key in window.IMAGES) {
+        const arr = window.IMAGES[key]
+        console.log(key, arr);
+        const slice = arr.slice(0, 10).sort(() => 0.5 - Math.random());
+        console.log(key, slice);
     }
     
     window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
@@ -521,8 +509,6 @@ function welcomeRoutineBegin(snapshot) {
   }
 }
 
-
-var frameRemains;
 function welcomeRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'welcome' ---
@@ -636,7 +622,6 @@ function welcomeRoutineEachFrame() {
   };
 }
 
-
 function welcomeRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'welcome' ---
@@ -669,13 +654,6 @@ function welcomeRoutineEnd(snapshot) {
   }
 }
 
-
-var trialMaxDurationReached;
-var _key_resp_allKeys;
-var random_duration;
-var image_path;
-var trialMaxDuration;
-var trialComponents;
 function trialRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -714,7 +692,6 @@ function trialRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
-
 
 function trialRoutineEachFrame() {
   return async function () {
@@ -807,7 +784,6 @@ function trialRoutineEachFrame() {
   };
 }
 
-
 function trialRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'trial' ---
@@ -839,10 +815,6 @@ function trialRoutineEnd(snapshot) {
   }
 }
 
-
-var waitMaxDurationReached;
-var waitMaxDuration;
-var waitComponents;
 function waitRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -867,7 +839,6 @@ function waitRoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
-
 
 function waitRoutineEachFrame() {
   return async function () {
@@ -917,7 +888,6 @@ function waitRoutineEachFrame() {
   };
 }
 
-
 function waitRoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'wait' ---
@@ -940,13 +910,6 @@ function waitRoutineEnd(snapshot) {
   }
 }
 
-
-var break_2MaxDurationReached;
-var clock;
-var current_time;
-var countdown_time;
-var break_2MaxDuration;
-var break_2Components;
 function break_2RoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -976,7 +939,6 @@ function break_2RoutineBegin(snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
-
 
 function break_2RoutineEachFrame() {
   return async function () {
@@ -1042,7 +1004,6 @@ function break_2RoutineEachFrame() {
   };
 }
 
-
 function break_2RoutineEnd(snapshot) {
   return async function () {
     //--- Ending Routine 'break_2' ---
@@ -1063,14 +1024,12 @@ function break_2RoutineEnd(snapshot) {
   }
 }
 
-
 function importConditions(currentLoop) {
   return async function () {
     psychoJS.importAttributes(currentLoop.getCurrentTrial());
     return Scheduler.Event.NEXT;
     };
 }
-
 
 async function quitPsychoJS(message, isCompleted) {
   // Check for and save orphaned data
