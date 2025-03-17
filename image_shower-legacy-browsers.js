@@ -11,6 +11,7 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
+console.log("Fetching images.");
 window.IMAGES = new Map();
 
 console.log("Fetching images.");
@@ -510,6 +511,7 @@ function welcomeRoutineBegin(snapshot) {
     welcomeMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
+    console.log("Trial:  " + trials.thisN);
     if (trials.thisN === 0) {
         text.text = welcome_1.text;
     } else if (trials.thisN === 1) {
@@ -521,16 +523,15 @@ function welcomeRoutineBegin(snapshot) {
     // Initialize list of 40 images
     routine_image_list = []
     console.log("Initializing images");
-    for (let key in window.IMAGES) {
+    console.log(window.IMAGES);
+    for (const key in window.IMAGES) {
         const arr = window.IMAGES[key]
         console.log(key, arr);
         const slice = arr.slice(0, 10).sort(() => 0.5 - Math.random());
         console.log(key, slice);
     }
-    
-    // window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
-    
     console.log("Randomizing images");
+    window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
     console.log(window.RANDOM_IMAGES)
     
     key_resp_2.keys = undefined;
