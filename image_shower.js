@@ -1170,7 +1170,7 @@ async function experimentInit() {
   text_countdown = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_countdown',
-    text: '10',
+    text: '5',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
