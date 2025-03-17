@@ -26,7 +26,6 @@ console.log("Fetching images.");
 fetch('images.csv')
       .then(response => response.text())
       .then(text => {
-        console.log("Splitting lines.");
         const lines = text.split("\n");
         // 4 categories
         let persons = [];
@@ -36,7 +35,6 @@ fetch('images.csv')
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i];
             const values = line.split(',');
-            console.log("category: " + values[1]);
             if (values[1] === "Person") {
                 persons.push(values[2]);
             }
@@ -50,14 +48,14 @@ fetch('images.csv')
                 animals.push(values[2]);
             }
         }
-        console.log("persons");
-        console.log(persons);
-        console.log("scenes");
-        console.log(scenes);
-        console.log("objects");
-        console.log(objects);
-        console.log("animals");
-        console.log(animals);
+//        console.log("persons");
+//        console.log(persons);
+//        console.log("scenes");
+//        console.log(scenes);
+//        console.log("objects");
+//        console.log(objects);
+//        console.log("animals");
+//        console.log(animals);
         window.IMAGES.set("person", persons);
         window.IMAGES.set("scene", scenes);
         window.IMAGES.set("object", objects);
@@ -1052,14 +1050,14 @@ async function updateInfo() {
 
 var welcomeClock;
 var text;
-var key_resp_2;
+var welcome_key_input;
 var welcome_1;
 var welcome_2;
 var welcome_3;
 var trialClock;
 var polygon;
 var image;
-var key_resp;
+var image_key_input;
 var waitClock;
 var text_3;
 var break_2Clock;
@@ -1082,7 +1080,7 @@ async function experimentInit() {
     depth: 0.0 
   });
   
-  key_resp_2 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+  welcome_key_input = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   welcome_1 = new visual.TextStim({
     win: psychoJS.window,
@@ -1151,7 +1149,7 @@ async function experimentInit() {
     flipHoriz : false, flipVert : false,
     texRes : 128.0, interpolate : true, depth : -1.0 
   });
-  key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+  image_key_input = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Initialize components for Routine "wait"
   waitClock = new util.Clock();
@@ -1342,7 +1340,7 @@ var frameN;
 var continueRoutine;
 var welcomeMaxDurationReached;
 var routine_image_list;
-var _key_resp_2_allKeys;
+var _welcome_key_input_allKeys;
 var welcomeMaxDuration;
 var welcomeComponents;
 function welcomeRoutineBegin(snapshot) {
@@ -1369,28 +1367,25 @@ function welcomeRoutineBegin(snapshot) {
     
     // Initialize list of 40 images
     routine_image_list = []
-    console.log("Initializing images");
-    console.log(window.IMAGES);
     
     for (const [key, arr] of window.IMAGES.entries()) {
-        console.log(key, arr);
+    //    console.log(key, arr);
         const slice = arr.sort(() => 0.5 - Math.random()).slice(0, 10);
-        console.log(key, slice);
+    //    console.log(key, slice);
         routine_image_list.push.apply(routine_image_list, slice);
     }
-    console.log("Randomizing images");
+    //console.log("Randomizing images");
     window.RANDOM_IMAGES = routine_image_list.slice()
-    console.log(window.RANDOM_IMAGES)
-    
-    key_resp_2.keys = undefined;
-    key_resp_2.rt = undefined;
-    _key_resp_2_allKeys = [];
+    //console.log(window.RANDOM_IMAGES)
+    welcome_key_input.keys = undefined;
+    welcome_key_input.rt = undefined;
+    _welcome_key_input_allKeys = [];
     psychoJS.experiment.addData('welcome.started', globalClock.getTime());
     welcomeMaxDuration = null
     // keep track of which components have finished
     welcomeComponents = [];
     welcomeComponents.push(text);
-    welcomeComponents.push(key_resp_2);
+    welcomeComponents.push(welcome_key_input);
     welcomeComponents.push(welcome_1);
     welcomeComponents.push(welcome_2);
     welcomeComponents.push(welcome_3);
@@ -1422,25 +1417,25 @@ function welcomeRoutineEachFrame() {
     }
     
     
-    // *key_resp_2* updates
-    if (t >= 1 && key_resp_2.status === PsychoJS.Status.NOT_STARTED) {
+    // *welcome_key_input* updates
+    if (t >= 1 && welcome_key_input.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      key_resp_2.tStart = t;  // (not accounting for frame time here)
-      key_resp_2.frameNStart = frameN;  // exact frame index
+      welcome_key_input.tStart = t;  // (not accounting for frame time here)
+      welcome_key_input.frameNStart = frameN;  // exact frame index
       
       // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { key_resp_2.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { key_resp_2.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { key_resp_2.clearEvents(); });
+      psychoJS.window.callOnFlip(function() { welcome_key_input.clock.reset(); });  // t=0 on next screen flip
+      psychoJS.window.callOnFlip(function() { welcome_key_input.start(); }); // start on screen flip
+      psychoJS.window.callOnFlip(function() { welcome_key_input.clearEvents(); });
     }
     
-    if (key_resp_2.status === PsychoJS.Status.STARTED) {
-      let theseKeys = key_resp_2.getKeys({keyList: ['space'], waitRelease: false});
-      _key_resp_2_allKeys = _key_resp_2_allKeys.concat(theseKeys);
-      if (_key_resp_2_allKeys.length > 0) {
-        key_resp_2.keys = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].name;  // just the last key pressed
-        key_resp_2.rt = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].rt;
-        key_resp_2.duration = _key_resp_2_allKeys[_key_resp_2_allKeys.length - 1].duration;
+    if (welcome_key_input.status === PsychoJS.Status.STARTED) {
+      let theseKeys = welcome_key_input.getKeys({keyList: ['space'], waitRelease: false});
+      _welcome_key_input_allKeys = _welcome_key_input_allKeys.concat(theseKeys);
+      if (_welcome_key_input_allKeys.length > 0) {
+        welcome_key_input.keys = _welcome_key_input_allKeys[_welcome_key_input_allKeys.length - 1].name;  // just the last key pressed
+        welcome_key_input.rt = _welcome_key_input_allKeys[_welcome_key_input_allKeys.length - 1].rt;
+        welcome_key_input.duration = _welcome_key_input_allKeys[_welcome_key_input_allKeys.length - 1].duration;
         // a response ends the routine
         continueRoutine = false;
       }
@@ -1529,16 +1524,16 @@ function welcomeRoutineEnd(snapshot) {
     psychoJS.experiment.addData('welcome.stopped', globalClock.getTime());
     // update the trial handler
     if (currentLoop instanceof MultiStairHandler) {
-      currentLoop.addResponse(key_resp_2.corr, level);
+      currentLoop.addResponse(welcome_key_input.corr, level);
     }
-    psychoJS.experiment.addData('key_resp_2.keys', key_resp_2.keys);
-    if (typeof key_resp_2.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('key_resp_2.rt', key_resp_2.rt);
-        psychoJS.experiment.addData('key_resp_2.duration', key_resp_2.duration);
+    psychoJS.experiment.addData('welcome_key_input.keys', welcome_key_input.keys);
+    if (typeof welcome_key_input.keys !== 'undefined') {  // we had a response
+        psychoJS.experiment.addData('welcome_key_input.rt', welcome_key_input.rt);
+        psychoJS.experiment.addData('welcome_key_input.duration', welcome_key_input.duration);
         routineTimer.reset();
         }
     
-    key_resp_2.stop();
+    welcome_key_input.stop();
     // the Routine "welcome" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -1552,7 +1547,7 @@ function welcomeRoutineEnd(snapshot) {
 
 
 var trialMaxDurationReached;
-var _key_resp_allKeys;
+var _image_key_input_allKeys;
 var random_duration;
 var image_path;
 var trialMaxDuration;
@@ -1570,9 +1565,9 @@ function trialRoutineBegin(snapshot) {
     trialMaxDurationReached = false;
     // update component parameters for each repeat
     image.setImage('image/Acorns 1.jpg');
-    key_resp.keys = undefined;
-    key_resp.rt = undefined;
-    _key_resp_allKeys = [];
+    image_key_input.keys = undefined;
+    image_key_input.rt = undefined;
+    _image_key_input_allKeys = [];
     // Run 'Begin Routine' code from code
     let image_time_range = 1;
     
@@ -1580,6 +1575,7 @@ function trialRoutineBegin(snapshot) {
     //text_2.text = random_duration;
     
     image_path = window.RANDOM_IMAGES[loops.thisN];
+    console.log("Loop " + loops.trialN + ": " + image_path);
     image.image = image_path;
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
@@ -1587,7 +1583,7 @@ function trialRoutineBegin(snapshot) {
     trialComponents = [];
     trialComponents.push(polygon);
     trialComponents.push(image);
-    trialComponents.push(key_resp);
+    trialComponents.push(image_key_input);
     
     for (const thisComponent of trialComponents)
       if ('status' in thisComponent)
@@ -1635,30 +1631,30 @@ function trialRoutineEachFrame() {
     }
     
     
-    // *key_resp* updates
-    if (t >= 1 && key_resp.status === PsychoJS.Status.NOT_STARTED) {
+    // *image_key_input* updates
+    if (t >= 1 && image_key_input.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      key_resp.tStart = t;  // (not accounting for frame time here)
-      key_resp.frameNStart = frameN;  // exact frame index
+      image_key_input.tStart = t;  // (not accounting for frame time here)
+      image_key_input.frameNStart = frameN;  // exact frame index
       
       // keyboard checking is just starting
-      psychoJS.window.callOnFlip(function() { key_resp.clock.reset(); });  // t=0 on next screen flip
-      psychoJS.window.callOnFlip(function() { key_resp.start(); }); // start on screen flip
-      psychoJS.window.callOnFlip(function() { key_resp.clearEvents(); });
+      psychoJS.window.callOnFlip(function() { image_key_input.clock.reset(); });  // t=0 on next screen flip
+      psychoJS.window.callOnFlip(function() { image_key_input.start(); }); // start on screen flip
+      psychoJS.window.callOnFlip(function() { image_key_input.clearEvents(); });
     }
     
     frameRemains = 1 + random_duration - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (key_resp.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      key_resp.status = PsychoJS.Status.FINISHED;
+    if (image_key_input.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      image_key_input.status = PsychoJS.Status.FINISHED;
         }
       
-    if (key_resp.status === PsychoJS.Status.STARTED) {
-      let theseKeys = key_resp.getKeys({keyList: ['space'], waitRelease: false});
-      _key_resp_allKeys = _key_resp_allKeys.concat(theseKeys);
-      if (_key_resp_allKeys.length > 0) {
-        key_resp.keys = _key_resp_allKeys[_key_resp_allKeys.length - 1].name;  // just the last key pressed
-        key_resp.rt = _key_resp_allKeys[_key_resp_allKeys.length - 1].rt;
-        key_resp.duration = _key_resp_allKeys[_key_resp_allKeys.length - 1].duration;
+    if (image_key_input.status === PsychoJS.Status.STARTED) {
+      let theseKeys = image_key_input.getKeys({keyList: ['space'], waitRelease: false});
+      _image_key_input_allKeys = _image_key_input_allKeys.concat(theseKeys);
+      if (_image_key_input_allKeys.length > 0) {
+        image_key_input.keys = _image_key_input_allKeys[_image_key_input_allKeys.length - 1].name;  // just the last key pressed
+        image_key_input.rt = _image_key_input_allKeys[_image_key_input_allKeys.length - 1].rt;
+        image_key_input.duration = _image_key_input_allKeys[_image_key_input_allKeys.length - 1].duration;
       }
     }
     
@@ -1700,15 +1696,15 @@ function trialRoutineEnd(snapshot) {
     psychoJS.experiment.addData('trial.stopped', globalClock.getTime());
     // update the trial handler
     if (currentLoop instanceof MultiStairHandler) {
-      currentLoop.addResponse(key_resp.corr, level);
+      currentLoop.addResponse(image_key_input.corr, level);
     }
-    psychoJS.experiment.addData('key_resp.keys', key_resp.keys);
-    if (typeof key_resp.keys !== 'undefined') {  // we had a response
-        psychoJS.experiment.addData('key_resp.rt', key_resp.rt);
-        psychoJS.experiment.addData('key_resp.duration', key_resp.duration);
+    psychoJS.experiment.addData('image_key_input.keys', image_key_input.keys);
+    if (typeof image_key_input.keys !== 'undefined') {  // we had a response
+        psychoJS.experiment.addData('image_key_input.rt', image_key_input.rt);
+        psychoJS.experiment.addData('image_key_input.duration', image_key_input.duration);
         }
     
-    key_resp.stop();
+    image_key_input.stop();
     // the Routine "trial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     

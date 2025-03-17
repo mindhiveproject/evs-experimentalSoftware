@@ -1,7 +1,0 @@
-﻿welcome.started,welcome.stopped,key_resp_2.keys,key_resp_2.rt,key_resp_2.duration,trial.started,trial.stopped,key_resp.keys,key_resp.rt,key_resp.duration,wait.started,wait.stopped,loops.thisRepN,loops.thisTrialN,loops.thisN,loops.thisIndex,loops.ran,participant,session,date,expName,psychopyVersion,OS,frameRate,break_2.started,break_2.stopped,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.ran
-0.002,29.9565,space,28.9324,,29.9584,38.9477,space,5.2552,,38.9478,39.9479,0,0,0,0,1,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,,,,,,,
-,,,,,39.9495,49.9393,space,1.3928,,49.9394,50.9403,1,0,1,0,1,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,,,,,,,
-,,,,,,,,,,,,,,,,,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,50.9405,51.9411,0,0,0,0,1
-51.9414,53.7927,space,0.8344,,53.7944,59.7975,space,0.8769,,59.7976,60.7984,0,0,0,0,1,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,,,,,,,
-,,,,,60.8003,67.7877,space,5.9109,,67.7877,68.7887,1,0,1,0,1,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,,,,,,,
-,,,,,,,,,,,,,,,,,153866,001,2025-03-06_15h43.02.177,image_shower,2024.2.4,Win32,59.52380952,68.7887,69.7892,1,0,1,0,1

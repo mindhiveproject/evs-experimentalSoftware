@@ -155,7 +155,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </ImageComponent>
-      <KeyboardComponent name="key_resp" plugin="None">
+      <KeyboardComponent name="image_key_input" plugin="None">
         <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="" valType="str" updates="None" name="deviceLabel"/>
@@ -163,7 +163,7 @@
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="image_key_input" valType="code" updates="None" name="name"/>
         <Param val="press" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
@@ -180,7 +180,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="import csv&amp;#10;import random&amp;#10;IMAGE_ORDER = []&amp;#10;&amp;#10;# read csv&amp;#10;with open(&quot;images.csv&quot;) as f:&amp;#10;    reader = csv.reader(f)&amp;#10;    next(reader, None) # skip header&amp;#10;    for row in reader:&amp;#10;        image_path = row[2]&amp;#10;        IMAGE_ORDER.append(image_path)&amp;#10;&amp;#10;print(IMAGE_ORDER[0])&amp;#10;random.shuffle(IMAGE_ORDER)&amp;#10;print(IMAGE_ORDER[0])" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="let image_time_range = 1;&amp;#10;&amp;#10;random_duration = 2 + Math.floor(Math.random() * image_time_range);&amp;#10;//text_2.text = random_duration;&amp;#10;&amp;#10;image_path = window.RANDOM_IMAGES[loops.thisN];&amp;#10;image.image = image_path;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="let image_time_range = 1;&amp;#10;&amp;#10;random_duration = 2 + Math.floor(Math.random() * image_time_range);&amp;#10;//text_2.text = random_duration;&amp;#10;&amp;#10;image_path = window.RANDOM_IMAGES[loops.thisN];&amp;#10;console.log(&quot;Loop &quot; + loops.trialN + &quot;: &quot; + image_path);&amp;#10;image.image = image_path;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="import random &amp;#10;random_duration = random.randint(2,10)&amp;#10;text_2.text = random_duration&amp;#10;&amp;#10;image_path = IMAGE_ORDER[loops.thisN]&amp;#10;print(image_path)&amp;#10;image.Image = image_path" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
@@ -266,10 +266,10 @@
       </TextComponent>
       <CodeComponent name="code_2" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="console.log(&quot;Fetching images.&quot;);&amp;#10;window.IMAGES = new Map();&amp;#10;&amp;#10;console.log(&quot;Fetching images.&quot;);&amp;#10;fetch('images.csv')&amp;#10;      .then(response =&gt; response.text())&amp;#10;      .then(text =&gt; {&amp;#10;        console.log(&quot;Splitting lines.&quot;);&amp;#10;        const lines = text.split(&quot;\n&quot;);&amp;#10;        // 4 categories&amp;#10;        let persons = [];&amp;#10;        let scenes = [];&amp;#10;        let objects = [];&amp;#10;        let animals = [];&amp;#10;        for (let i = 1; i &lt; lines.length; i++) {&amp;#10;            const line = lines[i];&amp;#10;            const values = line.split(',');&amp;#10;            console.log(&quot;category: &quot; + values[1]);&amp;#10;            if (values[1] === &quot;Person&quot;) {&amp;#10;                persons.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Scene&quot;) {&amp;#10;                scenes.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Object&quot;) {&amp;#10;                objects.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Animal&quot;) {&amp;#10;                animals.push(values[2]);&amp;#10;            }&amp;#10;        }&amp;#10;        console.log(&quot;persons&quot;);&amp;#10;        console.log(persons);&amp;#10;        console.log(&quot;scenes&quot;);&amp;#10;        console.log(scenes);&amp;#10;        console.log(&quot;objects&quot;);&amp;#10;        console.log(objects);&amp;#10;        console.log(&quot;animals&quot;);&amp;#10;        console.log(animals);&amp;#10;        window.IMAGES.set(&quot;person&quot;, persons);&amp;#10;        window.IMAGES.set(&quot;scene&quot;, scenes);&amp;#10;        window.IMAGES.set(&quot;object&quot;, objects);&amp;#10;        window.IMAGES.set(&quot;animal&quot;, animals);&amp;#10;      });" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="console.log(&quot;Fetching images.&quot;);&amp;#10;window.IMAGES = new Map();&amp;#10;&amp;#10;console.log(&quot;Fetching images.&quot;);&amp;#10;fetch('images.csv')&amp;#10;      .then(response =&gt; response.text())&amp;#10;      .then(text =&gt; {&amp;#10;        const lines = text.split(&quot;\n&quot;);&amp;#10;        // 4 categories&amp;#10;        let persons = [];&amp;#10;        let scenes = [];&amp;#10;        let objects = [];&amp;#10;        let animals = [];&amp;#10;        for (let i = 1; i &lt; lines.length; i++) {&amp;#10;            const line = lines[i];&amp;#10;            const values = line.split(',');&amp;#10;            if (values[1] === &quot;Person&quot;) {&amp;#10;                persons.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Scene&quot;) {&amp;#10;                scenes.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Object&quot;) {&amp;#10;                objects.push(values[2]);&amp;#10;            }&amp;#10;            if (values[1] === &quot;Animal&quot;) {&amp;#10;                animals.push(values[2]);&amp;#10;            }&amp;#10;        }&amp;#10;//        console.log(&quot;persons&quot;);&amp;#10;//        console.log(persons);&amp;#10;//        console.log(&quot;scenes&quot;);&amp;#10;//        console.log(scenes);&amp;#10;//        console.log(&quot;objects&quot;);&amp;#10;//        console.log(objects);&amp;#10;//        console.log(&quot;animals&quot;);&amp;#10;//        console.log(animals);&amp;#10;        window.IMAGES.set(&quot;person&quot;, persons);&amp;#10;        window.IMAGES.set(&quot;scene&quot;, scenes);&amp;#10;        window.IMAGES.set(&quot;object&quot;, objects);&amp;#10;        window.IMAGES.set(&quot;animal&quot;, animals);&amp;#10;      });" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="console.log(&quot;Trial:  &quot; + trials.thisN);&amp;#10;if (trials.thisN === 0) {&amp;#10;    text.text = welcome_1.text;&amp;#10;} else if (trials.thisN === 1) {&amp;#10;    text.text = welcome_2.text;&amp;#10;} else if (trials.thisN === 2) {&amp;#10;    text.text = welcome_3.text;&amp;#10;}&amp;#10;&amp;#10;// Initialize list of 40 images&amp;#10;routine_image_list = []&amp;#10;console.log(&quot;Initializing images&quot;);&amp;#10;console.log(window.IMAGES);&amp;#10;&amp;#10;for (const [key, arr] of window.IMAGES.entries()) {&amp;#10;    console.log(key, arr);&amp;#10;    const slice = arr.sort(() =&gt; 0.5 - Math.random()).slice(0, 10);&amp;#10;    console.log(key, slice);&amp;#10;    routine_image_list.push.apply(routine_image_list, slice);&amp;#10;}&amp;#10;console.log(&quot;Randomizing images&quot;);&amp;#10;window.RANDOM_IMAGES = routine_image_list.slice()&amp;#10;console.log(window.RANDOM_IMAGES)&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="console.log(&quot;Trial:  &quot; + trials.thisN);&amp;#10;if (trials.thisN === 0) {&amp;#10;    text.text = welcome_1.text;&amp;#10;} else if (trials.thisN === 1) {&amp;#10;    text.text = welcome_2.text;&amp;#10;} else if (trials.thisN === 2) {&amp;#10;    text.text = welcome_3.text;&amp;#10;}&amp;#10;&amp;#10;// Initialize list of 40 images&amp;#10;routine_image_list = []&amp;#10;&amp;#10;for (const [key, arr] of window.IMAGES.entries()) {&amp;#10;//    console.log(key, arr);&amp;#10;    const slice = arr.sort(() =&gt; 0.5 - Math.random()).slice(0, 10);&amp;#10;//    console.log(key, slice);&amp;#10;    routine_image_list.push.apply(routine_image_list, slice);&amp;#10;}&amp;#10;//console.log(&quot;Randomizing images&quot;);&amp;#10;window.RANDOM_IMAGES = routine_image_list.slice()&amp;#10;//console.log(window.RANDOM_IMAGES)" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="if trials.thisN == 0:&amp;#10;    text.text = welcome_1.text&amp;#10;elif trials.thisN == 1:&amp;#10;    text.text = welcome_2.text&amp;#10;elif trials.thisN == 2:&amp;#10;    text.text = welcome_3.text" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
@@ -281,7 +281,7 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_2" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <KeyboardComponent name="key_resp_2" plugin="None">
+      <KeyboardComponent name="welcome_key_input" plugin="None">
         <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="" valType="str" updates="None" name="deviceLabel"/>
@@ -289,7 +289,7 @@
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="key_resp_2" valType="code" updates="None" name="name"/>
+        <Param val="welcome_key_input" valType="code" updates="None" name="name"/>
         <Param val="press" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
