@@ -1077,7 +1077,7 @@ async function experimentInit() {
   welcome_1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_1',
-    text: 'welcome 1',
+    text: 'Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1089,7 +1089,7 @@ async function experimentInit() {
   welcome_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_2',
-    text: 'welcome_2',
+    text: '"Welcome to the next phase! In this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 2.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1101,7 +1101,7 @@ async function experimentInit() {
   welcome_3 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_3',
-    text: 'welcome 3',
+    text: 'Welcome to the final phase! In this phase, you will be seated again. A new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image. Press the spacebar now to begin Phase 3.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1836,7 +1836,7 @@ function break_2RoutineBegin(snapshot) {
     // Run 'Begin Routine' code from code_3
     clock = new util.Clock();
     current_time = 0
-    countdown_time = 10
+    countdown_time = 5
     psychoJS.experiment.addData('break_2.started', globalClock.getTime());
     break_2MaxDuration = null
     // keep track of which components have finished
