@@ -530,14 +530,15 @@ function welcomeRoutineBegin(snapshot) {
     routine_image_list = []
     console.log("Initializing images");
     console.log(window.IMAGES);
-    for (const key in window.IMAGES) {
-        const arr = window.IMAGES[key]
+    
+    for (const [key, arr] of window.IMAGES.entries()) {
         console.log(key, arr);
-        const slice = arr.slice(0, 10).sort(() => 0.5 - Math.random());
+        const slice = arr.sort(() => 0.5 - Math.random()).slice(0, 10);
         console.log(key, slice);
+        routine_image_list.push.apply(routine_image_list, slice);
     }
     console.log("Randomizing images");
-    window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
+    window.RANDOM_IMAGES = routine_image_list.slice()
     console.log(window.RANDOM_IMAGES)
     
     key_resp_2.keys = undefined;
