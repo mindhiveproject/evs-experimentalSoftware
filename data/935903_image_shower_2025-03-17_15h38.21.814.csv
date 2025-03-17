@@ -1,0 +1,13 @@
+﻿welcome.started,welcome.stopped,welcome_key_input.keys,welcome_key_input.rt,welcome_key_input.duration,trial.started,trial.stopped,image_key_input.keys,wait.started,wait.stopped,loops.thisRepN,loops.thisTrialN,loops.thisN,loops.thisIndex,loops.ran,participant,session,date,expName,psychopyVersion,OS,frameRate,image_key_input.rt,image_key_input.duration,break_2.started,break_2.stopped,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.ran
+0.0017,2.3097,space,1.2843,,2.3121,5.3103,,5.3107,6.3099,0,0,0,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,,,,,,,
+,,,,,6.3115,9.3087,space,9.3088,10.3096,1,0,1,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,0.1993,,,,,,,,
+,,,,,10.3108,13.3096,,13.3097,14.3097,2,0,2,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,,,,,,,
+,,,,,,,,,,,,,,,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,14.3104,19.3436,0,0,0,0,1
+19.345,20.8099,space,0.4329,,20.8118,23.8096,,23.8097,24.8097,0,0,0,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,,,,,,,
+,,,,,24.811,27.8096,space,27.8096,28.8095,1,0,1,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,1.495,,,,,,,,
+,,,,,28.8106,31.8117,space,31.8118,32.8097,2,0,2,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,0.452,,,,,,,,
+,,,,,,,,,,,,,,,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,32.8098,37.8427,1,0,1,0,1
+37.8451,41.3931,space,2.5178,,41.395,44.3929,space,44.393,45.3928,0,0,0,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,0.558,,,,,,,,
+,,,,,45.3943,48.3981,space,48.3982,49.3928,1,0,1,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,0.3566,,,,,,,,
+,,,,,49.3941,52.3929,space,52.393,53.3927,2,0,2,0,1,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,0.5071,,,,,,,,
+,,,,,,,,,,,,,,,935903,001,2025-03-17_15h38.21.814,image_shower,2024.2.4,MacIntel,59.88023952,,,53.393,58.4268,2,0,2,0,1
