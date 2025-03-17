@@ -21,9 +21,11 @@ let expInfo = {
 // Start code blocks for 'Before Experiment'
 window.IMAGES = new Map();
 
+console.log("Fetching images.");
 fetch('images.csv')
       .then(response => response.text())
       .then(text => {
+        console.log("Splitting lines.");
         const lines = text.split("\n");
         // 4 categories
         let persons = [];
@@ -33,6 +35,7 @@ fetch('images.csv')
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i];
             const values = line.split(',');
+            console.log("category: " + values[1]);
             if (values[1] === "Person") {
                 persons.push(values[2]);
             }
@@ -46,6 +49,14 @@ fetch('images.csv')
                 animals.push(values[2]);
             }
         }
+        console.log("persons");
+        console.log(persons);
+        console.log("scenes");
+        console.log(scenes);
+        console.log("objects");
+        console.log(objects);
+        console.log("animals");
+        console.log(animals);
         window.IMAGES.set("person", persons);
         window.IMAGES.set("scene", scenes);
         window.IMAGES.set("object", objects);
@@ -488,6 +499,7 @@ var t;
 var frameN;
 var continueRoutine;
 var welcomeMaxDurationReached;
+var routine_image_list;
 var _key_resp_2_allKeys;
 var welcomeMaxDuration;
 var welcomeComponents;
@@ -504,28 +516,28 @@ function welcomeRoutineBegin(snapshot) {
     welcomeMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
-    //if (trials.thisN === 0) {
-    //    text.text = welcome_1.text;
-    //} else if (trials.thisN === 1) {
-    //    text.text = welcome_2.text;
-    //} else if (trials.thisN === 2) {
-    //    text.text = welcome_3.text;
-    //}
-    //
-    //// Initialize list of 40 images
-    //routine_image_list = []
-    //
-    //for (let key in window.IMAGES) {
-    //    const arr = window.IMAGES[key]
-    //    console.log(key, arr);
-    //    const slice = arr.slice(0, 10).sort(() => 0.5 - Math.random());
-    //    console.log(key, slice);
-    //}
-    //
-    //// window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
-    //
-    //console.log("Randomizing images");
-    //console.log(window.RANDOM_IMAGES)
+    if (trials.thisN === 0) {
+        text.text = welcome_1.text;
+    } else if (trials.thisN === 1) {
+        text.text = welcome_2.text;
+    } else if (trials.thisN === 2) {
+        text.text = welcome_3.text;
+    }
+    
+    // Initialize list of 40 images
+    routine_image_list = []
+    console.log("Initializing images");
+    for (let key in window.IMAGES) {
+        const arr = window.IMAGES[key]
+        console.log(key, arr);
+        const slice = arr.slice(0, 10).sort(() => 0.5 - Math.random());
+        console.log(key, slice);
+    }
+    
+    // window.RANDOM_IMAGES = window.IMAGES.slice().sort(() => 0.5 - Math.random());
+    
+    console.log("Randomizing images");
+    console.log(window.RANDOM_IMAGES)
     
     key_resp_2.keys = undefined;
     key_resp_2.rt = undefined;
