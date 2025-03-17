@@ -1570,7 +1570,7 @@ function trialRoutineBegin(snapshot) {
     //text_2.text = random_duration;
     
     image_path = window.RANDOM_IMAGES[loops.thisN];
-    console.log("Loop " + loops.trialN + ": " + image_path);
+    console.log("Loop " + loops.thisN + ": " + image_path);
     image.image = image_path;
     psychoJS.experiment.addData('trial.started', globalClock.getTime());
     trialMaxDuration = null
