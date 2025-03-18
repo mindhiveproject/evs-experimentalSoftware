@@ -11,7 +11,7 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
-console.log("Fetching images2.");
+console.log("Fetching images.");
 window.IMAGES = new Map();
 
 console.log("Fetching images.");
@@ -1077,7 +1077,7 @@ async function experimentInit() {
   welcome_1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_1',
-    text: '12345+ Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
+    text: '(3/17/25) Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
