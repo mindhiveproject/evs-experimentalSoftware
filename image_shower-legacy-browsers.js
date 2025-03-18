@@ -11,7 +11,7 @@ let expInfo = {
 };
 
 // Start code blocks for 'Before Experiment'
-console.log("Fetching images.");
+console.log("Fetching images2.");
 window.IMAGES = new Map();
 
 console.log("Fetching images.");
