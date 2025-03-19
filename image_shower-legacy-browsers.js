@@ -1077,7 +1077,7 @@ async function experimentInit() {
   welcome_1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_1',
-    text: '999@@@@@@@@@@@@@@@@ Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
+    text: 'Hello :) Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1089,7 +1089,7 @@ async function experimentInit() {
   welcome_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_2',
-    text: '"Welcome to the next phase! In this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 2.',
+    text: ':D --- Welcome to the next phase! In this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 2.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1101,7 +1101,7 @@ async function experimentInit() {
   welcome_3 = new visual.TextStim({
     win: psychoJS.window,
     name: 'welcome_3',
-    text: 'Welcome to the final phase! In this phase, you will be seated again. A new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image. Press the spacebar now to begin Phase 3.',
+    text: ';) --- Welcome to the final phase! In this phase, you will be seated again. A new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image. Press the spacebar now to begin Phase 3.',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
@@ -1564,7 +1564,7 @@ function trialRoutineBegin(snapshot) {
     image_key_input.rt = undefined;
     _image_key_input_allKeys = [];
     // Run 'Begin Routine' code from code
-    let image_time_range = 1;
+    let image_time_range = 5;
     
     random_duration = 2 + Math.floor(Math.random() * image_time_range);
     //text_2.text = random_duration;
