@@ -88,10 +88,10 @@ psychoJS.scheduleCondition(function() { return (psychoJS.gui.dialogComponent.but
 // flowScheduler gets run if the participants presses OK
 flowScheduler.add(updateInfo); // add timeStamp
 flowScheduler.add(experimentInit);
-const trialsLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(trialsLoopBegin(trialsLoopScheduler));
-flowScheduler.add(trialsLoopScheduler);
-flowScheduler.add(trialsLoopEnd);
+const blockLoopScheduler = new Scheduler(psychoJS);
+flowScheduler.add(blockLoopBegin(blockLoopScheduler));
+flowScheduler.add(blockLoopScheduler);
+flowScheduler.add(blockLoopEnd);
 
 
 
@@ -1199,37 +1199,37 @@ async function experimentInit() {
 }
 
 
-var trials;
-function trialsLoopBegin(trialsLoopScheduler, snapshot) {
+var block;
+function blockLoopBegin(blockLoopScheduler, snapshot) {
   return async function() {
     TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
     
     // set up handler to look after randomisation of conditions etc
-    trials = new TrialHandler({
+    block = new TrialHandler({
       psychoJS: psychoJS,
       nReps: 3, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: undefined,
-      seed: undefined, name: 'trials'
+      seed: undefined, name: 'block'
     });
-    psychoJS.experiment.addLoop(trials); // add the loop to the experiment
-    currentLoop = trials;  // we're now the current loop
+    psychoJS.experiment.addLoop(block); // add the loop to the experiment
+    currentLoop = block;  // we're now the current loop
     
     // Schedule all the trials in the trialList:
-    for (const thisTrial of trials) {
-      snapshot = trials.getSnapshot();
-      trialsLoopScheduler.add(importConditions(snapshot));
-      trialsLoopScheduler.add(welcomeRoutineBegin(snapshot));
-      trialsLoopScheduler.add(welcomeRoutineEachFrame());
-      trialsLoopScheduler.add(welcomeRoutineEnd(snapshot));
+    for (const thisBlock of block) {
+      snapshot = block.getSnapshot();
+      blockLoopScheduler.add(importConditions(snapshot));
+      blockLoopScheduler.add(welcomeRoutineBegin(snapshot));
+      blockLoopScheduler.add(welcomeRoutineEachFrame());
+      blockLoopScheduler.add(welcomeRoutineEnd(snapshot));
       const loopsLoopScheduler = new Scheduler(psychoJS);
-      trialsLoopScheduler.add(loopsLoopBegin(loopsLoopScheduler, snapshot));
-      trialsLoopScheduler.add(loopsLoopScheduler);
-      trialsLoopScheduler.add(loopsLoopEnd);
-      trialsLoopScheduler.add(break_2RoutineBegin(snapshot));
-      trialsLoopScheduler.add(break_2RoutineEachFrame());
-      trialsLoopScheduler.add(break_2RoutineEnd(snapshot));
-      trialsLoopScheduler.add(trialsLoopEndIteration(trialsLoopScheduler, snapshot));
+      blockLoopScheduler.add(loopsLoopBegin(loopsLoopScheduler, snapshot));
+      blockLoopScheduler.add(loopsLoopScheduler);
+      blockLoopScheduler.add(loopsLoopEnd);
+      blockLoopScheduler.add(break_2RoutineBegin(snapshot));
+      blockLoopScheduler.add(break_2RoutineEachFrame());
+      blockLoopScheduler.add(break_2RoutineEnd(snapshot));
+      blockLoopScheduler.add(blockLoopEndIteration(blockLoopScheduler, snapshot));
     }
     
     return Scheduler.Event.NEXT;
@@ -1303,9 +1303,9 @@ function loopsLoopEndIteration(scheduler, snapshot) {
 }
 
 
-async function trialsLoopEnd() {
+async function blockLoopEnd() {
   // terminate loop
-  psychoJS.experiment.removeLoop(trials);
+  psychoJS.experiment.removeLoop(block);
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1315,7 +1315,7 @@ async function trialsLoopEnd() {
 }
 
 
-function trialsLoopEndIteration(scheduler, snapshot) {
+function blockLoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
   return async function () {
     if (typeof snapshot !== 'undefined') {
