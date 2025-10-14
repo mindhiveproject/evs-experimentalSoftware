@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Thu Jul  3 13:13:20 2025
+This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
+    on Tue Oct 14 17:02:59 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -17,11 +17,12 @@ from psychopy import prefs
 from psychopy import plugins
 plugins.activatePlugins()
 prefs.hardware['audioLib'] = 'ptb'
-prefs.hardware['audioLatencyMode'] = '3'
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, hardware
 from psychopy.tools import environmenttools
-from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
-                                STOPPED, FINISHED, PRESSED, RELEASED, FOREVER, priority)
+from psychopy.constants import (
+    NOT_STARTED, STARTED, PLAYING, PAUSED, STOPPED, STOPPING, FINISHED, PRESSED, 
+    RELEASED, FOREVER, priority
+)
 
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import (sin, cos, tan, log, log10, pi, average,
@@ -83,14 +84,18 @@ deviceManager = hardware.DeviceManager()
 # ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
-psychopyVersion = '2024.2.4'
+psychopyVersion = '2025.1.1'
 expName = 'image_shower'  # from the Builder filename that created this script
+expVersion = ''
+# a list of functions to run when the experiment ends (starts off blank)
+runAtExit = []
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
     'session': '001',
     'date|hid': data.getDateStr(),
     'expName|hid': expName,
+    'expVersion|hid': expVersion,
     'psychopyVersion|hid': psychopyVersion,
 }
 
@@ -112,6 +117,9 @@ if PILOTING:
         _fullScr = False
         # set window size
         _winSize = prefs.piloting['forcedWindowSize']
+    # replace default participant ID
+    if prefs.piloting['replaceParticipantID']:
+        expInfo['participant'] = 'pilot'
 
 def showExpInfoDlg(expInfo):
     """
@@ -168,7 +176,7 @@ def setupData(expInfo, dataDir=None):
     
     # an ExperimentHandler isn't essential but helps with data saving
     thisExp = data.ExperimentHandler(
-        name=expName, version='',
+        name=expName, version=expVersion,
         extraInfo=expInfo, runtimeInfo=None,
         originPath='/Users/franckporteous/Documents/MindHive/EmotiBit NYU Validation Study/psychopy_experiment/testing2/image_shower_lastrun.py',
         savePickle=True, saveWideText=True,
@@ -258,9 +266,13 @@ def setupWindow(expInfo=None, win=None):
             win._monitorFrameRate = win.getActualFrameRate(infoMsg='Attempting to measure frame rate of screen, please wait...')
         expInfo['frameRate'] = win._monitorFrameRate
     win.hideMessage()
-    # show a visual indicator if we're in piloting mode
-    if PILOTING and prefs.piloting['showPilotingIndicator']:
-        win.showPilotingIndicator()
+    if PILOTING:
+        # show a visual indicator if we're in piloting mode
+        if prefs.piloting['showPilotingIndicator']:
+            win.showPilotingIndicator()
+        # always show the mouse in piloting mode
+        if prefs.piloting['forceMouseVisible']:
+            win.mouseVisible = True
     
     return win
 
@@ -319,7 +331,7 @@ def setupDevices(expInfo, thisExp, win):
     # return True if completed successfully
     return True
 
-def pauseExperiment(thisExp, win=None, timers=[], playbackComponents=[]):
+def pauseExperiment(thisExp, win=None, timers=[], currentRoutine=None):
     """
     Pause this experiment, preventing the flow from advancing to the next routine until resumed.
     
@@ -332,8 +344,8 @@ def pauseExperiment(thisExp, win=None, timers=[], playbackComponents=[]):
         Window for this experiment.
     timers : list, tuple
         List of timers to reset once pausing is finished.
-    playbackComponents : list, tuple
-        List of any components with a `pause` method which need to be paused.
+    currentRoutine : psychopy.data.Routine
+        Current Routine we are in at time of pausing, if any. This object tells PsychoPy what Components to pause/play/dispatch.
     """
     # if we are not paused, do nothing
     if thisExp.status != PAUSED:
@@ -342,8 +354,9 @@ def pauseExperiment(thisExp, win=None, timers=[], playbackComponents=[]):
     # start a timer to figure out how long we're paused for
     pauseTimer = core.Clock()
     # pause any playback components
-    for comp in playbackComponents:
-        comp.pause()
+    if currentRoutine is not None:
+        for comp in currentRoutine.getPlaybackComponents():
+            comp.pause()
     # make sure we have a keyboard
     defaultKeyboard = deviceManager.getDevice('defaultKeyboard')
     if defaultKeyboard is None:
@@ -357,14 +370,19 @@ def pauseExperiment(thisExp, win=None, timers=[], playbackComponents=[]):
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=['escape']):
             endExperiment(thisExp, win=win)
+        # dispatch messages on response components
+        if currentRoutine is not None:
+            for comp in currentRoutine.getDispatchComponents():
+                comp.device.dispatchMessages()
         # sleep 1ms so other threads can execute
         clock.time.sleep(0.001)
     # if stop was requested while paused, quit
     if thisExp.status == FINISHED:
         endExperiment(thisExp, win=win)
     # resume any playback components
-    for comp in playbackComponents:
-        comp.play()
+    if currentRoutine is not None:
+        for comp in currentRoutine.getPlaybackComponents():
+            comp.play()
     # reset any timers
     for timer in timers:
         timer.addTime(-pauseTimer.getTime())
@@ -448,14 +466,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         languageStyle='LTR',
         depth=-5.0);
     
-    # --- Initialize components for Routine "trials" ---
-    polygon = visual.ShapeStim(
-        win=win, name='polygon', vertices='cross',
-        size=(0.5, 0.5),
-        ori=0.0, pos=(0, 0), draggable=False, anchor='center',
-        lineWidth=1.0,
-        colorSpace='rgb', lineColor='white', fillColor='white',
-        opacity=None, depth=0.0, interpolate=True)
+    # --- Initialize components for Routine "trial" ---
+    presentation_duration = visual.TextStim(win=win, name='presentation_duration',
+        text=None,
+        font='Arial',
+        units='pix', pos=(0, -150), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    text_fixationCross = visual.TextStim(win=win, name='text_fixationCross',
+        text='+',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-1.0);
     image = visual.ImageStim(
         win=win,
         name='image', 
@@ -463,9 +488,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         ori=0.0, pos=(0, 0), draggable=False, size=(0.5, 0.5),
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=128.0, interpolate=True, depth=-1.0)
+        texRes=128.0, interpolate=True, depth=-2.0)
     image_key_input = keyboard.Keyboard(deviceName='image_key_input')
-    # Run 'Begin Experiment' code from code
+    # Run 'Begin Experiment' code from trial_code
     import csv
     import random
     IMAGE_ORDER = []
@@ -478,9 +503,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             image_path = row[2]
             IMAGE_ORDER.append(image_path)
     
-    print(IMAGE_ORDER[0])
     random.shuffle(IMAGE_ORDER)
-    print(IMAGE_ORDER[0])
+    print("After shuffle: ",IMAGE_ORDER)
     
     # --- Initialize components for Routine "wait" ---
     text_3 = visual.TextStim(win=win, name='text_3',
@@ -556,6 +580,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisSession.sendExperimentData()
     
     for thisBloc in bloc:
+        bloc.status = STARTED
+        if hasattr(thisBloc, 'status'):
+            thisBloc.status = STARTED
         currentLoop = bloc
         thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
         if thisSession is not None:
@@ -577,14 +604,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from welcome_setup
         print("made it here")
-        if trials.thisN == 0:
+        if bloc.thisN == 0: 
+            print("in 1")
             text.text = welcome_1.text
-        elif trials.thisN == 1:
+        elif bloc.thisN == 1:
             text.text = welcome_2.text
-        elif trials.thisN == 2:
+            print("in 2")
+        elif bloc.thisN == 2:
             text.text = welcome_3.text
-        
-        print("made it there")
+            print("in 3")
         import random
         
         # Initialize the final list
@@ -602,7 +630,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         # Optional: Print for debugging
         # print("RANDOM_IMAGES:", RANDOM_IMAGES)
-        
         # create starting attributes for welcome_key_input
         welcome_key_input.keys = []
         welcome_key_input.rt = []
@@ -628,11 +655,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = -1
         
         # --- Run Routine "welcome" ---
-        # if trial has changed, end Routine now
-        if isinstance(bloc, data.TrialHandler2) and thisBloc.thisN != bloc.thisTrial.thisN:
-            continueRoutine = False
         welcome.forceEnded = routineForceEnded = not continueRoutine
         while continueRoutine:
+            # if trial has changed, end Routine now
+            if hasattr(thisBloc, 'status') and thisBloc.status == STOPPING:
+                continueRoutine = False
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -801,8 +828,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pauseExperiment(
                     thisExp=thisExp, 
                     win=win, 
-                    timers=[routineTimer], 
-                    playbackComponents=[]
+                    timers=[routineTimer, globalClock], 
+                    currentRoutine=welcome,
                 )
                 # skip the frame we paused on
                 continue
@@ -842,7 +869,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # set up handler to look after randomisation of conditions etc
         loops = data.TrialHandler2(
             name='loops',
-            nReps=5.0, 
+            nReps=3.0, 
             method='sequential', 
             extraInfo=expInfo, 
             originPath=-1, 
@@ -860,6 +887,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             thisSession.sendExperimentData()
         
         for thisLoop in loops:
+            loops.status = STARTED
+            if hasattr(thisLoop, 'status'):
+                thisLoop.status = STARTED
             currentLoop = loops
             thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
             if thisSession is not None:
@@ -870,37 +900,39 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 for paramName in thisLoop:
                     globals()[paramName] = thisLoop[paramName]
             
-            # --- Prepare to start Routine "trials" ---
-            # create an object to store info about Routine trials
-            trials = data.Routine(
-                name='trials',
-                components=[polygon, image, image_key_input],
+            # --- Prepare to start Routine "trial" ---
+            # create an object to store info about Routine trial
+            trial = data.Routine(
+                name='trial',
+                components=[presentation_duration, text_fixationCross, image, image_key_input],
             )
-            trials.status = NOT_STARTED
+            trial.status = NOT_STARTED
             continueRoutine = True
             # update component parameters for each repeat
-            image.setImage('image/Acorns 1.jpg')
+            image.setImage(image_path)
             # create starting attributes for image_key_input
             image_key_input.keys = []
             image_key_input.rt = []
             _image_key_input_allKeys = []
-            # Run 'Begin Routine' code from code
+            # Run 'Begin Routine' code from trial_code
             import random 
-            random_duration = random.randint(2,10)
-            text_2.text = random_duration
+            random_duration = random.randint(2,5)
+            presentation_duration.text = random_duration
+            print("presentation_duration.text : ", )
             
             image_path = IMAGE_ORDER[loops.thisN]
-            print(image_path)
+            print("loops.thisN : ", loops.thisN)
+            print("image_path : ", image_path)
             image.Image = image_path
-            # store start times for trials
-            trials.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-            trials.tStart = globalClock.getTime(format='float')
-            trials.status = STARTED
-            thisExp.addData('trials.started', trials.tStart)
-            trials.maxDuration = None
+            # store start times for trial
+            trial.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+            trial.tStart = globalClock.getTime(format='float')
+            trial.status = STARTED
+            thisExp.addData('trial.started', trial.tStart)
+            trial.maxDuration = None
             # keep track of which components have finished
-            trialsComponents = trials.components
-            for thisComponent in trials.components:
+            trialComponents = trial.components
+            for thisComponent in trial.components:
                 thisComponent.tStart = None
                 thisComponent.tStop = None
                 thisComponent.tStartRefresh = None
@@ -912,12 +944,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             _timeToFirstFrame = win.getFutureFlipTime(clock="now")
             frameN = -1
             
-            # --- Run Routine "trials" ---
-            # if trial has changed, end Routine now
-            if isinstance(loops, data.TrialHandler2) and thisLoop.thisN != loops.thisTrial.thisN:
-                continueRoutine = False
-            trials.forceEnded = routineForceEnded = not continueRoutine
+            # --- Run Routine "trial" ---
+            trial.forceEnded = routineForceEnded = not continueRoutine
             while continueRoutine:
+                # if trial has changed, end Routine now
+                if hasattr(thisLoop, 'status') and thisLoop.status == STOPPING:
+                    continueRoutine = False
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -925,39 +957,73 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
                 # update/draw components on each frame
                 
-                # *polygon* updates
+                # *presentation_duration* updates
                 
-                # if polygon is starting this frame...
-                if polygon.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # if presentation_duration is starting this frame...
+                if presentation_duration.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                     # keep track of start time/frame for later
-                    polygon.frameNStart = frameN  # exact frame index
-                    polygon.tStart = t  # local t and not account for scr refresh
-                    polygon.tStartRefresh = tThisFlipGlobal  # on global time
-                    win.timeOnFlip(polygon, 'tStartRefresh')  # time at next scr refresh
+                    presentation_duration.frameNStart = frameN  # exact frame index
+                    presentation_duration.tStart = t  # local t and not account for scr refresh
+                    presentation_duration.tStartRefresh = tThisFlipGlobal  # on global time
+                    win.timeOnFlip(presentation_duration, 'tStartRefresh')  # time at next scr refresh
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'polygon.started')
+                    thisExp.timestampOnFlip(win, 'presentation_duration.started')
                     # update status
-                    polygon.status = STARTED
-                    polygon.setAutoDraw(True)
+                    presentation_duration.status = STARTED
+                    presentation_duration.setAutoDraw(True)
                 
-                # if polygon is active this frame...
-                if polygon.status == STARTED:
+                # if presentation_duration is active this frame...
+                if presentation_duration.status == STARTED:
                     # update params
                     pass
                 
-                # if polygon is stopping this frame...
-                if polygon.status == STARTED:
+                # if presentation_duration is stopping this frame...
+                if presentation_duration.status == STARTED:
                     # is it time to stop? (based on global clock, using actual start)
-                    if tThisFlipGlobal > polygon.tStartRefresh + 1.0-frameTolerance:
+                    if tThisFlipGlobal > presentation_duration.tStartRefresh + 1-frameTolerance:
                         # keep track of stop time/frame for later
-                        polygon.tStop = t  # not accounting for scr refresh
-                        polygon.tStopRefresh = tThisFlipGlobal  # on global time
-                        polygon.frameNStop = frameN  # exact frame index
+                        presentation_duration.tStop = t  # not accounting for scr refresh
+                        presentation_duration.tStopRefresh = tThisFlipGlobal  # on global time
+                        presentation_duration.frameNStop = frameN  # exact frame index
                         # add timestamp to datafile
-                        thisExp.timestampOnFlip(win, 'polygon.stopped')
+                        thisExp.timestampOnFlip(win, 'presentation_duration.stopped')
                         # update status
-                        polygon.status = FINISHED
-                        polygon.setAutoDraw(False)
+                        presentation_duration.status = FINISHED
+                        presentation_duration.setAutoDraw(False)
+                
+                # *text_fixationCross* updates
+                
+                # if text_fixationCross is starting this frame...
+                if text_fixationCross.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                    # keep track of start time/frame for later
+                    text_fixationCross.frameNStart = frameN  # exact frame index
+                    text_fixationCross.tStart = t  # local t and not account for scr refresh
+                    text_fixationCross.tStartRefresh = tThisFlipGlobal  # on global time
+                    win.timeOnFlip(text_fixationCross, 'tStartRefresh')  # time at next scr refresh
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'text_fixationCross.started')
+                    # update status
+                    text_fixationCross.status = STARTED
+                    text_fixationCross.setAutoDraw(True)
+                
+                # if text_fixationCross is active this frame...
+                if text_fixationCross.status == STARTED:
+                    # update params
+                    pass
+                
+                # if text_fixationCross is stopping this frame...
+                if text_fixationCross.status == STARTED:
+                    # is it time to stop? (based on global clock, using actual start)
+                    if tThisFlipGlobal > text_fixationCross.tStartRefresh + 1.0-frameTolerance:
+                        # keep track of stop time/frame for later
+                        text_fixationCross.tStop = t  # not accounting for scr refresh
+                        text_fixationCross.tStopRefresh = tThisFlipGlobal  # on global time
+                        text_fixationCross.frameNStop = frameN  # exact frame index
+                        # add timestamp to datafile
+                        thisExp.timestampOnFlip(win, 'text_fixationCross.stopped')
+                        # update status
+                        text_fixationCross.status = FINISHED
+                        text_fixationCross.setAutoDraw(False)
                 
                 # *image* updates
                 
@@ -1044,18 +1110,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     pauseExperiment(
                         thisExp=thisExp, 
                         win=win, 
-                        timers=[routineTimer], 
-                        playbackComponents=[]
+                        timers=[routineTimer, globalClock], 
+                        currentRoutine=trial,
                     )
                     # skip the frame we paused on
                     continue
                 
                 # check if all components have finished
                 if not continueRoutine:  # a component has requested a forced-end of Routine
-                    trials.forceEnded = routineForceEnded = True
+                    trial.forceEnded = routineForceEnded = True
                     break
                 continueRoutine = False  # will revert to True if at least one component still running
-                for thisComponent in trials.components:
+                for thisComponent in trial.components:
                     if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                         continueRoutine = True
                         break  # at least one component has not yet finished
@@ -1064,14 +1130,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                     win.flip()
             
-            # --- Ending Routine "trials" ---
-            for thisComponent in trials.components:
+            # --- Ending Routine "trial" ---
+            for thisComponent in trial.components:
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
-            # store stop times for trials
-            trials.tStop = globalClock.getTime(format='float')
-            trials.tStopRefresh = tThisFlipGlobal
-            thisExp.addData('trials.stopped', trials.tStop)
+            # store stop times for trial
+            trial.tStop = globalClock.getTime(format='float')
+            trial.tStopRefresh = tThisFlipGlobal
+            thisExp.addData('trial.stopped', trial.tStop)
             # check responses
             if image_key_input.keys in ['', [], None]:  # No response was made
                 image_key_input.keys = None
@@ -1079,7 +1145,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if image_key_input.keys != None:  # we had a response
                 loops.addData('image_key_input.rt', image_key_input.rt)
                 loops.addData('image_key_input.duration', image_key_input.duration)
-            # the Routine "trials" was not non-slip safe, so reset the non-slip timer
+            # the Routine "trial" was not non-slip safe, so reset the non-slip timer
             routineTimer.reset()
             
             # --- Prepare to start Routine "wait" ---
@@ -1112,11 +1178,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             frameN = -1
             
             # --- Run Routine "wait" ---
-            # if trial has changed, end Routine now
-            if isinstance(loops, data.TrialHandler2) and thisLoop.thisN != loops.thisTrial.thisN:
-                continueRoutine = False
             wait.forceEnded = routineForceEnded = not continueRoutine
             while continueRoutine and routineTimer.getTime() < 1.0:
+                # if trial has changed, end Routine now
+                if hasattr(thisLoop, 'status') and thisLoop.status == STOPPING:
+                    continueRoutine = False
                 # get current time
                 t = routineTimer.getTime()
                 tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1169,8 +1235,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     pauseExperiment(
                         thisExp=thisExp, 
                         win=win, 
-                        timers=[routineTimer], 
-                        playbackComponents=[]
+                        timers=[routineTimer, globalClock], 
+                        currentRoutine=wait,
                     )
                     # skip the frame we paused on
                     continue
@@ -1204,9 +1270,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 routineTimer.reset()
             else:
                 routineTimer.addTime(-1.000000)
+            # mark thisLoop as finished
+            if hasattr(thisLoop, 'status'):
+                thisLoop.status = FINISHED
+            # if awaiting a pause, pause now
+            if loops.status == PAUSED:
+                thisExp.status = PAUSED
+                pauseExperiment(
+                    thisExp=thisExp, 
+                    win=win, 
+                    timers=[globalClock], 
+                )
+                # once done pausing, restore running status
+                loops.status = STARTED
             thisExp.nextEntry()
             
-        # completed 5.0 repeats of 'loops'
+        # completed 3.0 repeats of 'loops'
+        loops.status = FINISHED
         
         if thisSession is not None:
             # if running in a Session with a Liaison client, send data up to now
@@ -1244,11 +1324,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         frameN = -1
         
         # --- Run Routine "break_2" ---
-        # if trial has changed, end Routine now
-        if isinstance(bloc, data.TrialHandler2) and thisBloc.thisN != bloc.thisTrial.thisN:
-            continueRoutine = False
         break_2.forceEnded = routineForceEnded = not continueRoutine
         while continueRoutine:
+            # if trial has changed, end Routine now
+            if hasattr(thisBloc, 'status') and thisBloc.status == STOPPING:
+                continueRoutine = False
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1318,8 +1398,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 pauseExperiment(
                     thisExp=thisExp, 
                     win=win, 
-                    timers=[routineTimer], 
-                    playbackComponents=[]
+                    timers=[routineTimer, globalClock], 
+                    currentRoutine=break_2,
                 )
                 # skip the frame we paused on
                 continue
@@ -1348,9 +1428,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('break_2.stopped', break_2.tStop)
         # the Routine "break_2" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
+        # mark thisBloc as finished
+        if hasattr(thisBloc, 'status'):
+            thisBloc.status = FINISHED
+        # if awaiting a pause, pause now
+        if bloc.status == PAUSED:
+            thisExp.status = PAUSED
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[globalClock], 
+            )
+            # once done pausing, restore running status
+            bloc.status = STARTED
         thisExp.nextEntry()
         
     # completed 3.0 repeats of 'bloc'
+    bloc.status = FINISHED
     
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
@@ -1400,6 +1494,9 @@ def endExperiment(thisExp, win=None):
     logging.console.setLevel(logging.WARNING)
     # mark experiment handler as finished
     thisExp.status = FINISHED
+    # run any 'at exit' functions
+    for fcn in runAtExit:
+        fcn()
     logging.flush()
 
 
