@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
-    on Tue Oct 14 17:02:59 2025
+    on Wed Oct 15 16:36:03 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -34,7 +34,8 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# Run 'Before Experiment' code from welcome_setup
+# Run 'Before Experiment' code from welcome_code
+print("+++ welcome_code | START | Before experiment")
 import csv
 
 # Initialize category lists
@@ -54,7 +55,7 @@ with open('images.csv', newline='', encoding='utf-8') as csvfile:
     next(reader)  # Skip the header row
     for row in reader:
         if len(row) < 3:
-            continue  # Skip rows that don't have enough columns
+            continue
         category = row[1]
         filename = row[2]
         if category == "Person":
@@ -71,13 +72,8 @@ IMAGES["person"] = persons
 IMAGES["scene"] = scenes
 IMAGES["object"] = objects
 IMAGES["animal"] = animals
-
-# Optional: Print to confirm
-# print("Persons:", persons)
-# print("Scenes:", scenes)
-# print("Objects:", objects)
-# print("Animals:", animals)
-
+print("IMAGES.keys() : ", IMAGES.keys())
+print("+++ welcome_code | END | Before experiment")
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -85,8 +81,8 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2025.1.1'
-expName = 'image_shower'  # from the Builder filename that created this script
-expVersion = ''
+expName = 'emotibit_validation_study'  # from the Builder filename that created this script
+expVersion = 'alpha'
 # a list of functions to run when the experiment ends (starts off blank)
 runAtExit = []
 # information about this experiment
@@ -109,7 +105,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = [1710, 1107]
+_winSize = [1920, 1080]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -178,7 +174,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version=expVersion,
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/franckporteous/Documents/MindHive/EmotiBit NYU Validation Study/psychopy_experiment/testing2/image_shower_lastrun.py',
+        originPath='/Users/franckporteous/Documents/MindHive/EmotiBit NYU Validation Study/evs-experimentalSoftware/emotibit_validation_study_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -445,26 +441,26 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     welcome_key_input = keyboard.Keyboard(deviceName='welcome_key_input')
     welcome_1 = visual.TextStim(win=win, name='welcome_1',
-        text='Hello :) Welcome to the experiment! In this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 1.',
+        text='Welcome to the experiment! \n\nIn this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. \n\nPress the spacebar now to begin Phase 1.',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
+    welcome_2 = visual.TextStim(win=win, name='welcome_2',
+        text="You're done with phase 1!\n\nIn this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. \n\nPress the spacebar now to begin Phase 2.",
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-3.0);
-    welcome_2 = visual.TextStim(win=win, name='welcome_2',
-        text=':D --- Welcome to the next phase! In this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. Press the spacebar now to begin Phase 2.',
+    welcome_3 = visual.TextStim(win=win, name='welcome_3',
+        text='In this final phase, you will be seated again.\n\nA new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image.\n\nPress the spacebar now to begin Phase 3.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-4.0);
-    welcome_3 = visual.TextStim(win=win, name='welcome_3',
-        text=';) --- Welcome to the final phase! In this phase, you will be seated again. A new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image. Press the spacebar now to begin Phase 3.',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=-5.0);
     
     # --- Initialize components for Routine "trial" ---
     presentation_duration = visual.TextStim(win=win, name='presentation_duration',
@@ -491,9 +487,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         texRes=128.0, interpolate=True, depth=-2.0)
     image_key_input = keyboard.Keyboard(deviceName='image_key_input')
     # Run 'Begin Experiment' code from trial_code
+    print("+++ trial_code | START | Begin experiment")
+    
     import csv
     import random
+    import pylsl
+    from pylsl import StreamInfo, StreamOutlet
     IMAGE_ORDER = []
+    
+    # Create LSL outlet for markers
+    info = StreamInfo(name='ExperimentMarkers', type='Markers', channel_count=1, channel_format='string', source_id='psychopy_markers')
+    outlet = StreamOutlet(info)
+    print("LSL Marker outlet created successfully")
     
     # read csv
     with open("images.csv") as f:
@@ -504,7 +509,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             IMAGE_ORDER.append(image_path)
     
     random.shuffle(IMAGE_ORDER)
-    print("After shuffle: ",IMAGE_ORDER)
+    print("After shuffle (len): ", len(IMAGE_ORDER))
+    
+    
+    
+    print("+++ trial_code | END | Begin experiment")
     
     # --- Initialize components for Routine "wait" ---
     text_3 = visual.TextStim(win=win, name='text_3',
@@ -515,7 +524,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         languageStyle='LTR',
         depth=0.0);
     
-    # --- Initialize components for Routine "break_2" ---
+    # --- Initialize components for Routine "break_block" ---
     text_countdown = visual.TextStim(win=win, name='text_countdown',
         text='5',
         font='Arial',
@@ -560,38 +569,32 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     )
     
     # set up handler to look after randomisation of conditions etc
-    bloc = data.TrialHandler2(
-        name='bloc',
+    block = data.TrialHandler2(
+        name='block',
         nReps=3.0, 
-        method='random', 
+        method='sequential', 
         extraInfo=expInfo, 
         originPath=-1, 
         trialList=[None], 
         seed=None, 
     )
-    thisExp.addLoop(bloc)  # add the loop to the experiment
-    thisBloc = bloc.trialList[0]  # so we can initialise stimuli with some values
-    # abbreviate parameter names if possible (e.g. rgb = thisBloc.rgb)
-    if thisBloc != None:
-        for paramName in thisBloc:
-            globals()[paramName] = thisBloc[paramName]
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
+    thisExp.addLoop(block)  # add the loop to the experiment
+    thisBlock = block.trialList[0]  # so we can initialise stimuli with some values
+    # abbreviate parameter names if possible (e.g. rgb = thisBlock.rgb)
+    if thisBlock != None:
+        for paramName in thisBlock:
+            globals()[paramName] = thisBlock[paramName]
     
-    for thisBloc in bloc:
-        bloc.status = STARTED
-        if hasattr(thisBloc, 'status'):
-            thisBloc.status = STARTED
-        currentLoop = bloc
+    for thisBlock in block:
+        block.status = STARTED
+        if hasattr(thisBlock, 'status'):
+            thisBlock.status = STARTED
+        currentLoop = block
         thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
-        if thisSession is not None:
-            # if running in a Session with a Liaison client, send data up to now
-            thisSession.sendExperimentData()
-        # abbreviate parameter names if possible (e.g. rgb = thisBloc.rgb)
-        if thisBloc != None:
-            for paramName in thisBloc:
-                globals()[paramName] = thisBloc[paramName]
+        # abbreviate parameter names if possible (e.g. rgb = thisBlock.rgb)
+        if thisBlock != None:
+            for paramName in thisBlock:
+                globals()[paramName] = thisBlock[paramName]
         
         # --- Prepare to start Routine "welcome" ---
         # create an object to store info about Routine welcome
@@ -602,38 +605,56 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         welcome.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # Run 'Begin Routine' code from welcome_setup
-        print("made it here")
-        if bloc.thisN == 0: 
-            print("in 1")
-            text.text = welcome_1.text
-        elif bloc.thisN == 1:
-            text.text = welcome_2.text
-            print("in 2")
-        elif bloc.thisN == 2:
-            text.text = welcome_3.text
-            print("in 3")
-        import random
-        
-        # Initialize the final list
-        routine_image_list = []
-        
-        # Randomly sample 10 from each category and combine
-        for key in ["person", "scene", "object", "animal"]:
-            if key in IMAGES:
-                images = IMAGES[key]
-                sample = random.sample(images, min(10, len(images)))
-                routine_image_list.extend(sample)
-        
-        # Store the randomized list
-        RANDOM_IMAGES = routine_image_list.copy()
-        
-        # Optional: Print for debugging
-        # print("RANDOM_IMAGES:", RANDOM_IMAGES)
         # create starting attributes for welcome_key_input
         welcome_key_input.keys = []
         welcome_key_input.rt = []
         _welcome_key_input_allKeys = []
+        # Run 'Begin Routine' code from welcome_code
+        print("+++ welcome_code | START | Begin routine")
+        
+        if block.thisN == 0: 
+            print("\n+++++Block 1\n")
+            text.text = welcome_1.text
+        elif block.thisN == 1:
+            text.text = welcome_2.text
+            print("\n+++++Block 2\n")
+        elif block.thisN == 2:
+            text.text = welcome_3.text
+            print("\n+++++Block 3\n")
+        import random
+        # Get the block number (0, 1, 2, etc.)
+        block_num = int(thisBlock.thisN)  # or however you're tracking blocks
+        
+        # Define how many images per block
+        images_per_block = 40  # adjust based on your RANDOM_IMAGES length
+        
+        # Calculate the portion for this block
+        start_idx = block_num * images_per_block
+        end_idx = start_idx + images_per_block
+        
+        # Extract the portion for this block
+        RANDOM_IMAGES = IMAGE_ORDER[start_idx:end_idx]
+        
+        print("Block", block_num + 1)
+        print("RANDOM_IMAGES:", RANDOM_IMAGES)
+        print("+++ welcome_code | END | Begin routine")
+        
+        
+        ## Initialize the final list
+        #routine_image_list = []
+        #
+        ## Randomly sample 10 from each category and combine
+        #for key in ["person", "scene", "object", "animal"]:
+        #    if key in IMAGES:
+        #        images = IMAGES[key]
+        #        sample = random.sample(images, min(10, len(images)))
+        #        routine_image_list.extend(sample)
+        #
+        ## Store the randomized list
+        #RANDOM_IMAGES = routine_image_list.copy()
+        #
+        #print("RANDOM_IMAGES:", RANDOM_IMAGES)
+        #print("+++ welcome_code | END | Begin routine")
         # store start times for welcome
         welcome.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         welcome.tStart = globalClock.getTime(format='float')
@@ -658,7 +679,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         welcome.forceEnded = routineForceEnded = not continueRoutine
         while continueRoutine:
             # if trial has changed, end Routine now
-            if hasattr(thisBloc, 'status') and thisBloc.status == STOPPING:
+            if hasattr(thisBlock, 'status') and thisBlock.status == STOPPING:
                 continueRoutine = False
             # get current time
             t = routineTimer.getTime()
@@ -859,10 +880,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # check responses
         if welcome_key_input.keys in ['', [], None]:  # No response was made
             welcome_key_input.keys = None
-        bloc.addData('welcome_key_input.keys',welcome_key_input.keys)
+        block.addData('welcome_key_input.keys',welcome_key_input.keys)
         if welcome_key_input.keys != None:  # we had a response
-            bloc.addData('welcome_key_input.rt', welcome_key_input.rt)
-            bloc.addData('welcome_key_input.duration', welcome_key_input.duration)
+            block.addData('welcome_key_input.rt', welcome_key_input.rt)
+            block.addData('welcome_key_input.duration', welcome_key_input.duration)
         # the Routine "welcome" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -915,15 +936,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             image_key_input.rt = []
             _image_key_input_allKeys = []
             # Run 'Begin Routine' code from trial_code
+            print("+++ trial_code | START | Begin Routine")
+            
             import random 
             random_duration = random.randint(2,5)
             presentation_duration.text = random_duration
-            print("presentation_duration.text : ", )
+            print("presentation_duration.text : ", presentation_duration.text)
             
-            image_path = IMAGE_ORDER[loops.thisN]
+            image_path = RANDOM_IMAGES[loops.thisN]
             print("loops.thisN : ", loops.thisN)
             print("image_path : ", image_path)
-            image.Image = image_path
+            image.setImage(image_path)
+            
+            
+            print("+++ trial_code | END| Begin Routine")
             # store start times for trial
             trial.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
             trial.tStart = globalClock.getTime(format='float')
@@ -1098,6 +1124,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                         image_key_input.keys = _image_key_input_allKeys[-1].name  # just the last key pressed
                         image_key_input.rt = _image_key_input_allKeys[-1].rt
                         image_key_input.duration = _image_key_input_allKeys[-1].duration
+                # Run 'Each Frame' code from trial_code
+                import time
+                
+                # Check for spacebar press
+                keys = event.getKeys(keyList=['space'])
+                
+                if 'space' in keys:
+                    timestamp = time.time()
+                    marker_data = f"SPACEBAR_{loops.thisN}_{image_path}"
+                    
+                    # Send LSL marker - simple and straightforward
+                    outlet.push_sample([marker_data], timestamp)
+                    
+                    print(f"+++ SPACEBAR PRESSED | timestamp: {timestamp} | image_path: {image_path} | loops.thisN: {loops.thisN} | marker sent: {marker_data}")
+                    trial.finished = True
                 
                 # check for quit (typically the Esc key)
                 if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1292,26 +1333,26 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if running in a Session with a Liaison client, send data up to now
             thisSession.sendExperimentData()
         
-        # --- Prepare to start Routine "break_2" ---
-        # create an object to store info about Routine break_2
-        break_2 = data.Routine(
-            name='break_2',
+        # --- Prepare to start Routine "break_block" ---
+        # create an object to store info about Routine break_block
+        break_block = data.Routine(
+            name='break_block',
             components=[text_countdown, text_4],
         )
-        break_2.status = NOT_STARTED
+        break_block.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # Run 'Begin Routine' code from code_3
+        # Run 'Begin Routine' code from break_code
         task_timer = core.CountdownTimer(start = 5)
-        # store start times for break_2
-        break_2.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-        break_2.tStart = globalClock.getTime(format='float')
-        break_2.status = STARTED
-        thisExp.addData('break_2.started', break_2.tStart)
-        break_2.maxDuration = None
+        # store start times for break_block
+        break_block.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+        break_block.tStart = globalClock.getTime(format='float')
+        break_block.status = STARTED
+        thisExp.addData('break_block.started', break_block.tStart)
+        break_block.maxDuration = None
         # keep track of which components have finished
-        break_2Components = break_2.components
-        for thisComponent in break_2.components:
+        break_blockComponents = break_block.components
+        for thisComponent in break_block.components:
             thisComponent.tStart = None
             thisComponent.tStop = None
             thisComponent.tStartRefresh = None
@@ -1323,11 +1364,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         _timeToFirstFrame = win.getFutureFlipTime(clock="now")
         frameN = -1
         
-        # --- Run Routine "break_2" ---
-        break_2.forceEnded = routineForceEnded = not continueRoutine
+        # --- Run Routine "break_block" ---
+        break_block.forceEnded = routineForceEnded = not continueRoutine
         while continueRoutine:
             # if trial has changed, end Routine now
-            if hasattr(thisBloc, 'status') and thisBloc.status == STOPPING:
+            if hasattr(thisBlock, 'status') and thisBlock.status == STOPPING:
                 continueRoutine = False
             # get current time
             t = routineTimer.getTime()
@@ -1355,7 +1396,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if text_countdown.status == STARTED:
                 # update params
                 pass
-            # Run 'Each Frame' code from code_3
+            # Run 'Each Frame' code from break_code
             # end task after 5 secs
             time_left = task_timer.getTime()
             minutes = int(time_left/60)
@@ -1399,17 +1440,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     thisExp=thisExp, 
                     win=win, 
                     timers=[routineTimer, globalClock], 
-                    currentRoutine=break_2,
+                    currentRoutine=break_block,
                 )
                 # skip the frame we paused on
                 continue
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
-                break_2.forceEnded = routineForceEnded = True
+                break_block.forceEnded = routineForceEnded = True
                 break
             continueRoutine = False  # will revert to True if at least one component still running
-            for thisComponent in break_2.components:
+            for thisComponent in break_block.components:
                 if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                     continueRoutine = True
                     break  # at least one component has not yet finished
@@ -1418,21 +1459,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                 win.flip()
         
-        # --- Ending Routine "break_2" ---
-        for thisComponent in break_2.components:
+        # --- Ending Routine "break_block" ---
+        for thisComponent in break_block.components:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        # store stop times for break_2
-        break_2.tStop = globalClock.getTime(format='float')
-        break_2.tStopRefresh = tThisFlipGlobal
-        thisExp.addData('break_2.stopped', break_2.tStop)
-        # the Routine "break_2" was not non-slip safe, so reset the non-slip timer
+        # store stop times for break_block
+        break_block.tStop = globalClock.getTime(format='float')
+        break_block.tStopRefresh = tThisFlipGlobal
+        thisExp.addData('break_block.stopped', break_block.tStop)
+        # the Routine "break_block" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
-        # mark thisBloc as finished
-        if hasattr(thisBloc, 'status'):
-            thisBloc.status = FINISHED
+        # mark thisBlock as finished
+        if hasattr(thisBlock, 'status'):
+            thisBlock.status = FINISHED
         # if awaiting a pause, pause now
-        if bloc.status == PAUSED:
+        if block.status == PAUSED:
             thisExp.status = PAUSED
             pauseExperiment(
                 thisExp=thisExp, 
@@ -1440,15 +1481,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 timers=[globalClock], 
             )
             # once done pausing, restore running status
-            bloc.status = STARTED
-        thisExp.nextEntry()
-        
-    # completed 3.0 repeats of 'bloc'
-    bloc.status = FINISHED
+            block.status = STARTED
+    # completed 3.0 repeats of 'block'
+    block.status = FINISHED
     
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
