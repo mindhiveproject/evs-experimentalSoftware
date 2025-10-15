@@ -232,7 +232,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="console.log(&quot;Trial:  &quot; + trials.thisN);&amp;#10;if (trials.thisN === 0) {&amp;#10;    text.text = welcome_1.text;&amp;#10;} else if (trials.thisN === 1) {&amp;#10;    text.text = welcome_2.text;&amp;#10;} else if (trials.thisN === 2) {&amp;#10;    text.text = welcome_3.text;&amp;#10;}&amp;#10;&amp;#10;// Initialize list of 40 images&amp;#10;routine_image_list = []&amp;#10;&amp;#10;for (const [key, arr] of window.IMAGES.entries()) {&amp;#10;//    console.log(key, arr);&amp;#10;    const slice = arr.sort(() =&gt; 0.5 - Math.random()).slice(0, 10);&amp;#10;//    console.log(key, slice);&amp;#10;    routine_image_list.push.apply(routine_image_list, slice);&amp;#10;}&amp;#10;//console.log(&quot;Randomizing images&quot;);&amp;#10;window.RANDOM_IMAGES = routine_image_list.slice()&amp;#10;//console.log(window.RANDOM_IMAGES)" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="print(&quot;+++ welcome_code | START | Begin routine&quot;)&amp;#10;&amp;#10;if block.thisN == 0: &amp;#10;    print(&quot;\n+++++Block 1\n&quot;)&amp;#10;    text.text = welcome_1.text&amp;#10;elif block.thisN == 1:&amp;#10;    text.text = welcome_2.text&amp;#10;    print(&quot;\n+++++Block 2\n&quot;)&amp;#10;elif block.thisN == 2:&amp;#10;    text.text = welcome_3.text&amp;#10;    print(&quot;\n+++++Block 3\n&quot;)&amp;#10;import random&amp;#10;# Get the block number (0, 1, 2, etc.)&amp;#10;block_num = int(thisBlock.thisN)  # or however you're tracking blocks&amp;#10;&amp;#10;# Define how many images per block&amp;#10;images_per_block = 40  # adjust based on your RANDOM_IMAGES length&amp;#10;&amp;#10;# Calculate the portion for this block&amp;#10;start_idx = block_num * images_per_block&amp;#10;end_idx = start_idx + images_per_block&amp;#10;&amp;#10;# Extract the portion for this block&amp;#10;RANDOM_IMAGES = IMAGE_ORDER[start_idx:end_idx]&amp;#10;&amp;#10;print(&quot;Block&quot;, block_num + 1)&amp;#10;print(&quot;RANDOM_IMAGES:&quot;, RANDOM_IMAGES)&amp;#10;print(&quot;+++ welcome_code | END | Begin routine&quot;)&amp;#10;&amp;#10;&amp;#10;## Initialize the final list&amp;#10;#routine_image_list = []&amp;#10;#&amp;#10;## Randomly sample 10 from each category and combine&amp;#10;#for key in [&quot;person&quot;, &quot;scene&quot;, &quot;object&quot;, &quot;animal&quot;]:&amp;#10;#    if key in IMAGES:&amp;#10;#        images = IMAGES[key]&amp;#10;#        sample = random.sample(images, min(10, len(images)))&amp;#10;#        routine_image_list.extend(sample)&amp;#10;#&amp;#10;## Store the randomized list&amp;#10;#RANDOM_IMAGES = routine_image_list.copy()&amp;#10;#&amp;#10;#print(&quot;RANDOM_IMAGES:&quot;, RANDOM_IMAGES)&amp;#10;#print(&quot;+++ welcome_code | END | Begin routine&quot;)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="print(&quot;+++ welcome_code | START | Begin routine&quot;)&amp;#10;&amp;#10;if block.thisN == 0: &amp;#10;    print(&quot;\n+++++Block 1\n&quot;)&amp;#10;    text.text = welcome_1.text&amp;#10;elif block.thisN == 1:&amp;#10;    text.text = welcome_2.text&amp;#10;    print(&quot;\n+++++Block 2\n&quot;)&amp;#10;elif block.thisN == 2:&amp;#10;    text.text = welcome_3.text&amp;#10;    print(&quot;\n+++++Block 3\n&quot;)&amp;#10;&amp;#10;import random&amp;#10;# Get the block number (0, 1, 2, etc.)&amp;#10;block_num = int(thisBlock.thisN) &amp;#10;&amp;#10;# Define how many images are availble per block&amp;#10;images_per_block = 40&amp;#10;&amp;#10;# Calculate the portion for this block&amp;#10;start_idx = block_num * images_per_block&amp;#10;end_idx = start_idx + images_per_block&amp;#10;&amp;#10;# Extract the portion for this block&amp;#10;RANDOM_IMAGES = IMAGE_ORDER[start_idx:end_idx]&amp;#10;&amp;#10;print(&quot;Block&quot;, block_num + 1)&amp;#10;print(&quot;RANDOM_IMAGES:&quot;, RANDOM_IMAGES)&amp;#10;&amp;#10;marker = f&quot;BLOCK_START_{block_num}&quot;&amp;#10;outlet.push_sample([marker])&amp;#10;&amp;#10;print(&quot;+++ welcome_code | END | Begin routine&quot;)&amp;#10;&amp;#10;&amp;#10;## Initialize the final list&amp;#10;#routine_image_list = []&amp;#10;#&amp;#10;## Randomly sample 10 from each category and combine&amp;#10;#for key in [&quot;person&quot;, &quot;scene&quot;, &quot;object&quot;, &quot;animal&quot;]:&amp;#10;#    if key in IMAGES:&amp;#10;#        images = IMAGES[key]&amp;#10;#        sample = random.sample(images, min(10, len(images)))&amp;#10;#        routine_image_list.extend(sample)&amp;#10;#&amp;#10;## Store the randomized list&amp;#10;#RANDOM_IMAGES = routine_image_list.copy()&amp;#10;#&amp;#10;#print(&quot;RANDOM_IMAGES:&quot;, RANDOM_IMAGES)&amp;#10;#print(&quot;+++ welcome_code | END | Begin routine&quot;)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -395,33 +395,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
-      <TextComponent name="presentation_duration" plugin="None">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Arial" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="presentation_duration" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, -150)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="" valType="str" updates="constant" name="text"/>
-        <Param val="pix" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
       <TextComponent name="text_fixationCross" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -501,12 +474,12 @@
       <CodeComponent name="trial_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="print(&quot;+++ trial_code | START | Begin experiment&quot;)&amp;#10;&amp;#10;import csv&amp;#10;import random&amp;#10;import pylsl&amp;#10;from pylsl import StreamInfo, StreamOutlet&amp;#10;IMAGE_ORDER = []&amp;#10;&amp;#10;# Create LSL outlet for markers&amp;#10;info = StreamInfo(name='ExperimentMarkers', type='Markers', channel_count=1, channel_format='string', source_id='psychopy_markers')&amp;#10;outlet = StreamOutlet(info)&amp;#10;print(&quot;LSL Marker outlet created successfully&quot;)&amp;#10;&amp;#10;# read csv&amp;#10;with open(&quot;images.csv&quot;) as f:&amp;#10;    reader = csv.reader(f)&amp;#10;    next(reader, None) # skip header&amp;#10;    for row in reader:&amp;#10;        image_path = row[2]&amp;#10;        IMAGE_ORDER.append(image_path)&amp;#10;&amp;#10;random.shuffle(IMAGE_ORDER)&amp;#10;print(&quot;After shuffle (len): &quot;, len(IMAGE_ORDER))&amp;#10;&amp;#10;&amp;#10;&amp;#10;print(&quot;+++ trial_code | END | Begin experiment&quot;)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="print(&quot;+++ trial_code | START | Begin experiment&quot;)&amp;#10;&amp;#10;import csv&amp;#10;import random&amp;#10;import pylsl&amp;#10;from pylsl import StreamInfo, StreamOutlet&amp;#10;import time&amp;#10;&amp;#10;IMAGE_ORDER = []&amp;#10;&amp;#10;# Create LSL outlet for markers&amp;#10;info = StreamInfo(name='ExperimentMarkers', type='Markers', channel_count=1, channel_format='string', source_id='psychopy_markers')&amp;#10;outlet = StreamOutlet(info)&amp;#10;print(&quot;LSL Marker outlet created successfully&quot;)&amp;#10;&amp;#10;# Send experiment start marker&amp;#10;outlet.push_sample(['EXPERIMENT_START'])&amp;#10;&amp;#10;# read csv&amp;#10;with open(&quot;images.csv&quot;) as f:&amp;#10;    reader = csv.reader(f)&amp;#10;    next(reader, None) # skip header&amp;#10;    for row in reader:&amp;#10;        image_path = row[2]&amp;#10;        IMAGE_ORDER.append(image_path)&amp;#10;&amp;#10;random.shuffle(IMAGE_ORDER)&amp;#10;print(&quot;After shuffle (len): &quot;, len(IMAGE_ORDER))&amp;#10;&amp;#10;&amp;#10;&amp;#10;print(&quot;+++ trial_code | END | Begin experiment&quot;)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="let image_time_range = 5;&amp;#10;&amp;#10;random_duration = 2 + Math.floor(Math.random() * image_time_range);&amp;#10;//text_2.text = random_duration;&amp;#10;&amp;#10;image_path = window.RANDOM_IMAGES[loops.thisN];&amp;#10;console.log(&quot;Loop &quot; + loops.thisN + &quot;: &quot; + image_path);&amp;#10;image.image = image_path;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="print(&quot;+++ trial_code | START | Begin Routine&quot;)&amp;#10;&amp;#10;import random &amp;#10;random_duration = random.randint(2,5)&amp;#10;presentation_duration.text = random_duration&amp;#10;print(&quot;presentation_duration.text : &quot;, presentation_duration.text)&amp;#10;&amp;#10;image_path = RANDOM_IMAGES[loops.thisN]&amp;#10;print(&quot;loops.thisN : &quot;, loops.thisN)&amp;#10;print(&quot;image_path : &quot;, image_path)&amp;#10;image.setImage(image_path)&amp;#10;&amp;#10;&amp;#10;print(&quot;+++ trial_code | END| Begin Routine&quot;)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="print(&quot;+++ trial_code | START | Begin Routine&quot;)&amp;#10;&amp;#10;import random &amp;#10;import time&amp;#10;&amp;#10;random_duration = random.randint(2,5)&amp;#10;&amp;#10;image_path = RANDOM_IMAGES[loops.thisN]&amp;#10;trial_num = loops.thisN + 1&amp;#10;block_num = int(thisBlock.thisN) + 1&amp;#10;&amp;#10;# Send trial and image markers&amp;#10;outlet.push_sample([f&quot;TRIAL_START_{trial_num}&quot;])&amp;#10;outlet.push_sample([f&quot;IMAGE_PRESENTED_{image_path}&quot;])&amp;#10;&amp;#10;# Store trial start time for RT calculation&amp;#10;trial_start_time = time.time()&amp;#10;&amp;#10;print(&quot;loops.thisN : &quot;, loops.thisN)&amp;#10;print(&quot;image_path : &quot;, image_path)&amp;#10;image.setImage(image_path)&amp;#10;&amp;#10;&amp;#10;print(&quot;+++ trial_code | END| Begin Routine&quot;)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="import time&amp;#10;&amp;#10;# Check for spacebar press&amp;#10;keys = event.getKeys(keyList=['space'])&amp;#10;&amp;#10;if 'space' in keys:&amp;#10;    timestamp = time.time()&amp;#10;    marker_data = f&quot;SPACEBAR_{loops.thisN}_{image_path}&quot;&amp;#10;    &amp;#10;    # Send LSL marker - simple and straightforward&amp;#10;    outlet.push_sample([marker_data], timestamp)&amp;#10;    &amp;#10;    print(f&quot;+++ SPACEBAR PRESSED | timestamp: {timestamp} | image_path: {image_path} | loops.thisN: {loops.thisN} | marker sent: {marker_data}&quot;)&amp;#10;    trial.finished = True" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="import time&amp;#10;&amp;#10;# Check for spacebar press&amp;#10;keys = event.getKeys(keyList=['space'])&amp;#10;&amp;#10;if 'space' in keys:&amp;#10;    reaction_time = time.time() - trial_start_time&amp;#10;    block_num = int(thisBlock.thisN) + 1&amp;#10;    trial_num = loops.thisN + 1&amp;#10;    &amp;#10;    marker_data = f&quot;SPACEBAR_PRESSED_RT{reaction_time:.3f}s&quot;&amp;#10;    outlet.push_sample([marker_data])&amp;#10;    &amp;#10;    print(f&quot;+++ SPACEBAR PRESSED | Block: {block_num} | Trial: {trial_num} | RT: {reaction_time:.3f}s | image_path: {image_path}&quot;)&amp;#10;#    trial.finished = True" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -655,8 +628,139 @@
         <Param val="mouse onset" valType="str" updates="constant" name="timeRelativeTo"/>
       </MouseComponent>
     </Routine>
+    <Routine name="end_experiment">
+      <RoutineSettingsComponent name="end_experiment" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
+        <Param val="end_experiment" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_end" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Arial" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_end" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Thanks for participating!&amp;#10;&amp;#10;Press the 'enter' bar to end the experiment." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_end" plugin="None">
+        <Param val="'up'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp_end" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="2.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="experimenter_check">
+      <RoutineSettingsComponent name="experimenter_check" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
+        <Param val="experimenter_check" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text_check" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Arial" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_check" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Click the key when all is in place" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp" plugin="None">
+        <Param val="'r'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
   </Routines>
   <Flow>
+    <Routine name="experimenter_check"/>
     <LoopInitiator loopType="TrialHandler" name="block">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
@@ -685,5 +789,6 @@
     <LoopTerminator name="loops"/>
     <Routine name="break_block"/>
     <LoopTerminator name="block"/>
+    <Routine name="end_experiment"/>
   </Flow>
 </PsychoPy2experiment>
