@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
-    on Wed Oct 15 17:01:13 2025
+    on Fri Oct 17 16:33:40 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -445,7 +445,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "experimenter_check" ---
     text_check = visual.TextStim(win=win, name='text_check',
-        text='Click the key when all is in place',
+        text='Click the key when all is in place\n\nCheck lsl with `space`\n',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -460,7 +460,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
     welcome_key_input = keyboard.Keyboard(deviceName='welcome_key_input')
     welcome_1 = visual.TextStim(win=win, name='welcome_1',
         text='Welcome to the experiment! \n\nIn this phase, you will remain seated. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a brief blank screen. As soon as you see the image, press the spacebar immediately. \n\nPress the spacebar now to begin Phase 1.',
@@ -468,21 +468,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-2.0);
+        depth=-3.0);
     welcome_2 = visual.TextStim(win=win, name='welcome_2',
         text="You're done with phase 1!\n\nIn this phase, you will stand. A new image will appear every 2-10 seconds. Before each image, you will see a fixation point. After each image, there will be a blank screen. As soon as you see the image, press the spacebar immediately. \n\nPress the spacebar now to begin Phase 2.",
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-3.0);
+        depth=-4.0);
     welcome_3 = visual.TextStim(win=win, name='welcome_3',
         text='In this final phase, you will be seated again.\n\nA new image will appear every 2-10 seconds. You will see a fixation point before each image and a blank screen after each image. Press the spacebar immediately when you see the image.\n\nPress the spacebar now to begin Phase 3.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-4.0);
+        depth=-5.0);
     
     # --- Initialize components for Routine "trial" ---
     text_fixationCross = visual.TextStim(win=win, name='text_fixationCross',
@@ -513,12 +513,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     IMAGE_ORDER = []
     
     # Create LSL outlet for markers
-    info = StreamInfo(name='ExperimentMarkers', type='Markers', channel_count=1, channel_format='string', source_id='psychopy_markers')
+    info = StreamInfo(name='Markers', type='Markers', channel_count=1, 
+                      channel_format='string', source_id='psychopy_markers')
     outlet = StreamOutlet(info)
+    
     print("LSL Marker outlet created successfully")
     
     # Send experiment start marker
-    outlet.push_sample(['EXPERIMENT_START'])
+    outlet.push_sample(['EXP_START'])
     
     # read csv
     with open("images.csv") as f:
@@ -562,7 +564,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "end_experiment" ---
     text_end = visual.TextStim(win=win, name='text_end',
-        text="Thanks for participating!\n\nPress the 'enter' bar to end.",
+        text='Thanks for participating!\n\nPress the special key to end the experiment.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -688,6 +690,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 key_resp.duration = _key_resp_allKeys[-1].duration
                 # a response ends the routine
                 continueRoutine = False
+        # Run 'Each Frame' code from code
+        import time
+        
+        keys = event.getKeys(keyList=['space'])
+            
+        if 'space' in keys:
+            this_time = time.time()
+        
+            marker_data = f"SPACEBAR_PRESSED_RT{this_time:.3f}s"
+            outlet.push_sample([marker_data])
+            print(marker_data)
+        #        trial.finished = True
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -776,10 +790,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         welcome.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # create starting attributes for welcome_key_input
-        welcome_key_input.keys = []
-        welcome_key_input.rt = []
-        _welcome_key_input_allKeys = []
         # Run 'Begin Routine' code from welcome_code
         print("+++ welcome_code | START | Begin routine")
         
@@ -795,7 +805,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         import random
         # Get the block number (0, 1, 2, etc.)
-        block_num = int(thisBlock.thisN) 
+        block_num = int(thisBlock.thisN) + 1  # Block number (1, 2, 3)
+        marker = f"BLOCK_START|block_id:{block_num}"
+        outlet.push_sample([marker])
+        
+        print(f"Block {block_num}")
+        print(f"Marker sent: {marker}")
         
         # Define how many images are availble per block
         images_per_block = 40
@@ -806,12 +821,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         # Extract the portion for this block
         RANDOM_IMAGES = IMAGE_ORDER[start_idx:end_idx]
-        
-        print("Block", block_num + 1)
-        print("RANDOM_IMAGES:", RANDOM_IMAGES)
-        
-        marker = f"BLOCK_START_{block_num}"
-        outlet.push_sample([marker])
         
         print("+++ welcome_code | END | Begin routine")
         
@@ -831,6 +840,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         #
         #print("RANDOM_IMAGES:", RANDOM_IMAGES)
         #print("+++ welcome_code | END | Begin routine")
+        # create starting attributes for welcome_key_input
+        welcome_key_input.keys = []
+        welcome_key_input.rt = []
+        _welcome_key_input_allKeys = []
         # store start times for welcome
         welcome.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         welcome.tStart = globalClock.getTime(format='float')
@@ -1124,8 +1137,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             block_num = int(thisBlock.thisN) + 1
             
             # Send trial and image markers
-            outlet.push_sample([f"TRIAL_START_{trial_num}"])
-            outlet.push_sample([f"IMAGE_PRESENTED_{image_path}"])
+            outlet.push_sample([f"TRIAL_START|block_id:{block_num}|trial_id:{trial_num}"])
+            outlet.push_sample([f"IMAGE|block_id:{block_num}|trial_id:{trial_num}|image:{image_path}"])
+            
             
             # Store trial start time for RT calculation
             trial_start_time = time.time()
@@ -1279,19 +1293,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # Run 'Each Frame' code from trial_code
                 import time
                 
-                # Check for spacebar press
-                keys = event.getKeys(keyList=['space'])
-                
-                if 'space' in keys:
-                    reaction_time = time.time() - trial_start_time
-                    block_num = int(thisBlock.thisN) + 1
-                    trial_num = loops.thisN + 1
+                # Wait a brief moment before listening for spacebar to avoid capturing the block-start keypress
+                elapsed_time = time.time() - trial_start_time
+                if elapsed_time > 0.1:  # Start listening after 100ms
+                    keys = event.getKeys(keyList=['space'])
                     
-                    marker_data = f"SPACEBAR_PRESSED_RT{reaction_time:.3f}s"
-                    outlet.push_sample([marker_data])
-                    
-                    print(f"+++ SPACEBAR PRESSED | Block: {block_num} | Trial: {trial_num} | RT: {reaction_time:.3f}s | image_path: {image_path}")
-                #    trial.finished = True
+                    if 'space' in keys:
+                        reaction_time = time.time() - trial_start_time
+                        block_num = int(thisBlock.thisN) + 1
+                        trial_num = loops.thisN + 1
+                        
+                        marker_data = f"SPACEBAR|block_id:{block_num}|trial_id:{trial_num}|rt:{reaction_time:.3f}"
+                        outlet.push_sample([marker_data])
+                        
+                        print(f"+++ SPACEBAR PRESSED | Block: {block_num} | Trial: {trial_num} | RT: {reaction_time:.3f}s | image_path: {image_path}")
+                #        trial.finished = True
                 
                 # check for quit (typically the Esc key)
                 if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1706,7 +1722,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         waitOnFlip = False
         
         # if key_resp_end is starting this frame...
-        if key_resp_end.status == NOT_STARTED and tThisFlip >= 2.0-frameTolerance:
+        if key_resp_end.status == NOT_STARTED and tThisFlip >= 1.0-frameTolerance:
             # keep track of start time/frame for later
             key_resp_end.frameNStart = frameN  # exact frame index
             key_resp_end.tStart = t  # local t and not account for scr refresh
@@ -1721,7 +1737,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             win.callOnFlip(key_resp_end.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(key_resp_end.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if key_resp_end.status == STARTED and not waitOnFlip:
-            theseKeys = key_resp_end.getKeys(keyList=['up'], ignoreKeys=["escape"], waitRelease=False)
+            theseKeys = key_resp_end.getKeys(keyList=['r'], ignoreKeys=["escape"], waitRelease=False)
             _key_resp_end_allKeys.extend(theseKeys)
             if len(_key_resp_end_allKeys):
                 key_resp_end.keys = _key_resp_end_allKeys[-1].name  # just the last key pressed
@@ -1779,6 +1795,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     # the Routine "end_experiment" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
+    # Run 'End Experiment' code from code_end
+    outlet.push_sample(['EXP_END'])
+    print("Experiment complete - marker sent")
+    
+    ## File Template:
+    # %p_%d_%H-%M-%S.xdf
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
