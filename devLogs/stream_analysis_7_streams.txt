@@ -1,0 +1,67 @@
+XDF Stream Analysis Report
+==================================================
+
+
+EMOTIBIT MAGNETOMETER:
+------------------------------
+  [3] MAG_Z
+      Source ID: MD-V7-0000027
+      Type: MagnetometerZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,555, Duration: 100.50s
+      Time Range: 0.02s - 100.52s
+
+  [4] MAG_Y
+      Source ID: MD-V7-0000027
+      Type: MagnetometerY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,555, Duration: 100.50s
+      Time Range: 0.01s - 100.52s
+
+  [6] MAG_X
+      Source ID: MD-V7-0000027
+      Type: MagnetometerX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,555, Duration: 100.50s
+      Time Range: 0.01s - 100.52s
+
+
+EMOTIBIT PPG:
+------------------------------
+  [0] PPG_RED
+      Source ID: MD-V7-0000027
+      Type: PPGRed
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,500, Duration: 100.52s
+      Time Range: 0.00s - 100.52s
+
+
+EMOTIBIT EDA:
+------------------------------
+  [1] EDA
+      Source ID: MD-V7-0000027
+      Type: EDA
+      Channels: 1, Sample Rate: 15.0 Hz
+      Samples: 1,509, Duration: 100.52s
+      Time Range: 0.00s - 100.53s
+
+
+EMOTIBIT HR:
+------------------------------
+  [5] HR
+      Source ID: MD-V7-0000027
+      Type: HeartRate
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 131, Duration: 91.40s
+      Time Range: 0.66s - 92.06s
+
+
+MARKERS:
+------------------------------
+  [2] Markers
+      Source ID: psychopy_markers
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 39, Duration: 92.94s
+      Time Range: 2.24s - 95.18s
+

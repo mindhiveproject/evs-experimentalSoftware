@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
-    on Fri Oct 17 16:33:40 2025
+    on Mon Oct 20 17:43:36 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -454,6 +454,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_resp = keyboard.Keyboard(deviceName='key_resp')
     
     # --- Initialize components for Routine "welcome" ---
+    # Run 'Begin Experiment' code from welcome_code
+    import pylsl
+    from pylsl import StreamInfo, StreamOutlet
+    import time
+    
+    IMAGE_ORDER = []
+    
+    # Create LSL outlet for markers
+    info = StreamInfo(name='Markers', type='Markers', channel_count=1, 
+                      channel_format='string', source_id='psychopy_markers')
+    outlet = StreamOutlet(info)
+    
+    print("LSL Marker outlet created successfully")
     text = visual.TextStim(win=win, name='text',
         text='c',
         font='Arial',
@@ -506,18 +519,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     import csv
     import random
-    import pylsl
-    from pylsl import StreamInfo, StreamOutlet
     import time
     
     IMAGE_ORDER = []
     
-    # Create LSL outlet for markers
-    info = StreamInfo(name='Markers', type='Markers', channel_count=1, 
-                      channel_format='string', source_id='psychopy_markers')
-    outlet = StreamOutlet(info)
     
-    print("LSL Marker outlet created successfully")
     
     # Send experiment start marker
     outlet.push_sample(['EXP_START'])
@@ -1513,6 +1519,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from break_code
         task_timer = core.CountdownTimer(start = 5)
+        outlet.push_sample(['BLOCK_END'])
         # store start times for break_block
         break_block.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         break_block.tStart = globalClock.getTime(format='float')
