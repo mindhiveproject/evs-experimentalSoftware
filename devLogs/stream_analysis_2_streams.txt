@@ -1,0 +1,23 @@
+XDF Stream Analysis Report
+==================================================
+
+
+MARKERS:
+------------------------------
+  [0] Markers
+      Source ID: psychopy_markers
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 38, Duration: 78.23s
+      Time Range: 2.82s - 81.05s
+
+
+OTHER:
+------------------------------
+  [1] LiveAmpSN-054907-0281
+      Source ID: LiveAmpSN-054907-0281
+      Type: EEG
+      Channels: 19, Sample Rate: 500.0 Hz
+      Samples: 42,279, Duration: 84.55s
+      Time Range: 0.00s - 84.55s
+

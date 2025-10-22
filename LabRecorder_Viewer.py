@@ -496,8 +496,6 @@ class XDFExplorer:
 
         labels = [self.streams[idx]['info']['name'][0] for idx in emotibit_indices]
         self.plot_streams(emotibit_indices, max_duration=max_duration, labels=labels)
-
-
     
     def plot_streams(self, indices, channels_per_stream=None, max_duration=None, labels=None, 
                      enhanced=True, figsize=(16, 10)):
@@ -894,6 +892,9 @@ class XDFExplorer:
             else:
                 print("⚠️ No markers found in any stream")
 
+
+
+
     def extract_block_data(self, block_id, include_markers=True, include_emotibit=True, include_other=False):
         """
         Extract data from a specific block using BLOCK_START marker.
@@ -1223,7 +1224,7 @@ class XDFExplorer:
 # Example usage
 if __name__ == "__main__":
     # Load the XDF file
-    xdf_stream = XDFExplorer("./data/P004.xdf")
+    xdf_stream = XDFExplorer("./data/P006.xdf")
     
     # Show detailed summary
     xdf_stream.print_detailed_summary()
@@ -1253,11 +1254,34 @@ xdf_stream.analyze_data_quality()
 xdf_stream.export_stream_info()
 #%%
 xdf_stream.plot_streams(
+    indices=[0],
+    channels_per_stream=[[0]],
+    max_duration=90,
+    labels=["Markers"]
+)
+#%%
+xdf_stream.plot_streams(
+    indices=[0],
+    channels_per_stream=[[0]],
+    max_duration=90,
+    labels=["LiveAmpSN-054907-0281"]
+)
+#%%
+xdf_stream.plot_streams(
     indices=[0, 1, 2, 3, 4, 5, 6],
     channels_per_stream=[[0], [0], [0], [0], [0], [0], [0]],
     max_duration=90,
     labels=["PPG_RED", "EDA", "Markers", "MAG_Z", "MAG_Y", "HR", "MAG_X"]
 )
+
+#%%
+xdf_stream.plot_streams(
+    indices=[1, 0],
+    channels_per_stream=[list(range(19)), [0]],  # LiveAmpSN-054907-0281 has 19 channels
+    max_duration=90,
+    labels=["LiveAmpSN-054907-0281", "Markers"]
+)
+
 
 #%%
 # See all available blocks with statistics
