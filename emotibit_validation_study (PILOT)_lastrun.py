@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2025.1.1),
-    on Mon Oct 20 17:43:36 2025
+    on Wed Oct 22 15:45:13 2025
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -174,7 +174,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version=expVersion,
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/franckporteous/Documents/MindHive/EmotiBit NYU Validation Study/evs-experimentalSoftware/emotibit_validation_study_lastrun.py',
+        originPath='/Users/franckporteous/Documents/MindHive/EmotiBit NYU Validation Study/evs-experimentalSoftware/emotibit_validation_study (PILOT)_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )

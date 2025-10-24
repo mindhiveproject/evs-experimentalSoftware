@@ -31,10 +31,16 @@ class XDFExplorer:
             nch = int(s['info']['channel_count'][0])
             fs = float(s['info']['nominal_srate'][0])
             n_samples = len(s['time_series'])
-            tmin = min(s['time_stamps']) - self.t0
-            tmax = max(s['time_stamps']) - self.t0
-            print(f"[{i}] source_id: {source_id} \t    | {name} \t | type: {stype} \t | channels: {nch} \t | Fs: {fs:.1f} Hz \t | samples: {n_samples} \t | "
-                  f"time: {tmin:.2f}–{tmax:.2f}s")
+            if s['info']['name'][0] in ['LiveAmpSN-054907-0281-STETriggerIn', 'LiveAmpSN-054907-0281-DeviceTrigger']:
+                print(f"[{i}] source_id: {source_id} \t    | {name} \t | type: {stype} \t | channels: {nch} \t | Fs: {fs:.1f} Hz \t | samples: {n_samples} \t | ")
+            else: 
+                try:
+                    tmin = min(s['time_stamps']) - self.t0
+                    tmax = max(s['time_stamps']) - self.t0
+                except:
+                    tmin = tmax = 0
+                print(f"[{i}] source_id: {source_id} \t    | {name} \t | type: {stype} \t | channels: {nch} \t | Fs: {fs:.1f} Hz \t | samples: {n_samples} \t | "
+                    f"time: {tmin:.2f}–{tmax:.2f}s")
 
     def print_detailed_summary(self):
         """Print a comprehensive summary with better formatting and more details."""
@@ -892,8 +898,7 @@ class XDFExplorer:
             else:
                 print("⚠️ No markers found in any stream")
 
-
-
+# This below is where the fun begins
 
     def extract_block_data(self, block_id, include_markers=True, include_emotibit=True, include_other=False):
         """
@@ -1183,7 +1188,7 @@ class XDFExplorer:
     def export_stream_info(self, filename=None):
         """Export detailed stream information to a text file."""
         if filename is None:
-            filename = f"stream_analysis_{len(self.streams)}_streams.txt"
+            filename = f"./devLogs/stream_analysis_{len(self.streams)}_streams.txt"
         
         with open(filename, 'w') as f:
             f.write("XDF Stream Analysis Report\n")
@@ -1224,7 +1229,7 @@ class XDFExplorer:
 # Example usage
 if __name__ == "__main__":
     # Load the XDF file
-    xdf_stream = XDFExplorer("./data/P006.xdf")
+    xdf_stream = XDFExplorer("./data/P0RF.xdf")
     
     # Show detailed summary
     xdf_stream.print_detailed_summary()
@@ -1246,107 +1251,3 @@ if __name__ == "__main__":
     
     # Export stream info
     xdf_stream.export_stream_info()
-
-#%%
-xdf_stream.analyze_data_quality()
-
-#%%
-xdf_stream.export_stream_info()
-#%%
-xdf_stream.plot_streams(
-    indices=[0],
-    channels_per_stream=[[0]],
-    max_duration=90,
-    labels=["Markers"]
-)
-#%%
-xdf_stream.plot_streams(
-    indices=[0],
-    channels_per_stream=[[0]],
-    max_duration=90,
-    labels=["LiveAmpSN-054907-0281"]
-)
-#%%
-xdf_stream.plot_streams(
-    indices=[0, 1, 2, 3, 4, 5, 6],
-    channels_per_stream=[[0], [0], [0], [0], [0], [0], [0]],
-    max_duration=90,
-    labels=["PPG_RED", "EDA", "Markers", "MAG_Z", "MAG_Y", "HR", "MAG_X"]
-)
-
-#%%
-xdf_stream.plot_streams(
-    indices=[1, 0],
-    channels_per_stream=[list(range(19)), [0]],  # LiveAmpSN-054907-0281 has 19 channels
-    max_duration=90,
-    labels=["LiveAmpSN-054907-0281", "Markers"]
-)
-
-
-#%%
-# See all available blocks with statistics
-xdf_stream.list_all_block_ids()
-
-# Print details for block 1
-print("Print detailed markers for block 1")
-# xdf_stream.print_markers_by_block(1)
-xdf_stream.print_marker_timeline(block_id=1)
-
-# Print details for block 2
-print("Print detailed markers for block 2")
-# xdf_stream.print_markers_by_block(2)
-xdf_stream.print_marker_timeline(block_id=2)
-
-# See all markers across all blocks
-print("See all markers across all blocks")
-xdf_stream.print_marker_timeline()
-
-#%%
-
-
-#%%
-# Legacy example (for backward compatibility)
-"""
-# Get stream indices
-idx_emotibit_MAG_X = explorer.get_stream_index("MAG_X")
-idx_emotibit_MAG_Y = explorer.get_stream_index("MAG_Y")
-idx_emotibit_MAG_Z = explorer.get_stream_index("MAG_Z")
-idx_emotibit_PPG_RED = explorer.get_stream_index("PPG_RED")
-idx_emotibit_EDA = explorer.get_stream_index("EDA")
-idx_markers = explorer.get_stream_index("Markers")
-
-# Plot with enhanced visualization (default)
-explorer.plot_streams(
-    indices=[
-        idx_emotibit_MAG_X, 
-        idx_emotibit_MAG_Y, 
-        idx_markers
-    ],
-    channels_per_stream=[[0], [0], None],
-    max_duration=60,
-    labels=[
-        "MAG_X", 
-        "MAG_Y", 
-        "Markers"
-    ]
-)
-
-# Plot with original overlay method
-explorer.plot_streams(
-    indices=[
-        idx_emotibit_MAG_X, 
-        idx_emotibit_MAG_Y, 
-        idx_markers
-    ],
-    channels_per_stream=[[0], [0], None],
-    max_duration=60,
-    labels=[
-        "MAG_X", 
-        "MAG_Y", 
-        "Markers"
-    ],
-    enhanced=False  # Use original overlay method
-)
-"""
-
-# %%

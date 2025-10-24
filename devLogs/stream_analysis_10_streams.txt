@@ -1,0 +1,91 @@
+XDF Stream Analysis Report
+==================================================
+
+
+EMOTIBIT MAGNETOMETER:
+------------------------------
+  [1] MAG_Z
+      Source ID: MD-V7-0000027
+      Type: MagnetometerZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 3,343, Duration: 131.52s
+      Time Range: 0.09s - 131.60s
+
+  [4] MAG_X
+      Source ID: MD-V7-0000027
+      Type: MagnetometerX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 3,343, Duration: 131.52s
+      Time Range: 0.08s - 131.60s
+
+  [8] MAG_Y
+      Source ID: MD-V7-0000027
+      Type: MagnetometerY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 3,343, Duration: 131.52s
+      Time Range: 0.09s - 131.60s
+
+
+EMOTIBIT PPG:
+------------------------------
+  [9] PPG_RED
+      Source ID: MD-V7-0000027
+      Type: PPGRed
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 3,270, Duration: 131.51s
+      Time Range: 0.08s - 131.59s
+
+
+EMOTIBIT EDA:
+------------------------------
+  [2] EDA
+      Source ID: MD-V7-0000027
+      Type: EDA
+      Channels: 1, Sample Rate: 15.0 Hz
+      Samples: 1,974, Duration: 131.52s
+      Time Range: 0.08s - 131.60s
+
+
+EMOTIBIT HR:
+------------------------------
+  [6] HR
+      Source ID: MD-V7-0000027
+      Type: HeartRate
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0, Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+
+MARKERS:
+------------------------------
+  [5] Markers
+      Source ID: psychopy_markers
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 43, Duration: 119.74s
+      Time Range: 7.24s - 126.98s
+
+
+OTHER:
+------------------------------
+  [0] LiveAmpSN-054907-0281-STETriggerIn
+      Source ID: LiveAmpSN-054907-0281_STETriggerIn
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0, Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+  [3] LiveAmpSN-054907-0281
+      Source ID: LiveAmpSN-054907-0281
+      Type: EEG
+      Channels: 20, Sample Rate: 500.0 Hz
+      Samples: 65,764, Duration: 131.53s
+      Time Range: 0.00s - 131.53s
+
+  [7] LiveAmpSN-054907-0281-DeviceTrigger
+      Source ID: LiveAmpSN-054907-0281_DeviceTrigger
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0, Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+

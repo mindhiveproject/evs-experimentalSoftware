@@ -1,0 +1,81 @@
+XDF Stream Analysis Report
+==================================================
+
+
+EMOTIBIT MAGNETOMETER:
+------------------------------
+  [6] MAG_X
+      Source ID: MD-V7-0000027
+      Type: MagnetometerX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,061, Duration: 81.06s
+      Time Range: 0.01s - 81.07s
+
+  [7] MAG_Y
+      Source ID: MD-V7-0000027
+      Type: MagnetometerY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,061, Duration: 81.06s
+      Time Range: 0.01s - 81.07s
+
+  [8] MAG_Z
+      Source ID: MD-V7-0000027
+      Type: MagnetometerZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,061, Duration: 81.06s
+      Time Range: 0.01s - 81.08s
+
+
+EMOTIBIT PPG:
+------------------------------
+  [4] PPG_RED
+      Source ID: MD-V7-0000027
+      Type: PPGRed
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,016, Duration: 81.06s
+      Time Range: 0.00s - 81.06s
+
+
+EMOTIBIT EDA:
+------------------------------
+  [5] EDA
+      Source ID: MD-V7-0000027
+      Type: EDA
+      Channels: 1, Sample Rate: 15.0 Hz
+      Samples: 1,216, Duration: 80.99s
+      Time Range: 0.03s - 81.02s
+
+
+MARKERS:
+------------------------------
+  [3] Markers
+      Source ID: psychopy_markers
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 42, Duration: 78.12s
+      Time Range: 1.01s - 79.13s
+
+
+OTHER:
+------------------------------
+  [0] LiveAmpSN-054907-0281-STETriggerIn
+      Source ID: LiveAmpSN-054907-0281_STETriggerIn
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0, Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+  [1] LiveAmpSN-054907-0281-DeviceTrigger
+      Source ID: LiveAmpSN-054907-0281_DeviceTrigger
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0, Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+  [2] LiveAmpSN-054907-0281
+      Source ID: LiveAmpSN-054907-0281
+      Type: EEG
+      Channels: 20, Sample Rate: 500.0 Hz
+      Samples: 40,519, Duration: 81.04s
+      Time Range: 0.05s - 81.08s
+
