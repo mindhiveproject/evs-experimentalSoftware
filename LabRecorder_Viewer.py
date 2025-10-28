@@ -377,17 +377,17 @@ class XDFExplorer:
                     
                 # Plot channels
                 for ch in chs:
-                    channel_label = f"{stream_name} Ch{ch+1}" if n_channels > 1 else stream_name
+                    channel_label = f"{lbl} Ch{ch+1}" if n_channels > 1 else lbl
                     ax.plot(ts, data[:, ch], label=channel_label, color=color, linewidth=1.5)
                     
-                ax.set_ylabel(f"{stream_name}\n({stream_type.upper()})", color=color, fontweight='bold')
+                ax.set_ylabel(f"{lbl}\n({stream_type.upper()})", color=color, fontweight='bold')
                 ax.tick_params(axis='y', labelcolor=color)
                 ax.grid(True, alpha=0.3)
                 ax.legend(loc='upper right', fontsize=8)
                 
             else:
                 # Marker stream
-                ax.set_ylabel(f"{stream_name}\n(MARKERS)", color=color, fontweight='bold')
+                ax.set_ylabel(f"{lbl}\n(MARKERS)", color=color, fontweight='bold')
                 
                 # Plot markers with block-based coloring
                 for t, marker_row in zip(ts, data):
@@ -1022,6 +1022,7 @@ class XDFExplorer:
         for idx in streams_to_extract:
             s = self.streams[idx]
             name = s['info']['name'][0]
+            source_id = s['info']['source_id'][0]
             stype = s['info']['type'][0] if s['info']['type'] else "N/A"
             fs = float(s['info']['nominal_srate'][0])
             
@@ -1037,6 +1038,7 @@ class XDFExplorer:
             if len(block_ts) > 0:
                 extracted_data['streams'][idx] = {
                     'name': name,
+                    'source_id': source_id,
                     'type': stype,
                     'time_stamps': block_ts,
                     'time_series': block_data,
@@ -1077,6 +1079,7 @@ class XDFExplorer:
         for stream_idx, stream_data in block_data['streams'].items():
             prefix = f"stream_{stream_idx}"
             save_data[f"{prefix}_name"] = stream_data['name']
+            save_data[f"{prefix}_source_id"] = stream_data['source_id']
             save_data[f"{prefix}_type"] = stream_data['type']
             save_data[f"{prefix}_time_stamps"] = stream_data['time_stamps']
             save_data[f"{prefix}_time_series"] = stream_data['time_series']
@@ -1118,6 +1121,7 @@ class XDFExplorer:
                 prefix = f"stream_{stream_idx}"
                 block_data['streams'][stream_idx] = {
                     'name': str(data[f"{prefix}_name"]),
+                    'source_id': str(data[f"{prefix}_source_id"]),
                     'type': str(data[f"{prefix}_type"]),
                     'time_stamps': data[f"{prefix}_time_stamps"],
                     'time_series': data[f"{prefix}_time_series"],
@@ -1160,6 +1164,7 @@ class XDFExplorer:
             fs = stream_data['sample_rate']
             
             print(f"\n[{stream_idx}] {name}")
+            print(f"    Source ID: {stream_data['source_id']}")
             print(f"    Type: {stream_data['type']}")
             print(f"    Sample Rate: {fs:.1f} Hz")
             print(f"    Samples: {len(ts):,}")
@@ -1185,20 +1190,114 @@ class XDFExplorer:
                 if len(unique_markers) > 5:
                     print(f"      ... and {len(unique_markers) - 5} more")
 
+    def list_streams_by_source_id(self, source_id=None):
+        """
+        List streams grouped by source_id, or show streams for a specific source_id.
+        
+        Args:
+            source_id (str, optional): Filter by specific source_id. If None, shows all streams grouped by source_id.
+        """
+        if source_id:
+            print(f"\n📡 STREAMS FOR SOURCE ID: {source_id}")
+        else:
+            print("\n📡 STREAMS GROUPED BY SOURCE ID")
+        print("=" * 60)
+        
+        # Group streams by source_id
+        streams_by_source = {}
+        
+        for i, s in enumerate(self.streams):
+            current_source_id = s['info']['source_id'][0]
+            name = s['info']['name'][0]
+            stype = s['info']['type'][0] if s['info']['type'] else "N/A"
+            fs = float(s['info']['nominal_srate'][0])
+            
+            if current_source_id not in streams_by_source:
+                streams_by_source[current_source_id] = []
+            
+            streams_by_source[current_source_id].append({
+                'index': i,
+                'name': name,
+                'type': stype,
+                'sample_rate': fs
+            })
+        
+        # Display results in the requested format
+        for idx, (sid, streams) in enumerate(sorted(streams_by_source.items()), 1):
+            if source_id and sid.lower() != source_id.lower():
+                continue
+            
+            print(f"\n[{idx}] {sid}")
+            
+            for stream in streams:
+                print(f"    [{stream['index']}] {stream['name']}: {stream['type']} ({stream['sample_rate']:.1f} Hz)")
+            
+            print()
+        
+        if not source_id:
+            print(f"📊 Total unique source IDs: {len(streams_by_source)}")
+
+    def get_streams_by_source_id(self, source_id):
+        """
+        Get stream indices for a specific source_id.
+        
+        Args:
+            source_id (str): The source_id to filter by
+            
+        Returns:
+            list: List of stream indices matching the source_id
+        """
+        matching_indices = []
+        
+        for i, s in enumerate(self.streams):
+            if s['info']['source_id'][0].lower() == source_id.lower():
+                matching_indices.append(i)
+        
+        return matching_indices
+
     def export_stream_info(self, filename=None):
-        """Export detailed stream information to a text file."""
+        """Export detailed stream information to a text file with comprehensive logging."""
         if filename is None:
             filename = f"./devLogs/stream_analysis_{len(self.streams)}_streams.txt"
         
         with open(filename, 'w') as f:
+            # Header
             f.write("XDF Stream Analysis Report\n")
-            f.write("=" * 50 + "\n\n")
+            f.write("=" * 80 + "\n\n")
+            f.write(f"Total Streams: {len(self.streams)}\n")
+            f.write(f"Experiment Start (t0): {self.t0:.3f}s\n\n")
             
+            # Group by source_id
+            streams_by_source = {}
+            for i, s in enumerate(self.streams):
+                source_id = s['info']['source_id'][0]
+                if source_id not in streams_by_source:
+                    streams_by_source[source_id] = []
+                streams_by_source[source_id].append((i, s))
+            
+            f.write("STREAMS BY SOURCE ID\n")
+            f.write("=" * 80 + "\n\n")
+            for idx, (sid, streams) in enumerate(sorted(streams_by_source.items()), 1):
+                f.write(f"[{idx}] {sid}\n")
+                f.write("-" * 40 + "\n")
+                for stream_idx, s in streams:
+                    name = s['info']['name'][0]
+                    stype = s['info']['type'][0] if s['info']['type'] else "N/A"
+                    fs = float(s['info']['nominal_srate'][0])
+                    f.write(f"    [{stream_idx}] {name}: {stype} ({fs:.1f} Hz)\n")
+                f.write("\n")
+            
+            # Categorized streams with detailed info
             categories = self.categorize_streams()
+            f.write("\n\n" + "=" * 80 + "\n")
+            f.write("DETAILED STREAM INFORMATION BY CATEGORY\n")
+            f.write("=" * 80 + "\n\n")
+            
             for category, indices in categories.items():
                 if indices:
                     f.write(f"\n{category.upper().replace('_', ' ')}:\n")
-                    f.write("-" * 30 + "\n")
+                    f.write("-" * 40 + "\n")
+                    
                     for idx in indices:
                         s = self.streams[idx]
                         name = s['info']['name'][0]
@@ -1207,21 +1306,83 @@ class XDFExplorer:
                         nch = int(s['info']['channel_count'][0])
                         fs = float(s['info']['nominal_srate'][0])
                         n_samples = len(s['time_series'])
+                        ts = s['time_stamps'] - self.t0
+                        data = np.array(s['time_series'])
                         
-                        if len(s['time_stamps']) > 0:
-                            tmin = min(s['time_stamps']) - self.t0
-                            tmax = max(s['time_stamps']) - self.t0
+                        if len(ts) > 0:
+                            tmin = min(ts)
+                            tmax = max(ts)
                             duration = tmax - tmin
                         else:
                             duration = 0
                             tmin = tmax = 0
                         
-                        f.write(f"  [{idx}] {name}\n")
+                        f.write(f"\n  [{idx}] {name}\n")
                         f.write(f"      Source ID: {source_id}\n")
                         f.write(f"      Type: {stype}\n")
                         f.write(f"      Channels: {nch}, Sample Rate: {fs:.1f} Hz\n")
-                        f.write(f"      Samples: {n_samples:,}, Duration: {duration:.2f}s\n")
-                        f.write(f"      Time Range: {tmin:.2f}s - {tmax:.2f}s\n\n")
+                        f.write(f"      Samples: {n_samples:,}\n")
+                        f.write(f"      Duration: {duration:.2f}s\n")
+                        f.write(f"      Time Range: {tmin:.2f}s - {tmax:.2f}s\n")
+                        
+                        # Add data quality metrics
+                        if len(ts) > 0:
+                            if fs > 0:  # Continuous stream
+                                expected_samples = duration * fs
+                                completeness = (n_samples / expected_samples * 100) if expected_samples > 0 else 0
+                                if len(ts) > 1:
+                                    intervals = np.diff(ts)
+                                    expected_interval = 1.0 / fs
+                                    gaps = np.sum(intervals > expected_interval * 1.5)
+                                else:
+                                    gaps = 0
+                                
+                                f.write(f"      Completeness: {completeness:.1f}%\n")
+                                f.write(f"      Data Gaps: {gaps}\n")
+                                
+                                if data.dtype.kind not in ['U', 'S', 'O'] and data.size > 0:
+                                    f.write(f"      Data Range: {data.min():.3f} - {data.max():.3f}\n")
+                                    f.write(f"      Data Mean: {data.mean():.3f}\n")
+                                    f.write(f"      Data Std: {data.std():.3f}\n")
+                                
+                                # Quality assessment
+                                if completeness > 95 and gaps == 0:
+                                    quality = "EXCELLENT"
+                                elif completeness > 90 and gaps < 5:
+                                    quality = "GOOD"
+                                elif completeness > 80:
+                                    quality = "FAIR"
+                                else:
+                                    quality = "POOR"
+                                f.write(f"      Quality: {quality}\n")
+                            else:  # Marker stream
+                                if len(ts) > 1:
+                                    intervals = np.diff(ts)
+                                    min_interval = np.min(intervals)
+                                    max_interval = np.max(intervals)
+                                    avg_interval = np.mean(intervals)
+                                    f.write(f"      Interval Range: {min_interval:.3f}s - {max_interval:.3f}s\n")
+                                    f.write(f"      Avg Interval: {avg_interval:.3f}s\n")
+                                    
+                                    if min_interval > 0 and max_interval < 1000:
+                                        quality = "EXCELLENT"
+                                    elif min_interval > 0 and max_interval < 5000:
+                                        quality = "GOOD"
+                                    else:
+                                        quality = "FAIR"
+                                    f.write(f"      Quality: {quality}\n")
+            
+            # Summary statistics
+            f.write("\n\n" + "=" * 80 + "\n")
+            f.write("SUMMARY STATISTICS\n")
+            f.write("=" * 80 + "\n\n")
+            
+            f.write(f"Total Unique Source IDs: {len(streams_by_source)}\n")
+            f.write(f"Total Streams: {len(self.streams)}\n")
+            
+            for category, indices in categories.items():
+                if indices:
+                    f.write(f"{category.upper().replace('_', ' ')}: {len(indices)} streams\n")
         
         print(f"📄 Stream analysis exported to: {filename}")
 
