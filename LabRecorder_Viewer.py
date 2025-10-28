@@ -335,6 +335,11 @@ class XDFExplorer:
         # Block colors for markers
         block_colors = {1: '#FF6B6B', 2: '#4ECDC4', 3: '#FFE66D'}
         
+        # Get marker stream indices if show_markers is True
+        marker_stream_indices = []
+        if show_markers:
+            marker_stream_indices = self.get_streams_by_category('markers')
+        
         max_ts = 0
         
         for i, (idx, chs, lbl) in enumerate(zip(indices, channels_per_stream, labels)):
@@ -384,6 +389,28 @@ class XDFExplorer:
                 ax.tick_params(axis='y', labelcolor=color)
                 ax.grid(True, alpha=0.3)
                 ax.legend(loc='upper right', fontsize=8)
+                
+                # Overlay markers if requested
+                if show_markers and len(marker_stream_indices) > 0:
+                    for marker_idx in marker_stream_indices:
+                        marker_stream = self.streams[marker_idx]
+                        marker_ts = marker_stream['time_stamps'] - self.t0
+                        marker_data = marker_stream['time_series']
+                        
+                        for t, marker_row in zip(marker_ts, marker_data):
+                            if max_duration is None or t <= max_duration:
+                                marker_text = marker_row[0] if isinstance(marker_row, (list, np.ndarray)) else str(marker_row)
+                                
+                                # Extract block_id
+                                block_id = None
+                                if 'block_id:' in marker_text:
+                                    try:
+                                        block_id = int(marker_text.split('block_id:')[1].split('|')[0])
+                                    except (ValueError, IndexError):
+                                        pass
+                                
+                                marker_color = block_colors.get(block_id, '#999999') if block_id else '#999999'
+                                ax.axvline(x=t, color=marker_color, linestyle=':', alpha=0.5, linewidth=1.2)
                 
             else:
                 # Marker stream
