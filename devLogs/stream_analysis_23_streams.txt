@@ -1,0 +1,384 @@
+XDF Stream Analysis Report
+================================================================================
+
+Total Streams: 23
+Experiment Start (t0): 15003.393s
+
+STREAMS BY SOURCE ID
+================================================================================
+
+[1] LiveAmpSN-054907-0281
+----------------------------------------
+    [22] LiveAmpSN-054907-0281: EEG (500.0 Hz)
+
+[2] LiveAmpSN-054907-0281_DeviceTrigger
+----------------------------------------
+    [1] LiveAmpSN-054907-0281-DeviceTrigger: Markers (0.0 Hz)
+
+[3] LiveAmpSN-054907-0281_STETriggerIn
+----------------------------------------
+    [3] LiveAmpSN-054907-0281-STETriggerIn: Markers (0.0 Hz)
+
+[4] MD-V7-0000192
+----------------------------------------
+    [0] SCR_AMP: SCRAmplitude (0.0 Hz)
+    [2] SCR_FREQ: SCRFrequency (0.0 Hz)
+    [4] SCR_RIS: SCRRiseTime (0.0 Hz)
+    [5] PPG_IR: PPGInfrared (25.0 Hz)
+    [6] GYRO_Y: GyroscopeY (25.0 Hz)
+    [7] MAG_X: MagnetometerX (25.0 Hz)
+    [9] MAG_Y: MagnetometerY (25.0 Hz)
+    [10] PPG_RED: PPGRed (25.0 Hz)
+    [11] GYRO_Z: GyroscopeZ (25.0 Hz)
+    [12] GYRO_X: GyroscopeX (25.0 Hz)
+    [13] EDA: EDA (15.0 Hz)
+    [14] ACC_Z: AccelerometerZ (25.0 Hz)
+    [15] TEMP1: Temperature (7.5 Hz)
+    [16] HR: HeartRate (0.0 Hz)
+    [17] ACC_Y: AccelerometerY (25.0 Hz)
+    [18] PPG_GRN: PPGGreen (25.0 Hz)
+    [19] THERM: Thermopile (7.5 Hz)
+    [20] ACC_X: AccelerometerX (25.0 Hz)
+    [21] MAG_Z: MagnetometerZ (25.0 Hz)
+
+[5] psychopy_markers
+----------------------------------------
+    [8] Markers: Markers (0.0 Hz)
+
+
+
+================================================================================
+DETAILED STREAM INFORMATION BY CATEGORY
+================================================================================
+
+
+EMOTIBIT PHYSIOLOGICAL:
+----------------------------------------
+
+  [0] SCR_AMP
+      Source ID: MD-V7-0000192
+      Type: SCRAmplitude
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 22
+      Duration: 69.43s
+      Time Range: 5.68s - 75.11s
+      Interval Range: 0.217s - 28.934s
+      Avg Interval: 3.306s
+      Quality: EXCELLENT
+
+  [2] SCR_FREQ
+      Source ID: MD-V7-0000192
+      Type: SCRFrequency
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 248
+      Duration: 82.30s
+      Time Range: 0.03s - 82.33s
+      Interval Range: 0.150s - 0.467s
+      Avg Interval: 0.333s
+      Quality: EXCELLENT
+
+  [4] SCR_RIS
+      Source ID: MD-V7-0000192
+      Type: SCRRiseTime
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 22
+      Duration: 69.43s
+      Time Range: 5.68s - 75.11s
+      Interval Range: 0.217s - 28.934s
+      Avg Interval: 3.306s
+      Quality: EXCELLENT
+
+  [6] GYRO_Y
+      Source ID: MD-V7-0000192
+      Type: GyroscopeY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.54s
+      Time Range: 0.01s - 82.55s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -73.700 - 67.444
+      Data Mean: -0.203
+      Data Std: 5.305
+      Quality: EXCELLENT
+
+  [11] GYRO_Z
+      Source ID: MD-V7-0000192
+      Type: GyroscopeZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.54s
+      Time Range: 0.01s - 82.55s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -71.777 - 78.461
+      Data Mean: -0.306
+      Data Std: 5.342
+      Quality: EXCELLENT
+
+  [12] GYRO_X
+      Source ID: MD-V7-0000192
+      Type: GyroscopeX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.53s
+      Time Range: 0.01s - 82.54s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -37.323 - 44.067
+      Data Mean: -0.240
+      Data Std: 3.149
+      Quality: EXCELLENT
+
+  [14] ACC_Z
+      Source ID: MD-V7-0000192
+      Type: AccelerometerZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.53s
+      Time Range: 0.01s - 82.54s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: 0.307 - 0.615
+      Data Mean: 0.500
+      Data Std: 0.032
+      Quality: EXCELLENT
+
+  [15] TEMP1
+      Source ID: MD-V7-0000192
+      Type: Temperature
+      Channels: 1, Sample Rate: 7.5 Hz
+      Samples: 620
+      Duration: 82.53s
+      Time Range: 0.11s - 82.63s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: 29.385 - 29.983
+      Data Mean: 29.682
+      Data Std: 0.127
+      Quality: EXCELLENT
+
+  [17] ACC_Y
+      Source ID: MD-V7-0000192
+      Type: AccelerometerY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,067
+      Duration: 82.49s
+      Time Range: 0.05s - 82.54s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -0.290 - 0.028
+      Data Mean: -0.118
+      Data Std: 0.036
+      Quality: EXCELLENT
+
+  [19] THERM
+      Source ID: MD-V7-0000192
+      Type: Thermopile
+      Channels: 1, Sample Rate: 7.5 Hz
+      Samples: 620
+      Duration: 82.52s
+      Time Range: 0.11s - 82.64s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: 25.562 - 25.899
+      Data Mean: 25.715
+      Data Std: 0.072
+      Quality: EXCELLENT
+
+  [20] ACC_X
+      Source ID: MD-V7-0000192
+      Type: AccelerometerX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.53s
+      Time Range: 0.01s - 82.54s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -1.137 - -0.780
+      Data Mean: -0.945
+      Data Std: 0.019
+      Quality: EXCELLENT
+
+EMOTIBIT MAGNETOMETER:
+----------------------------------------
+
+  [7] MAG_X
+      Source ID: MD-V7-0000192
+      Type: MagnetometerX
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.54s
+      Time Range: 0.01s - 82.55s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: -12.000 - 3.000
+      Data Mean: -0.411
+      Data Std: 2.215
+      Quality: EXCELLENT
+
+  [9] MAG_Y
+      Source ID: MD-V7-0000192
+      Type: MagnetometerY
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.54s
+      Time Range: 0.01s - 82.55s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: 26.000 - 67.000
+      Data Mean: 43.289
+      Data Std: 5.697
+      Quality: EXCELLENT
+
+  [21] MAG_Z
+      Source ID: MD-V7-0000192
+      Type: MagnetometerZ
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,068
+      Duration: 82.54s
+      Time Range: 0.01s - 82.55s
+      Completeness: 100.2%
+      Data Gaps: 0
+      Data Range: 58.000 - 82.000
+      Data Mean: 72.067
+      Data Std: 2.996
+      Quality: EXCELLENT
+
+EMOTIBIT PPG:
+----------------------------------------
+
+  [5] PPG_IR
+      Source ID: MD-V7-0000192
+      Type: PPGInfrared
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,053
+      Duration: 82.53s
+      Time Range: 0.00s - 82.53s
+      Completeness: 99.5%
+      Data Gaps: 0
+      Data Range: 180966.000 - 182276.000
+      Data Mean: 181685.281
+      Data Std: 208.220
+      Quality: EXCELLENT
+
+  [10] PPG_RED
+      Source ID: MD-V7-0000192
+      Type: PPGRed
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,053
+      Duration: 82.53s
+      Time Range: 0.12s - 82.66s
+      Completeness: 99.5%
+      Data Gaps: 0
+      Data Range: 154018.000 - 156760.000
+      Data Mean: 155235.078
+      Data Std: 666.973
+      Quality: EXCELLENT
+
+  [18] PPG_GRN
+      Source ID: MD-V7-0000192
+      Type: PPGGreen
+      Channels: 1, Sample Rate: 25.0 Hz
+      Samples: 2,053
+      Duration: 82.53s
+      Time Range: 0.12s - 82.66s
+      Completeness: 99.5%
+      Data Gaps: 0
+      Data Range: 12120.000 - 13252.000
+      Data Mean: 12546.116
+      Data Std: 277.936
+      Quality: EXCELLENT
+
+EMOTIBIT EDA:
+----------------------------------------
+
+  [13] EDA
+      Source ID: MD-V7-0000192
+      Type: EDA
+      Channels: 1, Sample Rate: 15.0 Hz
+      Samples: 1,239
+      Duration: 82.52s
+      Time Range: 0.11s - 82.64s
+      Completeness: 100.1%
+      Data Gaps: 0
+      Data Range: 0.537 - 0.692
+      Data Mean: 0.631
+      Data Std: 0.043
+      Quality: EXCELLENT
+
+EMOTIBIT HR:
+----------------------------------------
+
+  [16] HR
+      Source ID: MD-V7-0000192
+      Type: HeartRate
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 72
+      Duration: 79.73s
+      Time Range: 2.70s - 82.43s
+      Interval Range: 0.200s - 4.468s
+      Avg Interval: 1.123s
+      Quality: EXCELLENT
+
+MARKERS:
+----------------------------------------
+
+  [8] Markers
+      Source ID: psychopy_markers
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 38
+      Duration: 79.00s
+      Time Range: 1.60s - 80.60s
+      Interval Range: 0.000s - 18.068s
+      Avg Interval: 2.135s
+      Quality: EXCELLENT
+
+OTHER:
+----------------------------------------
+
+  [1] LiveAmpSN-054907-0281-DeviceTrigger
+      Source ID: LiveAmpSN-054907-0281_DeviceTrigger
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0
+      Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+  [3] LiveAmpSN-054907-0281-STETriggerIn
+      Source ID: LiveAmpSN-054907-0281_STETriggerIn
+      Type: Markers
+      Channels: 1, Sample Rate: 0.0 Hz
+      Samples: 0
+      Duration: 0.00s
+      Time Range: 0.00s - 0.00s
+
+  [22] LiveAmpSN-054907-0281
+      Source ID: LiveAmpSN-054907-0281
+      Type: EEG
+      Channels: 5, Sample Rate: 500.0 Hz
+      Samples: 41,257
+      Duration: 82.51s
+      Time Range: 0.04s - 82.55s
+      Completeness: 100.0%
+      Data Gaps: 3
+      Data Range: -15694.987 - 87545.156
+      Data Mean: 17034.531
+      Data Std: 32366.064
+      Quality: GOOD
+
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+Total Unique Source IDs: 5
+Total Streams: 23
+EMOTIBIT PHYSIOLOGICAL: 11 streams
+EMOTIBIT MAGNETOMETER: 3 streams
+EMOTIBIT PPG: 3 streams
+EMOTIBIT EDA: 1 streams
+EMOTIBIT HR: 1 streams
+MARKERS: 1 streams
+OTHER: 3 streams

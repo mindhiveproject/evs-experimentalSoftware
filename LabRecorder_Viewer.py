@@ -745,7 +745,7 @@ class XDFExplorer:
             marker_indices = self.get_streams_by_category('markers')
             if not marker_indices:
                 print("⚠️ No marker streams found.")
-                pass
+                return
         else:
             marker_indices = [marker_stream_idx]
         
