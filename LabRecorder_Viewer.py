@@ -246,7 +246,7 @@ class XDFExplorer:
         
         return matches
 
-    def quick_emotibit_overview(self, max_duration=60):
+    def quick_emotibit_overview(self, time_range=60, max_duration=None):
         """Show a quick overview of all EmotiBit streams."""
         categories = self.categorize_streams()
         
@@ -270,7 +270,7 @@ class XDFExplorer:
                 all_emotibit.extend(indices)
         
         if all_emotibit:
-            self.plot_streams_enhanced(all_emotibit, max_duration=max_duration)
+            self.plot_streams_enhanced(all_emotibit, time_range=time_range, max_duration=max_duration)
 
     def _get_stream_type(self, stream_name):
         """Helper to determine stream type from name."""
@@ -289,7 +289,7 @@ class XDFExplorer:
             return 'other'
 
     @staticmethod
-    def _clip_std_outliers(values, n_std=1.0):
+    def _clip_std_outliers(values, n_std=1.5):
         """Clip values outside mean ± n_std*std (for plot readability only)."""
         arr = np.asarray(values, dtype=float)
         if arr.size == 0:
@@ -299,6 +299,58 @@ class XDFExplorer:
         if std == 0:
             return arr
         return np.clip(arr, mean - n_std * std, mean + n_std * std)
+
+    @staticmethod
+    def _resolve_time_window(time_range=None, max_duration=None):
+        """
+        Resolve plotting window in seconds relative to t0.
+
+        - None: full recording
+        - number: 0 to that time (same as legacy max_duration)
+        - (start, end): inclusive segment bounds
+        """
+        if time_range is None and max_duration is not None:
+            time_range = max_duration
+        if time_range is None:
+            return None, None
+        if isinstance(time_range, (int, float)):
+            return 0.0, float(time_range)
+        if isinstance(time_range, (list, tuple)) and len(time_range) == 2:
+            start_s, end_s = float(time_range[0]), float(time_range[1])
+            if start_s > end_s:
+                start_s, end_s = end_s, start_s
+            return start_s, end_s
+        raise ValueError(
+            "time_range must be None, a number (seconds from 0), or (start_s, end_s)."
+        )
+
+    @staticmethod
+    def _mask_time_window(ts, t_start, t_end):
+        """Boolean mask for samples inside [t_start, t_end] (inclusive)."""
+        if t_start is None and t_end is None:
+            return np.ones(len(ts), dtype=bool)
+        mask = np.ones(len(ts), dtype=bool)
+        if t_start is not None:
+            mask &= ts >= t_start
+        if t_end is not None:
+            mask &= ts <= t_end
+        return mask
+
+    @staticmethod
+    def _timestamp_in_time_window(t, t_start, t_end):
+        if t_start is not None and t < t_start:
+            return False
+        if t_end is not None and t > t_end:
+            return False
+        return True
+
+    @staticmethod
+    def _format_time_window_note(t_start, t_end):
+        if t_start is None and t_end is None:
+            return ""
+        if t_start is None or t_start == 0.0:
+            return f" | 0–{t_end:.1f}s"
+        return f" | {t_start:.1f}–{t_end:.1f}s"
 
     def plot_markers(self, idx):
         """Plot PsychoPy marker stream (event onsets)."""
@@ -318,20 +370,25 @@ class XDFExplorer:
         plt.tight_layout()
         plt.show()
 
-    def plot_streams_enhanced(self, indices, channels_per_stream=None, max_duration=None,
+    def plot_streams_enhanced(self, indices, channels_per_stream=None, time_range=None,
                              labels=None, show_markers=True, figsize=(16, 10),
-                             clip_std_outliers=False):
+                             clip_std_outliers=False, max_duration=None):
         """
         Enhanced plotting with better stream differentiation and layout.
 
         Args:
-            clip_std_outliers: If True, clip continuous channel values to mean ± 2*std
+            time_range: None (full recording), a number (0 to that time in seconds),
+                or (start_s, end_s) for a segment relative to t0.
+            max_duration: Deprecated alias for time_range when given as a single number.
+            clip_std_outliers: If True, clip continuous channel values to mean ± n*std
                 before plotting so artifact spikes do not dominate the y-axis range.
         """
         if channels_per_stream is None:
             channels_per_stream = [None] * len(indices)
         if labels is None:
             labels = [self.streams[idx]['info']['name'][0] for idx in indices]
+
+        t_start, t_end = self._resolve_time_window(time_range, max_duration)
 
         # Create subplot layout
         n_streams = len(indices)
@@ -391,11 +448,10 @@ class XDFExplorer:
                        transform=ax.transAxes, ha='center', va='center')
                 continue
                 
-            # Crop time
-            if max_duration is not None:
-                mask = ts <= max_duration
-                ts = ts[mask]
-                data = data[mask]
+            # Crop time window
+            mask = self._mask_time_window(ts, t_start, t_end)
+            ts = ts[mask]
+            data = data[mask]
                 
             if len(ts) > 0:
                 max_ts = max(max_ts, ts.max())
@@ -441,19 +497,19 @@ class XDFExplorer:
                         marker_data = marker_stream['time_series']
                         
                         for t, marker_row in zip(marker_ts, marker_data):
-                            if max_duration is None or t <= max_duration:
-                                marker_text = marker_row[0] if isinstance(marker_row, (list, np.ndarray)) else str(marker_row)
-                                
-                                # Extract block_id
-                                block_id = None
-                                if 'block_id:' in marker_text:
-                                    try:
-                                        block_id = int(marker_text.split('block_id:')[1].split('|')[0])
-                                    except (ValueError, IndexError):
-                                        pass
-                                
-                                marker_color = block_colors.get(block_id, '#999999') if block_id else '#999999'
-                                ax.axvline(x=t, color=marker_color, linestyle=':', alpha=0.5, linewidth=1.2)
+                            if not self._timestamp_in_time_window(t, t_start, t_end):
+                                continue
+                            marker_text = marker_row[0] if isinstance(marker_row, (list, np.ndarray)) else str(marker_row)
+
+                            block_id = None
+                            if 'block_id:' in marker_text:
+                                try:
+                                    block_id = int(marker_text.split('block_id:')[1].split('|')[0])
+                                except (ValueError, IndexError):
+                                    pass
+
+                            marker_color = block_colors.get(block_id, '#999999') if block_id else '#999999'
+                            ax.axvline(x=t, color=marker_color, linestyle=':', alpha=0.5, linewidth=1.2)
                 
             else:
                 # Marker stream
@@ -481,15 +537,21 @@ class XDFExplorer:
                 ax.set_ylim([0, 1])
                 ax.set_yticks([])
                 
-            ax.set_xlim([0, max_ts])
+            if t_start is not None or t_end is not None:
+                x_min = t_start if t_start is not None else 0.0
+                x_max = t_end if t_end is not None else max_ts
+                ax.set_xlim([x_min, x_max])
+            else:
+                ax.set_xlim([0, max_ts])
             
         # Set common x-axis label
         axes[-1].set_xlabel("Time (s)", fontweight='bold')
         
         # Add title with experiment info
         clip_note = " (±2σ clip)" if clip_std_outliers else ""
+        window_note = self._format_time_window_note(t_start, t_end)
         fig.suptitle(
-            f"📊 Multi-Stream Analysis - {len(indices)} streams{clip_note}",
+            f"📊 Multi-Stream Analysis - {len(indices)} streams{window_note}{clip_note}",
             fontsize=14,
             fontweight='bold',
         )
@@ -497,11 +559,12 @@ class XDFExplorer:
         plt.tight_layout()
         plt.show()
 
-    def plot_continuous(self, idx, channels=None, max_duration=None):
+    def plot_continuous(self, idx, channels=None, time_range=None, max_duration=None):
         """
         Plot physiological signal(s).
         channels: list of indices to plot (default: all)
-        max_duration: optional crop (in seconds)
+        time_range: None, a number (0 to that time), or (start_s, end_s)
+        max_duration: Deprecated alias for time_range when given as a single number.
         """
         s = self.streams[idx]
         name = s['info']['name'][0]
@@ -513,11 +576,10 @@ class XDFExplorer:
         if n_channels == 1:
             data = data.reshape(-1, 1)
 
-        # Crop
-        if max_duration is not None:
-            mask = ts <= max_duration
-            ts = ts[mask]
-            data = data[mask]
+        t_start, t_end = self._resolve_time_window(time_range, max_duration)
+        mask = self._mask_time_window(ts, t_start, t_end)
+        ts = ts[mask]
+        data = data[mask]
 
         # Channel selection
         if channels is None:
@@ -529,7 +591,13 @@ class XDFExplorer:
         plt.title(f"📈 Continuous Stream — {name}")
         plt.xlabel("Time (s)")
         plt.ylabel("Signal")
-        plt.xlim([0, ts[-1]])
+        if len(ts) > 0:
+            if t_start is not None or t_end is not None:
+                x_min = t_start if t_start is not None else 0.0
+                x_max = t_end if t_end is not None else ts[-1]
+                plt.xlim([x_min, x_max])
+            else:
+                plt.xlim([0, ts[-1]])
         plt.legend(loc="upper right", fontsize=8)
         plt.tight_layout()
         plt.show()
@@ -546,7 +614,7 @@ class XDFExplorer:
         print(f"⚠️ Source_id containing '{name_substring}' not found.")
         return None
 
-    def plot_emotibit_all(self, subset=None, max_duration=None):
+    def plot_emotibit_all(self, subset=None, time_range=None, max_duration=None):
         """
         Plot all EmotiBit continuous streams.
         EmotiBit streams are identified by 'MD-' in their source_id or name.
@@ -575,29 +643,41 @@ class XDFExplorer:
         print(f"📦 Found {len(emotibit_indices)} EmotiBit continuous stream(s).")
 
         labels = [self.streams[idx]['info']['name'][0] for idx in emotibit_indices]
-        self.plot_streams(emotibit_indices, max_duration=max_duration, labels=labels)
+        self.plot_streams(
+            emotibit_indices, time_range=time_range, max_duration=max_duration, labels=labels
+        )
     
-    def plot_streams(self, indices, channels_per_stream=None, max_duration=None, labels=None, 
-                     enhanced=True, figsize=(16, 10)):
+    def plot_streams(self, indices, channels_per_stream=None, time_range=None, labels=None,
+                     enhanced=True, figsize=(16, 10), max_duration=None):
         """
         Plot multiple streams with enhanced visualization by default.
         
         Args:
             indices (list[int]): stream indices to plot
             channels_per_stream (list[list[int]] or None): which channels to plot for each stream
-            max_duration (float or None): crop duration (seconds)
+            time_range: None, a number (0 to that time), or (start_s, end_s)
             labels (list[str] or None): optional labels for legend per stream
             enhanced (bool): use enhanced plotting with separate subplots
             figsize (tuple): figure size for plotting
+            max_duration: Deprecated alias for time_range when given as a single number.
         """
         if enhanced:
-            self.plot_streams_enhanced(indices, channels_per_stream, max_duration, labels, figsize=figsize)
+            self.plot_streams_enhanced(
+                indices,
+                channels_per_stream,
+                time_range=time_range,
+                labels=labels,
+                figsize=figsize,
+                max_duration=max_duration,
+            )
         else:
             # Original overlay method
             if channels_per_stream is None:
                 channels_per_stream = [None] * len(indices)
             if labels is None:
                 labels = [self.streams[idx]['info']['name'][0] for idx in indices]
+
+            t_start, t_end = self._resolve_time_window(time_range, max_duration)
 
             # Colors for different streams
             colors = plt.cm.tab10(np.linspace(0, 1, len(indices)))
@@ -623,11 +703,9 @@ class XDFExplorer:
                     print(f"⚠️ Stream '{stream_name}' is empty, skipping.")
                     continue
 
-                # Crop time
-                if max_duration is not None:
-                    mask = ts <= max_duration
-                    ts = ts[mask]
-                    data = data[mask]
+                mask = self._mask_time_window(ts, t_start, t_end)
+                ts = ts[mask]
+                data = data[mask]
 
                 if len(ts) > 0:
                     max_ts = max(max_ts, ts.max())
@@ -661,7 +739,12 @@ class XDFExplorer:
 
                     ax.set_ylabel(lbl, color=color)
                     ax.tick_params(axis='y', labelcolor=color)
-                    ax.set_xlim([0, max_ts])
+                    if t_start is not None or t_end is not None:
+                        x_min = t_start if t_start is not None else 0.0
+                        x_max = t_end if t_end is not None else max_ts
+                        ax.set_xlim([x_min, x_max])
+                    else:
+                        ax.set_xlim([0, max_ts])
 
                 else:
                     # Marker stream - parse by type and color by block_id
@@ -689,7 +772,12 @@ class XDFExplorer:
 
             # Set main axis properties
             ax_main.set_xlabel("Time (s)")
-            ax_main.set_xlim([0, max_ts])
+            if t_start is not None or t_end is not None:
+                x_min = t_start if t_start is not None else 0.0
+                x_max = t_end if t_end is not None else max_ts
+                ax_main.set_xlim([x_min, x_max])
+            else:
+                ax_main.set_xlim([0, max_ts])
 
             # Build legend for continuous streams
             handles, all_labels = [], []
@@ -713,7 +801,7 @@ class XDFExplorer:
             plt.tight_layout()
             plt.show()
 
-    def plot_by_category(self, category, max_duration=None, figsize=(16, 10)):
+    def plot_by_category(self, category, time_range=None, figsize=(16, 10), max_duration=None):
         """Plot all streams in a specific category."""
         indices = self.get_streams_by_category(category)
         if not indices:
@@ -721,9 +809,11 @@ class XDFExplorer:
             return
         
         print(f"📊 Plotting {len(indices)} streams from category: {category}")
-        self.plot_streams_enhanced(indices, max_duration=max_duration, figsize=figsize)
+        self.plot_streams_enhanced(
+            indices, time_range=time_range, figsize=figsize, max_duration=max_duration
+        )
 
-    def plot_emotibit_comparison(self, signal_types=None, max_duration=60):
+    def plot_emotibit_comparison(self, signal_types=None, time_range=60, max_duration=None):
         """Plot EmotiBit signals for comparison across different types."""
         if signal_types is None:
             signal_types = ['magnetometer', 'ppg', 'eda', 'hr']
@@ -740,7 +830,9 @@ class XDFExplorer:
         
         if all_indices:
             print(f"📊 EmotiBit Comparison: {len(all_indices)} streams")
-            self.plot_streams_enhanced(all_indices, max_duration=max_duration, labels=labels)
+            self.plot_streams_enhanced(
+                all_indices, time_range=time_range, max_duration=max_duration, labels=labels
+            )
         else:
             print("⚠️ No EmotiBit streams found for comparison")
 
