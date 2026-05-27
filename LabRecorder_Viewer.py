@@ -289,7 +289,7 @@ class XDFExplorer:
             return 'other'
 
     @staticmethod
-    def _clip_std_outliers(values, n_std=2.0):
+    def _clip_std_outliers(values, n_std=1.0):
         """Clip values outside mean ± n_std*std (for plot readability only)."""
         arr = np.asarray(values, dtype=float)
         if arr.size == 0:
@@ -351,6 +351,18 @@ class XDFExplorer:
         
         # Block colors for markers
         block_colors = {1: '#FF6B6B', 2: '#4ECDC4', 3: '#FFE66D'}
+
+        # Distinct colors when multiple plotted streams share a source_id
+        source_to_indices: dict[str, list[int]] = {}
+        for plot_idx in indices:
+            sid = self.streams[plot_idx]['info']['source_id'][0]
+            source_to_indices.setdefault(sid, []).append(plot_idx)
+        source_stream_colors = {}
+        for sid, sid_indices in source_to_indices.items():
+            if len(sid_indices) > 1:
+                palette = plt.cm.tab10(np.linspace(0, 1, len(sid_indices)))
+                for palette_i, plot_idx in enumerate(sid_indices):
+                    source_stream_colors[(sid, plot_idx)] = palette[palette_i]
         
         # Get marker stream indices if show_markers is True
         marker_stream_indices = []
@@ -363,12 +375,15 @@ class XDFExplorer:
             ax = axes[i]
             s = self.streams[idx]
             stream_name = s['info']['name'][0]
+            source_id = s['info']['source_id'][0]
             ts = s['time_stamps'] - self.t0
             data = np.array(s['time_series'])
             
-            # Determine stream type and color
+            # Determine stream type and default color
             stream_type = self._get_stream_type(stream_name)
-            color = stream_colors.get(stream_type, '#DDA0DD')
+            default_color = stream_colors.get(stream_type, '#DDA0DD')
+            shared_source = len(source_to_indices.get(source_id, [])) > 1
+            stream_color = source_stream_colors.get((source_id, idx), default_color)
             
             # Handle empty streams
             if len(ts) == 0:
@@ -397,16 +412,24 @@ class XDFExplorer:
                 if chs is None:
                     chs = range(n_channels)
 
+                multi_channel = len(chs) > 1
+                if multi_channel:
+                    channel_colors = plt.cm.tab10(np.linspace(0, 1, len(chs)))
+                else:
+                    channel_colors = [stream_color]
+
                 # Plot channels
-                for ch in chs:
+                for ch_i, ch in enumerate(chs):
                     channel_label = f"{lbl} Ch{ch+1}" if n_channels > 1 else lbl
                     y = data[:, ch]
                     if clip_std_outliers:
                         y = self._clip_std_outliers(y)
-                    ax.plot(ts, y, label=channel_label, color=color, linewidth=1.5)
-                    
-                ax.set_ylabel(f"{lbl}\n({stream_type.upper()})", color=color, fontweight='bold')
-                ax.tick_params(axis='y', labelcolor=color)
+                    line_color = channel_colors[ch_i] if multi_channel else stream_color
+                    ax.plot(ts, y, label=channel_label, color=line_color, linewidth=1.5)
+
+                ylabel_color = '#333333' if (multi_channel or shared_source) else stream_color
+                ax.set_ylabel(f"{lbl}\n({stream_type.upper()})", color=ylabel_color, fontweight='bold')
+                ax.tick_params(axis='y', labelcolor=ylabel_color)
                 ax.grid(True, alpha=0.3)
                 ax.legend(loc='upper right', fontsize=8)
                 
@@ -434,7 +457,7 @@ class XDFExplorer:
                 
             else:
                 # Marker stream
-                ax.set_ylabel(f"{lbl}\n(MARKERS)", color=color, fontweight='bold')
+                ax.set_ylabel(f"{lbl}\n(MARKERS)", color=stream_color, fontweight='bold')
                 
                 # Plot markers with block-based coloring
                 for t, marker_row in zip(ts, data):
