@@ -288,6 +288,18 @@ class XDFExplorer:
         else:
             return 'other'
 
+    @staticmethod
+    def _clip_std_outliers(values, n_std=2.0):
+        """Clip values outside mean ± n_std*std (for plot readability only)."""
+        arr = np.asarray(values, dtype=float)
+        if arr.size == 0:
+            return arr
+        mean = np.mean(arr)
+        std = np.std(arr)
+        if std == 0:
+            return arr
+        return np.clip(arr, mean - n_std * std, mean + n_std * std)
+
     def plot_markers(self, idx):
         """Plot PsychoPy marker stream (event onsets)."""
         s = self.streams[idx]
@@ -306,10 +318,15 @@ class XDFExplorer:
         plt.tight_layout()
         plt.show()
 
-    def plot_streams_enhanced(self, indices, channels_per_stream=None, max_duration=None, 
-                             labels=None, show_markers=True, figsize=(16, 10)):
+    def plot_streams_enhanced(self, indices, channels_per_stream=None, max_duration=None,
+                             labels=None, show_markers=True, figsize=(16, 10),
+                             clip_std_outliers=False):
         """
         Enhanced plotting with better stream differentiation and layout.
+
+        Args:
+            clip_std_outliers: If True, clip continuous channel values to mean ± 2*std
+                before plotting so artifact spikes do not dominate the y-axis range.
         """
         if channels_per_stream is None:
             channels_per_stream = [None] * len(indices)
@@ -379,11 +396,14 @@ class XDFExplorer:
                 n_channels = data.shape[1]
                 if chs is None:
                     chs = range(n_channels)
-                    
+
                 # Plot channels
                 for ch in chs:
                     channel_label = f"{lbl} Ch{ch+1}" if n_channels > 1 else lbl
-                    ax.plot(ts, data[:, ch], label=channel_label, color=color, linewidth=1.5)
+                    y = data[:, ch]
+                    if clip_std_outliers:
+                        y = self._clip_std_outliers(y)
+                    ax.plot(ts, y, label=channel_label, color=color, linewidth=1.5)
                     
                 ax.set_ylabel(f"{lbl}\n({stream_type.upper()})", color=color, fontweight='bold')
                 ax.tick_params(axis='y', labelcolor=color)
@@ -444,8 +464,12 @@ class XDFExplorer:
         axes[-1].set_xlabel("Time (s)", fontweight='bold')
         
         # Add title with experiment info
-        fig.suptitle(f"📊 Multi-Stream Analysis - {len(indices)} streams", 
-                    fontsize=14, fontweight='bold')
+        clip_note = " (±2σ clip)" if clip_std_outliers else ""
+        fig.suptitle(
+            f"📊 Multi-Stream Analysis - {len(indices)} streams{clip_note}",
+            fontsize=14,
+            fontweight='bold',
+        )
         
         plt.tight_layout()
         plt.show()
