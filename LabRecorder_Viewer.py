@@ -559,6 +559,145 @@ class XDFExplorer:
         plt.tight_layout()
         plt.show()
 
+    def plot_channels_grouped(
+        self,
+        idx,
+        channels=None,
+        channels_per_subplot=5,
+        time_range=None,
+        max_duration=None,
+        label=None,
+        show_markers=True,
+        clip_std_outliers=False,
+        figsize=None,
+    ):
+        """
+        Plot a multi-channel stream with channels split across subplots (default 5 per panel).
+
+        Args:
+            idx: Stream index in self.streams.
+            channels: Channel indices to plot (default: all channels in stream).
+            channels_per_subplot: Max channels drawn on each subplot.
+            time_range: None, a number (0 to that time), or (start_s, end_s).
+            max_duration: Deprecated alias for time_range when given as a single number.
+            label: Optional legend/title label (defaults to stream name).
+            show_markers: Overlay marker streams as vertical lines.
+            clip_std_outliers: Clip each channel to mean ± n*std before plotting.
+            figsize: Optional (width, height); height scales with number of subplot groups.
+        """
+        if channels_per_subplot < 1:
+            raise ValueError("channels_per_subplot must be at least 1.")
+
+        s = self.streams[idx]
+        stream_name = s['info']['name'][0]
+        lbl = label or stream_name
+        ts = np.asarray(s['time_stamps'], dtype=float) - self.t0
+        data = np.asarray(s['time_series'])
+
+        if data.dtype.kind in ['U', 'S', 'O']:
+            print(f"⚠️ Stream '{stream_name}' is not continuous; use marker plotting instead.")
+            return
+
+        if data.ndim == 1:
+            data = data.reshape(-1, 1)
+
+        t_start, t_end = self._resolve_time_window(time_range, max_duration)
+        mask = self._mask_time_window(ts, t_start, t_end)
+        ts = ts[mask]
+        data = data[mask]
+
+        if len(ts) == 0:
+            print(f"⚠️ Stream '{stream_name}' has no samples in the requested time window.")
+            return
+
+        n_channels = data.shape[1]
+        if channels is None:
+            channels = list(range(n_channels))
+        else:
+            channels = list(channels)
+
+        channel_groups = [
+            channels[i:i + channels_per_subplot]
+            for i in range(0, len(channels), channels_per_subplot)
+        ]
+        if not channel_groups:
+            print(f"⚠️ No channels selected for stream '{stream_name}'.")
+            return
+
+        n_groups = len(channel_groups)
+        if figsize is None:
+            figsize = (16, max(3 * n_groups, 4))
+
+        fig, axes = plt.subplots(n_groups, 1, figsize=figsize, sharex=True)
+        if n_groups == 1:
+            axes = [axes]
+
+        block_colors = {1: '#FF6B6B', 2: '#4ECDC4', 3: '#FFE66D'}
+        marker_stream_indices = self.get_streams_by_category('markers') if show_markers else []
+
+        for ax, group in zip(axes, channel_groups):
+            group_colors = plt.cm.tab10(np.linspace(0, 1, len(group)))
+            for ch_i, ch in enumerate(group):
+                if ch < 0 or ch >= n_channels:
+                    continue
+                y = data[:, ch]
+                if clip_std_outliers:
+                    y = self._clip_std_outliers(y)
+                ax.plot(
+                    ts,
+                    y,
+                    label=f"Ch {ch + 1}",
+                    color=group_colors[ch_i],
+                    linewidth=1.2,
+                )
+
+            ch_start = group[0] + 1
+            ch_end = group[-1] + 1
+            ax.set_ylabel(f"Ch {ch_start}-{ch_end}", fontsize=9)
+            ax.grid(True, alpha=0.3)
+            ax.legend(loc='upper right', fontsize=8)
+
+            if show_markers and marker_stream_indices:
+                for marker_idx in marker_stream_indices:
+                    marker_stream = self.streams[marker_idx]
+                    marker_ts = marker_stream['time_stamps'] - self.t0
+                    marker_data = marker_stream['time_series']
+                    for t, marker_row in zip(marker_ts, marker_data):
+                        if not self._timestamp_in_time_window(t, t_start, t_end):
+                            continue
+                        marker_text = (
+                            marker_row[0]
+                            if isinstance(marker_row, (list, np.ndarray))
+                            else str(marker_row)
+                        )
+                        block_id = None
+                        if 'block_id:' in marker_text:
+                            try:
+                                block_id = int(marker_text.split('block_id:')[1].split('|')[0])
+                            except (ValueError, IndexError):
+                                pass
+                        marker_color = block_colors.get(block_id, '#999999') if block_id else '#999999'
+                        ax.axvline(x=t, color=marker_color, linestyle=':', alpha=0.5, linewidth=1.0)
+
+            if t_start is not None or t_end is not None:
+                x_min = t_start if t_start is not None else 0.0
+                x_max = t_end if t_end is not None else float(ts.max())
+                ax.set_xlim([x_min, x_max])
+            else:
+                ax.set_xlim([0, float(ts.max())])
+
+        axes[-1].set_xlabel("Time (s)", fontweight='bold')
+        clip_note = " (±2σ clip)" if clip_std_outliers else ""
+        window_note = self._format_time_window_note(t_start, t_end)
+        fig.suptitle(
+            f"📊 {lbl} — {len(channels)} channels in groups of {channels_per_subplot}"
+            f"{window_note}{clip_note}",
+            fontsize=13,
+            fontweight='bold',
+        )
+        plt.tight_layout()
+        plt.show()
+
     def plot_continuous(self, idx, channels=None, time_range=None, max_duration=None):
         """
         Plot physiological signal(s).
